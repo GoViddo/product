@@ -1,0 +1,22 @@
+{
+  "name": "goviddo",
+  "version": "0.0.0",
+  "description": "GoViddo Product",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoViddo/product.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoViddo/product/issues"
+  },
+  "homepage": "https://github.com/GoViddo/product#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
