@@ -1,3 +1,5 @@
 .DS_Store
 AppLayer/node_modules
+AppLayer/.idea
 package-lock.json
+.idea

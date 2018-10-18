@@ -1,44 +1,43 @@
-var express = require('express');
-var app = express();
-var fs = require("fs");
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const path = require('path');
+const config = require('./config').config;
+const app = express();
 
-//Lets define a port we want to listen to
-const PORT = 3000;
-const ADDRESS = 'localhost';
+const {login, register, test} = require('./routes/index');
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+const port = config.port;
 
-app.use(bodyParser.json());
-
-// GET example
-app.get('/listUsers', function(req, res) {
-  fs.readFile(__dirname + "/" + "test.json", 'utf8', function(err, data) {
-    console.log(data);
-    res.end(data);
-  });
+// create connection to database
+// the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
+const db = mysql.createConnection ({
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database
 });
 
-// POST example
-app.post('/addUser', function(req, res) {
-
-  // First read existing users.
-  fs.readFile(__dirname + "/" + "test.json", 'utf8', function(err, data) {
-    data = JSON.parse(data);
-
-    // Append the body parameters to the data object and send it back.
-    // This example shows how to read body parameters.
-    data["user4"] = req.body;
-    console.log(data);
-    res.end(JSON.stringify(data));
-  });
+// connect to database
+db.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('Connected to database');
 });
+global.db = db;
 
-// Register and listen on a specifc port
-var server = app.listen(PORT, ADDRESS, function() {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log('running at http://' + host + ':' + port);
+// configure middleware
+app.set('port', process.env.port || port); // set express to use this port
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // parse form data client
+
+// routes for the app
+app.get('/test', test);
+app.post('/register', register);
+app.post('/login', login);
+
+// set the app to listen on the port
+app.listen(port, () => {
+    console.log(`Server running on port: ${port}`);
 });
