@@ -1,31 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const cassandra = require('cassandra-driver');
 const path = require('path');
 const config = require('./config').config;
 const app = express();
 
-const {login, register, test} = require('./routes/index');
+const { login, register, test } = require('./routes/index');
 
 const port = config.port;
 
 // create connection to database
-// the mysql.createConnection function takes in a configuration object which contains host, user, password and the database name.
-const db = mysql.createConnection ({
-    host: config.host,
-    user: config.user,
-    password: config.password,
-    database: config.database
-});
+const client = new cassandra.Client({ contactPoints: [config.host], keyspace: config.database });
 
 // connect to database
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Connected to database');
-});
-global.db = db;
+client.connect()
+    .then(function () {
+        console.log('Connected to database with %d host(s): %j', client.hosts.length, client.hosts.keys());
+        console.log('Keyspaces: %j', Object.keys(client.metadata.keyspaces));
+        global.db = client;
+    })
+    .catch(function (err) {
+        console.error('There was an error connecting to database', err);
+        return client.shutdown();
+    });
+
 
 // configure middleware
 app.set('port', process.env.port || port); // set express to use this port

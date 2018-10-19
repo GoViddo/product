@@ -6,7 +6,7 @@ var goviddo = goviddo || {};
         host: 'localhost',
         user: 'root',
         password: 'power123',
-        database: 'goviddo'
+        database: 'db_goviddo'
     };
 })(goviddo);
 
