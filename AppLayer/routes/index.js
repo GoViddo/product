@@ -46,6 +46,8 @@ module.exports = {
         let email = req.body.email;
         let password = req.body.password;
 
+
+
         if (!email || !password) {
             return res.status(400).send("Missing critical information");
         }
@@ -56,7 +58,7 @@ module.exports = {
             if (err) {
                 return res.status(500).send(err);
             }
-            if (result.length > 0) {
+            if (result.rows.length > 0) {
                 return res.status(400).send("Username already exists");
             } else {
                 
@@ -69,8 +71,13 @@ module.exports = {
                 //     const row = result.first();
                 // });
                 
+
+                //creating guid
+                var Guid = require('guid');
+                var guid = Guid.create();
+
                 // send the user's details to the database
-                let query = "INSERT INTO user_table (email_id, password) VALUES ('" + email + "', '" + password + "')";
+                let query = "INSERT INTO user_table (user_id,email_id, password) VALUES ('" + guid + "', '" + email + "', '" + password + "')";
                 db.execute(query, function (err, result) {
                     if (err) {
                         return res.status(500).send(err);

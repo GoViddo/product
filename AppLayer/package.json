@@ -18,6 +18,7 @@
   "homepage": "https://github.com/GoViddo/product#readme",
   "dependencies": {
     "cassandra-driver": "^3.5.0",
-    "express": "^4.16.3"
+    "express": "^4.16.4",
+    "guid": "0.0.12"
   }
 }

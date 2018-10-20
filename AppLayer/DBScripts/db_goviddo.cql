@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS db_goviddo.web_show_episode_table (
     AND speculative_retry = '99PERCENTILE';
 
 CREATE TABLE IF NOT EXISTS db_goviddo.user_table (
-    user_id int PRIMARY KEY,
+    user_id text PRIMARY KEY,
     address text,
     birth_date text,
     country text,
