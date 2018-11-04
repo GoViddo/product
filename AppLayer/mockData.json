@@ -1,0 +1,15 @@
+{
+  "bannerImageCount": 10,
+  "previewCount": 10,
+  "popularCount": 5,
+  "categories": [
+    {
+      "name": "Drama",
+      "count": 5
+    },
+    {
+      "name": "Comedy",
+      "count": 5
+    }
+  ]
+}

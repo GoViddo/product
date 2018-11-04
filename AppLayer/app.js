@@ -5,7 +5,7 @@ const path = require('path');
 const config = require('./config').config;
 const app = express();
 
-const { login, register, test } = require('./routes/index');
+const { login, register, getConfig } = require('./routes/index');
 
 const port = config.port;
 
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse form data client
 
 // routes for the app
-app.get('/test', test);
+app.get('/config', getConfig);
 app.post('/register', register);
 app.post('/login', login);
 

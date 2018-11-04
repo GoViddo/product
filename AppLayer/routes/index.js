@@ -1,8 +1,11 @@
 module.exports = {
 
-    // TODO: Remove this test API once we have at least 1 GET API
-    test: (req, res) => {
-        res.status(200).send("Nice! Server is working.");
+    getConfig: (req, res) => {
+      const fs = require('fs');
+      fs.readFile('mockData.json', (err, data) => {
+          if (err) res.status(500).send(err);;
+          res.status(200).send(JSON.parse(data));
+      });
     },
 
     login: (req, res) => {
