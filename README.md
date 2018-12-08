@@ -2,6 +2,9 @@
 It has 3 different layers as below,
 
 ## 1. Application layer
+Prerequisites
+Setup MySql database on your local [Note: Use username as "root" and password as "power123" to avoid changes in code for your local]
+Import sql script from AppLayer/DBScripts folder to bootstrap your database.
 
 Please follow below steps to run the sample node server,
 
