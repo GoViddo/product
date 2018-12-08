@@ -1,11 +1,28 @@
 module.exports = {
 
     getConfig: (req, res) => {
-      const fs = require('fs');
-      fs.readFile('mockData.json', (err, data) => {
-          if (err) res.status(500).send(err);;
-          res.status(200).send(JSON.parse(data));
-      });
+        // An example to read config from a JSON file
+        // const fs = require('fs');
+        // fs.readFile('mockData.json', (err, data) => {
+        //     if (err) res.status(500).send(err);
+        //     res.status(200).send(JSON.parse(data));
+        // });
+
+        let configQuery = "SELECT * FROM config_table";
+
+        db.query(configQuery, function (err, result) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            let data = {};
+
+            for (var i = 0; i < result.length; i++) {
+                data[result[i].config_key] = result[i].config_value;
+            }
+
+            return res.status(200).send(data);
+        });
     },
 
     login: (req, res) => {
@@ -16,16 +33,16 @@ module.exports = {
             return res.status(400).send("Missing critical information");
         }
 
-        let userQuery = "SELECT * FROM db_goviddo.user_table WHERE email_id = ?;";
+        let userQuery = "SELECT * FROM user_table WHERE email_id = '" + email + "';";
 
-        db.execute(userQuery, [email], function (err, result) {
+        db.query(userQuery, function (err, result) {
             if (err) {
                 return res.status(500).send(err);
             }
-            if (!result.rows || result.rows.length == 0) {
+            if (!result || !result.length) {
                 return res.status(400).send("User does not exist");
             } else {
-                const row = result.first();
+                const row = result[0];
                 if (row.password == password) {
                     return res.status(200).send({
                         message: "Login success",
@@ -39,7 +56,7 @@ module.exports = {
                         dob: row.birth_date
                     });
                 } else {
-                    return res.status(400).send("Password invalid");
+                    return res.status(400).send("Invalid Password");
                 }
             }
         });
@@ -48,40 +65,25 @@ module.exports = {
     register: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;
+        let firstName = req.body.firstName;
+        let lastName = req.body.lastName;
 
-
-
-        if (!email || !password) {
-            return res.status(400).send("Missing critical information");
+        if (!email || !password || !firstName || !lastName) {
+            return res.status(400).send("Missing first name, last name, email or password");
         }
 
-        let userQuery = "SELECT * FROM db_goviddo.user_table WHERE email_id = ?;";
+        let userQuery = "SELECT * FROM user_table WHERE email_id = '" + email + "';";
 
-        db.execute(userQuery, [email], function (err, result) {
+        db.query(userQuery, function (err, result) {
             if (err) {
                 return res.status(500).send(err);
             }
-            if (result.rows.length > 0) {
-                return res.status(400).send("Username already exists");
+            if (result.length) {
+                return res.status(400).send("User with this email already exists");
             } else {
-                
-                // Fetch user's details to calculate next user id
-                // let query = "SELECT user_id FROM db_goviddo.user_table;";
-                // db.execute(query, function (err, result) {
-                //     if (err) {
-                //         return res.status(500).send(err);
-                //     }
-                //     const row = result.first();
-                // });
-                
-
-                //creating guid
-                var Guid = require('guid');
-                var guid = Guid.create();
-
                 // send the user's details to the database
-                let query = "INSERT INTO user_table (user_id,email_id, password) VALUES ('" + guid + "', '" + email + "', '" + password + "')";
-                db.execute(query, function (err, result) {
+                let query = "INSERT INTO user_table (first_name, last_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "')";
+                db.query(query, function (err, result) {
                     if (err) {
                         return res.status(500).send(err);
                     }

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cassandra = require('cassandra-driver');
+const mysql = require('mysql');
 const path = require('path');
 const config = require('./config').config;
 const app = express();
@@ -10,20 +10,22 @@ const { login, register, getConfig } = require('./routes/index');
 const port = config.port;
 
 // create connection to database
-const client = new cassandra.Client({ contactPoints: [config.host], keyspace: config.database });
+const db = mysql.createConnection({
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database
+});
 
 // connect to database
-client.connect()
-    .then(function () {
-        console.log('Connected to database with %d host(s): %j', client.hosts.length, client.hosts.keys());
-        console.log('Keyspaces: %j', Object.keys(client.metadata.keyspaces));
-        global.db = client;
-    })
-    .catch(function (err) {
+db.connect((err) => {
+    if (err) {
         console.error('There was an error connecting to database', err);
-        return client.shutdown();
-    });
-
+        throw err;
+    }
+    global.db = db;
+    console.log('Connected to database');
+});
 
 // configure middleware
 app.set('port', process.env.port || port); // set express to use this port
