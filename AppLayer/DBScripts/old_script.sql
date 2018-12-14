@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 14, 2018 at 08:34 AM
+-- Generation Time: Dec 08, 2018 at 09:35 AM
 -- Server version: 10.2.17-MariaDB
 -- PHP Version: 7.1.22
 
@@ -83,7 +83,7 @@ INSERT INTO `config_table` (`id`, `config_key`, `config_value`) VALUES
 (1, 'bannerImgCount', '10'),
 (2, 'previewCount', '10'),
 (3, 'popularCount', '5'),
-(4, 'categories', '[{\'name\':\'Drama\', \'count\':5}, {\'name\':\'Horror\', \'count\':5}]');
+(4, 'categories', '[{\'name\':\'Drama\', \'count\':5}, {\'name\':\'comedy\', \'count\':5}]');
 
 -- --------------------------------------------------------
 
@@ -120,26 +120,6 @@ INSERT INTO `user_table` (`user_id`, `first_name`, `last_name`, `email_id`, `gen
 (3, 'Imran', 'Mulani', 'mulaniimran97@gmail.com', 'Male', 'imran', '8600955821', '18-10-1992', 'Pune', 'India', 'dvjsdbsdskfjbs', '', '', 'dsjnasds,mnasd,n', 0, 0, '2018-11-17 10:58:23', 1),
 (4, 'Imran', 'Mulani', 'mulaniimran127@gmail.com', 'Male', 'imran', '8600955821', '18-10-1992', 'Pune', 'India', 'dvjsdbsdskfjbs', '', '', 'dsjnasds,mnasd,n', 0, 0, '2018-11-17 10:59:11', 1),
 (7, 'imran', 'mulani', 'mulaniimran27@gmail.com', NULL, 'demo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '2018-12-08 09:32:48', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `video_genere_table`
---
-
-CREATE TABLE `video_genere_table` (
-  `video_genere_id` int(255) NOT NULL,
-  `video_genere_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `video_genere_table`
---
-
-INSERT INTO `video_genere_table` (`video_genere_id`, `video_genere_name`, `status`) VALUES
-(1, 'Drama', 1),
-(2, 'Horror', 1);
 
 -- --------------------------------------------------------
 
@@ -195,17 +175,10 @@ ALTER TABLE `user_table`
   ADD UNIQUE KEY `email_id` (`email_id`);
 
 --
--- Indexes for table `video_genere_table`
---
-ALTER TABLE `video_genere_table`
-  ADD PRIMARY KEY (`video_genere_id`);
-
---
 -- Indexes for table `video_table`
 --
 ALTER TABLE `video_table`
-  ADD PRIMARY KEY (`video_id`),
-  ADD KEY `video_genere_type` (`video_genere_type`);
+  ADD PRIMARY KEY (`video_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -230,26 +203,10 @@ ALTER TABLE `user_table`
   MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `video_genere_table`
---
-ALTER TABLE `video_genere_table`
-  MODIFY `video_genere_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `video_table`
 --
 ALTER TABLE `video_table`
   MODIFY `video_id` int(255) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `video_table`
---
-ALTER TABLE `video_table`
-  ADD CONSTRAINT `video_table_ibfk_1` FOREIGN KEY (`video_genere_type`) REFERENCES `video_genere_table` (`video_genere_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
