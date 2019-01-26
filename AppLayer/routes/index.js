@@ -87,6 +87,11 @@ module.exports = {
                     if (err) {
                         return res.status(500).send(err);
                     }
+
+
+                    cmd.run('cloes wallet unlock --password testpwd');
+
+
                     return res.status(200).send("Registration successful");
                 });
             }
