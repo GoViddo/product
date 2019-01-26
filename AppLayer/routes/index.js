@@ -89,7 +89,11 @@ module.exports = {
                     }
 
 
-                    cmd.run('cloes wallet unlock --password testpwd');
+                    cmd.run('cloes wallet unlock --password testpwd').then(function() {
+                        console.log('wallet unlocked!');
+                    }, function(error) {
+                        console.log('Error unlocking wallet!', error);
+                    });
 
 
                     return res.status(200).send("Registration successful");
