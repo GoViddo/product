@@ -9,23 +9,39 @@ const { login, register, getConfig } = require('./routes/index');
 
 const port = config.port;
 
-// create connection to database
-const db = mysql.createConnection({
+const db_config = {
     host: config.host,
     user: config.user,
     password: config.password,
     database: config.database
-});
+};
 
-// connect to database
-db.connect((err) => {
-    if (err) {
-        console.error('There was an error connecting to database', err);
-        throw err;
-    }
-    global.db = db;
-    console.log('Connected to database');
-});
+// create connection to database
+var db;
+
+function handleDisconnect() {
+    db = mysql.createConnection(db_config);
+
+    db.connect(function (err) {
+        if (err) {
+            console.log('Error connecting DB:', err);
+            setTimeout(handleDisconnect, 2000);
+        }
+        global.db = db;
+        console.log('Re-connected to database');
+    });
+
+    db.on('error', function (err) {
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            handleDisconnect();
+        } else {
+            console.log('Error connecting DB:', err);
+            throw err;
+        }
+    });
+}
+
+handleDisconnect();
 
 // configure middleware
 app.set('port', process.env.port || port); // set express to use this port
