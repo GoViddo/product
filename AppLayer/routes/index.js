@@ -97,21 +97,16 @@ module.exports = {
                     //     console.log('Error unlocking wallet!', error);
                     // });
 
+                    let password = "testpassword"
+
+                    let cleosWalletUnlockQuery = "cleos wallet unlock --password "+password;
 
                     cmd.get(
-                        'cleos wallet unlock --password testpwd',
+                        cleosWalletUnlockQuery,
                         function(err, data, stderr){
                             console.log('Wallet Unlocking Output :\n\n',data);
                             console.log('Wallet Unlocking Output :\n\n',err);
                             console.log('Wallet Unlocking Output :\n\n',stderr);
-                        }
-                    );
-
-
-                cmd.get(
-                        'ls',
-                        function(err, data, stderr){
-                            console.log('List File :\n\n',data)
                         }
                     );
 
