@@ -121,7 +121,7 @@ module.exports = {
                         function(err, data, stderr){
                             console.log('Active Keys :\n\n',data);
 
-                            var arr = str.split(": ");
+                            var arr = data.split(": ");
 
                             console.log(arr);
                         }
