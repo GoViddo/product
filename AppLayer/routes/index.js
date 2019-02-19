@@ -123,9 +123,13 @@ module.exports = {
 
                             var arr = data.split(": ");
 
-                            var Keys = arr[1].split("Public key");
+                            var Key = arr[1].split("Public key");
+                            var activePrivateKey = Key[0];
 
-                            console.log(Keys);
+                            var activePublicKey = arr[2];
+
+                            console.log(activePrivateKey);
+                            console.log(activePublicKey);
                         }
                     );
 
