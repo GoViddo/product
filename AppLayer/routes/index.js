@@ -148,8 +148,8 @@ module.exports = {
 
                             var activePublicKey = arr[2];
 
-                            console.log("Active Private Key ="+activePrivateKey);
-                            console.log("Active Public Key ="+activePublicKey);
+                            console.log("Owner Private Key ="+activePrivateKey);
+                            console.log("Owner Public Key ="+activePublicKey);
 
                         }
                     );
