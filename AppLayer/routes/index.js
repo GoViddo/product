@@ -104,13 +104,11 @@ module.exports = {
                     let cleosCreateActiveKeys = "cleos create key --to-console";
                     let cleosCreateOwnerKeys = "cleos create key --to-console";
 
+
                     cmd.get(
                         cleosWalletUnlockQuery,
                         function(err, data, stderr){
-                            console.log('Wallet Unlocking Output :\n\n',data);
-                            console.log('Wallet Unlocking Output :\n\n',err);
-
-
+                           
                         }
                     );
 
@@ -119,8 +117,6 @@ module.exports = {
                     cmd.get(
                         cleosCreateActiveKeys,
                         function(err, data, stderr){
-                            console.log('Active Keys :\n\n',data);
-
                             var arr = data.split(": ");
 
                             var Key = arr[1].split("Public key");
@@ -138,21 +134,29 @@ module.exports = {
                         cleosCreateOwnerKeys,
                         function(err, data, stderr){
                          
-                            console.log('Owner Keys :\n\n',data);
-                            
-
-                            var arr = data.split(": ");
+                        
+                            var arrr = data.split(": ");
 
                             var Key = arr[1].split("Public key");
-                            var activePrivateKey = Key[0];
+                            var ownerPrivateKey = Key[0];
 
-                            var activePublicKey = arr[2];
+                            var ownerPublicKey = arr[2];
 
-                            console.log("Owner Private Key ="+activePrivateKey);
-                            console.log("Owner Public Key ="+activePublicKey);
+                            console.log("Owner Private Key ="+ownerPrivateKey);
+                            console.log("Owner Public Key ="+ownerPublicKey);
 
                         }
                     );
+
+
+
+                    let account_name = "demoaccount1";
+
+                    let createEOSWalletCommand = 'cleos -u https://eos.greymass.com/ system newaccount   hellogoviddo '+account_name+' --stake-net "0.01 EOS" --stake-cpu "0.01 EOS" --buy-ram "0.1 EOS" '+ownerPublicKey+' '+activePublicKey;
+
+
+                    console.log("New Wallet Creation Command = "+createEOSWalletCommand);
+
 
 
 
