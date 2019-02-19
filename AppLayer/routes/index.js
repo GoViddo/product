@@ -113,6 +113,10 @@ module.exports = {
                     );
 
 
+                    let activePrivateKey = "";
+                    let activePublicKey = "";
+
+
 
                     cmd.get(
                         cleosCreateActiveKeys,
@@ -128,6 +132,11 @@ module.exports = {
                             console.log("Active Public Key ="+activePublicKey);
                         }
                     );
+
+
+
+                    let ownerPrivateKey = "";
+                    let ownerPublicKey = "";
 
 
                     cmd.get(
