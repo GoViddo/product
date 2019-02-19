@@ -101,7 +101,17 @@ module.exports = {
                     cmd.get(
                         'cleos wallet unlock --password testpwd',
                         function(err, data, stderr){
-                            console.log('Wallet Unlocking Output :\n\n',data)
+                            console.log('Wallet Unlocking Output :\n\n',data);
+                            console.log('Wallet Unlocking Output :\n\n',err);
+                            console.log('Wallet Unlocking Output :\n\n',stderr);
+                        }
+                    );
+
+
+                cmd.get(
+                        'ls',
+                        function(err, data, stderr){
+                            console.log('List File :\n\n',data)
                         }
                     );
 
