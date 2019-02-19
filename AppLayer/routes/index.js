@@ -123,7 +123,9 @@ module.exports = {
 
                             var arr = data.split(": ");
 
-                            console.log(arr);
+                            var Keys = arr[1].split("Public key");
+
+                            console.log(Keys);
                         }
                     );
 
