@@ -161,16 +161,9 @@ module.exports = {
 
 
 
-                            let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount   hellogoviddo "+account_name+" --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' "+ownerPublicKey+" "+activePublicKey;
+                            let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo "+account_name+" --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' "+ownerPublicKey+" "+activePublicKey;
 
-
-                            console.log("New Wallet Creation = "+createEOSWalletCommand);
-
-
-                        }
-                    );
-
-
+                            //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
 
                         }
@@ -179,9 +172,8 @@ module.exports = {
 
 
 
-
-
-
+                        }
+                    );
 
 
 
