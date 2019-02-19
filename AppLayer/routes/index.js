@@ -101,8 +101,8 @@ module.exports = {
 
                     let cleosWalletUnlockQuery = "cleos wallet unlock --password "+password;
 
-                    let cleosCreateActiveKeys = "cleos create keys --to-console";
-                    let cleosCreateOwnerKeys = "cleos create keys --to-console";
+                    let cleosCreateActiveKeys = "cleos create key --to-console";
+                    let cleosCreateOwnerKeys = "cleos create key --to-console";
 
                     cmd.get(
                         cleosWalletUnlockQuery,
