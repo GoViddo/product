@@ -97,7 +97,7 @@ module.exports = {
                     //     console.log('Error unlocking wallet!', error);
                     // });
 
-                    let password = "testpassword"
+                    let password = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                     let cleosWalletUnlockQuery = "cleos wallet unlock --password "+password;
 
