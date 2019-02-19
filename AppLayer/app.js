@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const path = require('path');
 const config = require('./config').config;
 const app = express();
-const cmd = require('node-run-cmd');
+const cmd = require('node-cmd');
 
 // List globals
 global.cmd = cmd
