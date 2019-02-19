@@ -120,7 +120,10 @@ module.exports = {
                         cleosCreateActiveKeys,
                         function(err, data, stderr){
                             console.log('Active Keys :\n\n',data);
-                            
+
+                            var arr = str.split(": ");
+
+                            console.log(arr);
                         }
                     );
 
