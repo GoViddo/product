@@ -97,24 +97,20 @@ module.exports = {
                     //     console.log('Error unlocking wallet!', error);
                     // });
 
-                    let password = "test";
+                    let password = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                     let cleosWalletUnlockQuery = "cleos wallet unlock --password "+password;
+
+                    let cleosCreateActiveKeys = "cleos create keys --to-console";
+                    let cleosCreateOwnerKeys = "cleos create keys --to-console";
+
                     cmd.get(
                         cleosWalletUnlockQuery,
                         function(err, data, stderr){
                             console.log('Wallet Unlocking Output :\n\n',data);
                             console.log('Wallet Unlocking Output :\n\n',err);
-                            console.log('Wallet Unlocking Output :\n\n',stderr);
-                        }
-                    );
 
-
-                    let cleosCreateActiveKeys = "cleos create keys --to-console";
-                    let cleosCreateOwnerKeys = "cleos create keys --to-console";
-
-
-                    cmd.get(
+                            cmd.get(
                         cleosCreateActiveKeys,
                         function(err, data, stderr){
                             console.log('Wallet Unlocking Output :\n\n',data);
@@ -123,8 +119,7 @@ module.exports = {
                     );
 
 
-
-                    cmd.get(
+                            cmd.get(
                         cleosCreateOwnerKeys,
                         function(err, data, stderr){
                          
@@ -135,6 +130,20 @@ module.exports = {
                         }
                     );
 
+
+
+
+                        }
+                    );
+
+
+                    
+
+                    
+
+
+
+                    
 
 
                     return res.status(200).send("Registration successful");
