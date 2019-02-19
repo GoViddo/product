@@ -113,7 +113,7 @@ module.exports = {
                             cmd.get(
                         cleosCreateActiveKeys,
                         function(err, data, stderr){
-                            console.log('Wallet Unlocking Output :\n\n',data);
+                            console.log('Active Keys :\n\n',data);
                             
                         }
                     );
@@ -123,7 +123,7 @@ module.exports = {
                         cleosCreateOwnerKeys,
                         function(err, data, stderr){
                          
-                            console.log('Wallet Unlocking Output :\n\n',data);
+                            console.log('Owner Keys :\n\n',data);
                                
 
 
