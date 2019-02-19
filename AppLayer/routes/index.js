@@ -120,9 +120,9 @@ module.exports = {
                             var arr = data.split(": ");
 
                             var Key = arr[1].split("Public key");
-                            var activePrivateKey = Key[0];
+                            let activePrivateKey = Key[0];
 
-                            var activePublicKey = arr[2];
+                            let activePublicKey = arr[2];
 
                             console.log("Active Private Key ="+activePrivateKey);
                             console.log("Active Public Key ="+activePublicKey);
@@ -138,9 +138,9 @@ module.exports = {
                             var arr = data.split(": ");
 
                             var Key = arr[1].split("Public key");
-                            var ownerPrivateKey = Key[0];
+                            let ownerPrivateKey = Key[0];
 
-                            var ownerPublicKey = arr[2];
+                            let ownerPublicKey = arr[2];
 
                             console.log("Owner Private Key ="+ownerPrivateKey);
                             console.log("Owner Public Key ="+ownerPublicKey);
