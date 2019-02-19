@@ -128,8 +128,8 @@ module.exports = {
 
                             var activePublicKey = arr[2];
 
-                            console.log(activePrivateKey);
-                            console.log(activePublicKey);
+                            console.log("Active Private Key ="+activePrivateKey);
+                            console.log("Active Public Key ="+activePublicKey);
                         }
                     );
 
@@ -139,20 +139,21 @@ module.exports = {
                         function(err, data, stderr){
                          
                             console.log('Owner Keys :\n\n',data);
-                               
+                            
 
+                            var arr = data.split(": ");
+
+                            var Key = arr[1].split("Public key");
+                            var activePrivateKey = Key[0];
+
+                            var activePublicKey = arr[2];
+
+                            console.log("Active Private Key ="+activePrivateKey);
+                            console.log("Active Public Key ="+activePublicKey);
 
                         }
                     );
 
-
-                    
-
-                    
-
-
-
-                    
 
 
                     return res.status(200).send("Registration successful");
