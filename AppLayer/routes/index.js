@@ -128,6 +128,12 @@ module.exports = {
 
                              var activePublicKey = arr[2];
 
+                             var activePrivateKey = activePrivateKey.replace(/\n/g, '');
+                             var activePublicKey = activePublicKey.replace(/\n/g, '');
+
+
+
+
                             console.log("Active Private Key ="+activePrivateKey);
                             console.log("Active Public Key ="+activePublicKey);
 
@@ -143,8 +149,11 @@ module.exports = {
 
                             var Key = arr[1].split("Public key");
                             var ownerPrivateKey = Key[0];
+                            var ownerPrivateKey = ownerPrivateKey.replace(/\n/g, '');
 
                             var ownerPublicKey = arr[2];
+
+                            var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
 
                             console.log("Owner Private Key ="+ownerPrivateKey);
                             console.log("Owner Public Key ="+ownerPublicKey);
@@ -152,7 +161,7 @@ module.exports = {
 
 
 
-                            let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount   hellogoviddo "+account_name+" --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' "+activePublicKey+" "+ownerPublicKey;
+                            let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount   hellogoviddo "+account_name+" --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' "+ownerPublicKey+" "+activePublicKey;
 
 
                             console.log("New Wallet Creation = "+createEOSWalletCommand);
