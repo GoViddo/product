@@ -113,9 +113,7 @@ module.exports = {
                     );
 
 
-                    let activePrivateKey = "";
-                    let activePublicKey = "";
-
+                    
 
 
                     cmd.get(
@@ -124,9 +122,9 @@ module.exports = {
                             var arr = data.split(": ");
 
                             var Key = arr[1].split("Public key");
-                            let activePrivateKey = Key[0];
+                            const activePrivateKey = Key[0];
 
-                            let activePublicKey = arr[2];
+                            const activePublicKey = arr[2];
 
                             console.log("Active Private Key ="+activePrivateKey);
                             console.log("Active Public Key ="+activePublicKey);
@@ -135,9 +133,7 @@ module.exports = {
 
 
 
-                    let ownerPrivateKey = "";
-                    let ownerPublicKey = "";
-
+                    
 
                     cmd.get(
                         cleosCreateOwnerKeys,
@@ -147,9 +143,9 @@ module.exports = {
                             var arr = data.split(": ");
 
                             var Key = arr[1].split("Public key");
-                            let ownerPrivateKey = Key[0];
+                            const ownerPrivateKey = Key[0];
 
-                            let ownerPublicKey = arr[2];
+                            const ownerPublicKey = arr[2];
 
                             console.log("Owner Private Key ="+ownerPrivateKey);
                             console.log("Owner Public Key ="+ownerPublicKey);
