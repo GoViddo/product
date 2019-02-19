@@ -88,12 +88,18 @@ module.exports = {
                         return res.status(500).send(err);
                     }
 
+                    var dataCallback = function(data) {
+                      //useData(data);
+                      console.log(data);
+                    };
 
-                    cmd.run('cleos wallet unlock --password testpwd').then(function(exitCodes) {
-                        console.log('wallet unlocked!', exitCodes);
-                    }, function(error) {
-                        console.log('Error unlocking wallet!', error);
-                    });
+
+                    cmd.run('cleos wallet unlock --password testpwd', { onData: dataCallback });
+                    // .then(function() {
+                    //     console.log('wallet unlocked!');
+                    // }, function(error) {
+                    //     console.log('Error unlocking wallet!', error);
+                    // });
 
 
                     return res.status(200).send("Registration successful");
