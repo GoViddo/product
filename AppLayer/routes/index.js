@@ -113,9 +113,9 @@ module.exports = {
                     );
 
 
-                    const activePrivateKey;
+                    var activePrivateKey;
 
-                    const activePublicKey;
+                    var activePublicKey;
 
                     
 
@@ -136,8 +136,8 @@ module.exports = {
                     );
 
 
-                    const ownerPublicKey;
-                    const ownerPrivateKey
+                    var ownerPublicKey;
+                    var ownerPrivateKey
 
                     
 
