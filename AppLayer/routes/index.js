@@ -89,7 +89,7 @@ module.exports = {
                     }
 
 
-                    cmd.run('cloes wallet unlock --password testpwd').then(function() {
+                    cmd.run('cleos wallet unlock --password testpwd').then(function() {
                         console.log('wallet unlocked!');
                     }, function(error) {
                         console.log('Error unlocking wallet!', error);
