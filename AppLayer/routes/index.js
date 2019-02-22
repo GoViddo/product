@@ -96,10 +96,12 @@ module.exports = {
                     // }, function(error) {
                     //     console.log('Error unlocking wallet!', error);
                     // });
+                    
 
                     let encodedPassword = "UFc1S05HSHNmS012amU5VGd3RlR5V0FZOG5MTEd4QVJkQ3ZtYlh5MUtRTmN4dXJoR2FpQjU=";
 
                     let buff = new Buffer(encodedPassword, 'base64');  
+                    
                     let password = buff.toString('ascii');
 
 
@@ -115,7 +117,8 @@ module.exports = {
                     cmd.get(
                         cleosWalletUnlockQuery,
                         function(err, data, stderr){
-                           
+                           console.log("Wallet Unlocking status = "+data);
+                           console.log("Wallet Unlocking Error = "+err);
                         }
                     );
 
