@@ -96,6 +96,14 @@ module.exports = {
                     // }, function(error) {
                     //     console.log('Error unlocking wallet!', error);
                     // });
+
+                    //to check account name avilability
+                    EosApi = require('eosjs-api') // Or EosApi = require('./src')
+
+                    eos = EosApi() // // 127.0.0.1:8888
+
+                    eos.getAccount('mulaniimran2').then(result => console.log(result));
+
                     
 
                     let encodedPassword = "demopassword=";
