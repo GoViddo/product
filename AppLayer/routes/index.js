@@ -106,10 +106,10 @@ module.exports = {
                         function(err, data, stderr){
                            if(err == null)
                            {
-                           console.log("Account Name Not Avilabile");
+                           console.log("Account Name Not Avilabile"+data);
                            }
                            else{
-                               console.log("Wallet Name Avilabile");
+                               console.log("Wallet Name Avilabile"+err);
                            }
                             }
                     );                    
