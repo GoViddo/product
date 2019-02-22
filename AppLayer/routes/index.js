@@ -98,7 +98,7 @@ module.exports = {
                     // });
                     
 
-                    let encodedPassword = "UFc1S05HSHNmS012amU5VGd3RlR5V0FZOG5MTEd4QVJkQ3ZtYlh5MUtRTmN4dXJoR2FpQjU=";
+                    let encodedPassword = "demopassword=";
 
                     let buff = new Buffer(encodedPassword, 'base64');  
                     
