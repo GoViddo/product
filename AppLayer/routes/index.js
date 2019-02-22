@@ -102,7 +102,7 @@ module.exports = {
 
 
                     cmd.get(
-                        cleosWalletUnlockQuery,
+                        cleosCheckWalletName,
                         function(err, data, stderr){
                             if(err == null)
                             {
