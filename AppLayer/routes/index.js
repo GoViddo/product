@@ -98,18 +98,18 @@ module.exports = {
                     // });
 
                     //to check account name avilability
-                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account "+firstName;
+                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account "+firstName+" --json";
 
 
                     cmd.get(
                         cleosCheckWalletName,
                         function(err, data, stderr){
-                            if(err == null)
-                            {
-                           console.log("Account Name Not Avilabile"+data);
+                           if(err == null)
+                           {
+                           console.log("Account Name Not Avilabile");
                            }
                            else{
-                               console.log("Wallet Name Avilabile"+err);
+                               console.log("Wallet Name Avilabile");
                            }
                             }
                     );                    
