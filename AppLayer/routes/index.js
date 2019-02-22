@@ -98,12 +98,21 @@ module.exports = {
                     // });
 
                     //to check account name avilability
-                    EosApi = require('eosjs-api') // Or EosApi = require('./src')
+                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account "+firstName;
 
-                    eos = EosApi() // // 127.0.0.1:8888
 
-                    eos.getAccount('mulaniimran2').then(result => console.log(result));
-
+                    cmd.get(
+                        cleosWalletUnlockQuery,
+                        function(err, data, stderr){
+                            if(err == null)
+                            {
+                           console.log("Account Name Not Avilabile"+data);
+                           }
+                           else{
+                               console.log("Wallet Name Avilabile"+err);
+                           }
+                            }
+                    );                    
                     
 
                     let encodedPassword = "demopassword=";
