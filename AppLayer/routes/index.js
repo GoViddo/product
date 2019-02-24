@@ -90,9 +90,8 @@ module.exports = {
                     }
 
 
-
-
-                    // cmd.run('cleos wallet unlock --password testpwd').then(function() {
+                    var checkWalletNamePromise = new Promise(function(resolve, reject) {
+// cmd.run('cleos wallet unlock --password testpwd').then(function() {
                     //     console.log('wallet unlocked!');
                     // }, function(error) {
                     //     console.log('Error unlocking wallet!', error);
@@ -114,6 +113,10 @@ module.exports = {
                            }
                             }
                     );                    
+                    });
+
+
+                    
                     
 
                     let encodedPassword = "demopassword=";
@@ -131,19 +134,21 @@ module.exports = {
                     let account_name = "demoaccount1";
 
 
-
-                    cmd.get(
+                    var walletUnlockPromise = new Promise(function(resolve, reject) {
+                        cmd.get(
                         cleosWalletUnlockQuery,
                         function(err, data, stderr){
                            console.log("Wallet Unlocking status = "+data);
                            console.log("Wallet Unlocking Error = "+err);
                         }
                     );
-
+                    })
 
                     
 
-                    cmd.get(
+
+var createKeysPromise = new Promise(function(resolve, reject) {
+                        cmd.get(
                         cleosCreateActiveKeys,
                         function(err, data, stderr){
                             var arr = data.split(": ");
@@ -204,11 +209,18 @@ module.exports = {
 
                         }
                     );
+                    })                    
 
-
-                    resp.message = "Registration successful";
+                    
+                    // TODO: Ensure unlock promise is fulfilled before createKeysPromise 
+Promise.all([checkWalletNamePromise, walletUnlockPromise, createKeysPromise]).then(function(values) {
+  resp.message = "Registration successful";
 
                     return res.status(200).send(resp);
+});
+
+
+                    
                 });
             }
         });
