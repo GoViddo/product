@@ -107,9 +107,11 @@ module.exports = {
                            if(err == null)
                            {
                            console.log("Account Name Not Avilabile"+data);
+                           reject("Account Name Not Avilabile"+data);
                            }
                            else{
                                console.log("Wallet Name Avilabile"+err);
+                               resolve("Wallet Name Avilabile");
                            }
                             }
                     );                    
@@ -140,6 +142,12 @@ module.exports = {
                         function(err, data, stderr){
                            console.log("Wallet Unlocking status = "+data);
                            console.log("Wallet Unlocking Error = "+err);
+
+                           // if (err != null) {
+                           //  reject(err);
+                           // } else {
+                            resolve(data);
+                           // }
                         }
                     );
                     })
@@ -200,6 +208,7 @@ var createKeysPromise = new Promise(function(resolve, reject) {
 
                             //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
+                            resolve(data);
 
                         }
                     );
