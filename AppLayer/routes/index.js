@@ -75,6 +75,7 @@ module.exports = {
         let userQuery = "SELECT * FROM user_table WHERE email_id = '" + email + "';";
 
         db.query(userQuery, function (err, result) {
+            var resp = {};
             if (err) {
                 return res.status(500).send(err);
             }
@@ -156,6 +157,8 @@ module.exports = {
                              var activePublicKey = activePublicKey.replace(/\n/g, '');
 
 
+                            resp.activePrivateKey = activePrivateKey;
+                            resp.activePublicKey = activePublicKey;
 
 
                             console.log("Active Private Key ="+activePrivateKey);
@@ -179,6 +182,9 @@ module.exports = {
 
                             var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
 
+                            resp.ownerPrivateKey = ownerPrivateKey;
+                            resp.ownerPublicKey = ownerPublicKey;
+
                             console.log("Owner Private Key ="+ownerPrivateKey);
                             console.log("Owner Public Key ="+ownerPublicKey);
 
@@ -200,8 +206,9 @@ module.exports = {
                     );
 
 
+                    resp.message = "Registration successful";
 
-                    return res.status(200).send("Registration successful");
+                    return res.status(200).send(resp);
                 });
             }
         });
