@@ -5,7 +5,7 @@ var goviddo = goviddo || {};
         port: 3000,
         host: 'sql138.main-hosting.eu',
         user: 'u450042391_govid',
-        password: 'Pratik@GoViddo',
+        password: 'NewDbPassword',
         database: 'u450042391_govid'
     };
 })(goviddo);
