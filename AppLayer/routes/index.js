@@ -82,108 +82,107 @@ module.exports = {
             if (result.length) {
                 return res.status(400).send("User with this email already exists");
             } else {
-                // send the user's details to the database
-                let query = "INSERT INTO user_table (first_name, last_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "')";
-                db.query(query, function (err, result) {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
 
-                    let encodedPassword = "demopassword=";
-                    let buff = new Buffer(encodedPassword, 'base64');
-                    let password = buff.toString('ascii');
-                    let cleosWalletUnlockQuery = "cleos wallet unlock --password " + password;
-                    let cleosCreateActiveKeys = "cleos create key --to-console";
-                    let cleosCreateOwnerKeys = "cleos create key --to-console";
-                    let account_name = "demoaccount1";
+                let encodedPassword = "demopassword=";
+                let buff = new Buffer(encodedPassword, 'base64');
+                let password = buff.toString('ascii');
+                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + password;
+                let cleosCreateActiveKeys = "cleos create key --to-console";
+                let cleosCreateOwnerKeys = "cleos create key --to-console";
+                let account_name = "demoaccount1";
 
-                    var checkWalletNamePromise = new Promise(function (resolve, reject) {
-                        //to check account name avilability
-                        let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + firstName + " --json";
+                var checkWalletNamePromise = new Promise(function (resolve, reject) {
+                    //to check account name avilability
+                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + firstName + " --json";
 
+                    cmd.get(
+                        cleosCheckWalletName,
+                        function (err, data, stderr) {
+                            if (err == null) {
+                                console.log("Account Name Not Avilabile" + data);
+                                reject("Account Name Not Avilabile" + data);
+                            }
+                            else {
+                                console.log("Wallet Name Avilabile" + err);
+                                resolve("Wallet Name Avilabile");
+                            }
+                        }
+                    );
+                });
+
+                checkWalletNamePromise.then(function () {
+                    return new Promise(function (resolve, reject) {
                         cmd.get(
-                            cleosCheckWalletName,
+                            cleosWalletUnlockQuery,
                             function (err, data, stderr) {
-                                if (err == null) {
-                                    console.log("Account Name Not Avilabile" + data);
-                                    reject("Account Name Not Avilabile" + data);
-                                }
-                                else {
-                                    console.log("Wallet Name Avilabile" + err);
-                                    resolve("Wallet Name Avilabile");
-                                }
+                                console.log("Wallet Unlocking status = " + data);
+                                console.log("Wallet Unlocking Error = " + err);
+
+                                // if (err != null) {
+                                //  reject(err);
+                                // } else {
+                                resolve(data);
+                                // }
                             }
                         );
                     });
+                }).then(function () {
+                    return new Promise(function (resolve, reject) {
+                        cmd.get(
+                            cleosCreateActiveKeys,
+                            function (err, data, stderr) {
+                                var arr = data.split(": ");
+                                var Key = arr[1].split("Public key");
+                                var activePrivateKey = Key[0];
+                                var activePublicKey = arr[2];
+                                var activePrivateKey = activePrivateKey.replace(/\n/g, '');
+                                var activePublicKey = activePublicKey.replace(/\n/g, '');
 
-                    checkWalletNamePromise.then(function () {
-                        return new Promise(function (resolve, reject) {
-                            cmd.get(
-                                cleosWalletUnlockQuery,
-                                function (err, data, stderr) {
-                                    console.log("Wallet Unlocking status = " + data);
-                                    console.log("Wallet Unlocking Error = " + err);
+                                resp.activePrivateKey = activePrivateKey;
+                                resp.activePublicKey = activePublicKey;
 
-                                    // if (err != null) {
-                                    //  reject(err);
-                                    // } else {
-                                    resolve(data);
-                                    // }
-                                }
-                            );
-                        });
-                    }).then(function () {
-                        return new Promise(function (resolve, reject) {
-                            cmd.get(
-                                cleosCreateActiveKeys,
-                                function (err, data, stderr) {
-                                    var arr = data.split(": ");
-                                    var Key = arr[1].split("Public key");
-                                    var activePrivateKey = Key[0];
-                                    var activePublicKey = arr[2];
-                                    var activePrivateKey = activePrivateKey.replace(/\n/g, '');
-                                    var activePublicKey = activePublicKey.replace(/\n/g, '');
+                                console.log("Active Private Key =" + activePrivateKey);
+                                console.log("Active Public Key =" + activePublicKey);
+                                resolve(resp);
+                            }
+                        )
+                    })
+                }).then(function (resp) {
+                    return new Promise(function (resolve, reject) {
+                        cmd.get(
+                            cleosCreateOwnerKeys,
+                            function (err, data, stderr) {
+                                var arr = data.split(": ");
+                                var Key = arr[1].split("Public key");
+                                var ownerPrivateKey = Key[0];
+                                var ownerPrivateKey = ownerPrivateKey.replace(/\n/g, '');
+                                var ownerPublicKey = arr[2];
+                                var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
 
-                                    resp.activePrivateKey = activePrivateKey;
-                                    resp.activePublicKey = activePublicKey;
+                                resp.ownerPrivateKey = ownerPrivateKey;
+                                resp.ownerPublicKey = ownerPublicKey;
 
-                                    console.log("Active Private Key =" + activePrivateKey);
-                                    console.log("Active Public Key =" + activePublicKey);
-                                    resolve(resp);
-                                }
-                            )
-                        })
-                    }).then(function (resp) {
-                        return new Promise(function (resolve, reject) {
-                            cmd.get(
-                                cleosCreateOwnerKeys,
-                                function (err, data, stderr) {
-                                    var arr = data.split(": ");
-                                    var Key = arr[1].split("Public key");
-                                    var ownerPrivateKey = Key[0];
-                                    var ownerPrivateKey = ownerPrivateKey.replace(/\n/g, '');
-                                    var ownerPublicKey = arr[2];
-                                    var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
+                                console.log("Owner Private Key =" + ownerPrivateKey);
+                                console.log("Owner Public Key =" + ownerPublicKey);
 
-                                    resp.ownerPrivateKey = ownerPrivateKey;
-                                    resp.ownerPublicKey = ownerPublicKey;
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + account_name + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                console.log('Command to be executed', createEOSWalletCommand);
+                                //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
-                                    console.log("Owner Private Key =" + ownerPrivateKey);
-                                    console.log("Owner Public Key =" + ownerPublicKey);
-
-                                    let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + account_name + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
-                                    console.log('Command to be executed', createEOSWalletCommand);
-                                    //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
-
-                                    resolve(resp);
-                                }
-                            );
-                        })
-                    }).then(function(resp) {
+                                resolve(resp);
+                            }
+                        );
+                    })
+                }).then(function (resp) {
+                    // send the user's details to the database
+                    let query = "INSERT INTO user_table (first_name, last_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "')";
+                    db.query(query, function (err, result) {
+                        if (err) {
+                            return res.status(500).send(err);
+                        }
                         resp.message = "Registration successful";
                         return res.status(200).send(resp);
                     });
-
                 });
             }
         });
