@@ -129,11 +129,12 @@ module.exports = {
             else{
                 resp.message = "success";
 
-                data = [];
-                bannerDetails = {};
-
+               var data = [];
+                
                
                 for (var dd = 0; dd < result.length; dd++) {
+                   var bannerDetails = {};
+
                     
                     bannerDetails.video_id = result[dd].video_id;
                     
@@ -176,7 +177,7 @@ module.exports = {
                     bannerDetails.video_earnings = result[dd].video_earnings;
 
                     bannerDetails.status = result[dd].status;
-                    console.log(bannerDetails);
+                    
                     data.push(bannerDetails);
                 }
 
