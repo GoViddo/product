@@ -176,7 +176,7 @@ module.exports = {
                     bannerDetails.video_earnings = result[dd].video_earnings;
 
                     bannerDetails.status = result[dd].status;
-                    
+                    console.log(bannerDetails);
                     data.push(bannerDetails);
                 }
 
