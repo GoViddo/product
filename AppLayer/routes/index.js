@@ -116,7 +116,7 @@ module.exports = {
     bannerImages: (req, res) =>
     {
 
-        let query = "SELECT * FROM `video_table` WHERE `show_on_home_page` = 1 and `status` = 1 LIMIT 5";
+        let query = "SELECT * FROM `video_table` WHERE `show_on_home_page` = 1 and `status` = 1 ORDER BY `video_id` DESC LIMIT 5";
         var resp = {};
 
         db.query(query, function(err, result)
