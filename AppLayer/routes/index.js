@@ -114,7 +114,7 @@ module.exports = {
                             }
                         }
                     );
-                }).catch(console.log("Wallet Name Not Available"));
+                });
 
                 checkWalletNamePromise.then(function () {
                     return new Promise(function (resolve, reject) {
@@ -212,6 +212,6 @@ module.exports = {
                     });
                 });
             }
-        }).catch(console.log("Wallet Name Not Available"));
+        });
     }
 };
