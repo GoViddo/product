@@ -62,6 +62,36 @@ module.exports = {
         });
     },
 
+    checkWalletName: (req, res) => {
+        let walletName = req.body.walletName;
+        var resp = {};
+
+        let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+
+        cmd.get(
+            cleosCheckWalletName,
+            function (err, data, stderr) {
+                if (err == null) {
+                    resp.walletMessage = "Wallet Name Not Available";
+                    console.log("Account Name Not Avilabile" + data);
+                    resolve("Wallet Name Not vilabile");
+
+                    return res.status(400).send(resp);
+                }
+                else {
+                    resp.walletMessage = "Wallet Name Available";
+                    console.log("Wallet Name Avilabile" + err);
+                    resolve("Wallet Name Avilabile");
+                    return res.status(200).send(resp);
+                }
+            }
+        );
+         
+
+
+
+    },
+
     register: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;
@@ -150,7 +180,7 @@ module.exports = {
                                 var activePublicKey = arr[2];
                                 var activePrivateKey = activePrivateKey.replace(/\n/g, '');
                                 var activePublicKey = activePublicKey.replace(/\n/g, '');
-                                resp.createActiveKeyMsg = "Keys Not Created";
+                                //resp.createActiveKeyMsg = "Active Keys Created";
 
                                 
                                 activeKeys.activePrivateKey = activePrivateKey;
@@ -179,7 +209,7 @@ module.exports = {
                                 var ownerPrivateKey = ownerPrivateKey.replace(/\n/g, '');
                                 var ownerPublicKey = arr[2];
                                 var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
-                                resp.createOwnerKeysMsg = "Owner Keys Created";
+                                //resp.createOwnerKeysMsg = "Owner Keys Created";
 
                                 ownerKeys.ownerPrivateKey = ownerPrivateKey;
                                 ownerKeys.ownerPublicKey = ownerPublicKey;
