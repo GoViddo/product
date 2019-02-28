@@ -74,14 +74,11 @@ module.exports = {
                 if (err == null) {
                     resp.walletMessage = "Wallet Name Not Available";
                     console.log("Account Name Not Avilabile" + data);
-                    resolve("Wallet Name Not vilabile");
-
                     return res.status(400).send(resp);
                 }
                 else {
                     resp.walletMessage = "Wallet Name Available";
                     console.log("Wallet Name Avilabile" + err);
-                    resolve("Wallet Name Avilabile");
                     return res.status(200).send(resp);
                 }
             }
