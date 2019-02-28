@@ -244,7 +244,7 @@ module.exports = {
 
     getVideoGenereId: (req, res) => {
 
-        let videoGenereName = res.body.videoGenereName;
+        let videoGenereName = req.body.videoGenereName;
 
        
             let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenereName+"'";
