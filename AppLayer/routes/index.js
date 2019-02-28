@@ -133,7 +133,7 @@ module.exports = {
                 bannerDetails = {};
 
                 for (var i = 0; i < result.length; i++) {
-                    resp.id = result.length;
+                    resp.id = i;
                     
                     bannerDetails.video_id = result[i].video_id;
                     
