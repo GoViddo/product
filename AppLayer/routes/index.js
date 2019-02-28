@@ -81,10 +81,12 @@ module.exports = {
         db.query(userQuery, function (err, result) {
             var resp = {};
             if (err) {
-                return res.status(500).send(err);
+                resp.message = err;
+                return res.status(500).send(resp);
             }
             if (result.length) {
-                return res.status(400).send("User with this email already exists");
+                resp.message = "User with this email already exists";
+                return res.status(400).send(resp);
             } else {
 
                 let password = "demopassword=";
@@ -92,11 +94,10 @@ module.exports = {
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + password;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
                 let cleosCreateOwnerKeys = "cleos create key --to-console";
-                let account_name = "demoaccount1";
-
+                
                 var checkWalletNamePromise = new Promise(function (resolve, reject) {
                     //to check account name avilability
-                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + firstName + " --json";
+                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
 
                     cmd.get(
                         cleosCheckWalletName,
@@ -168,7 +169,7 @@ module.exports = {
                                 console.log("Owner Private Key =" + ownerPrivateKey);
                                 console.log("Owner Public Key =" + ownerPublicKey);
 
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + account_name + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
                                 console.log('Command to be executed', createEOSWalletCommand);
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
