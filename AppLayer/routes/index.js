@@ -118,6 +118,7 @@ module.exports = {
 
         let query = "SELECT * FROM `video_table` WHERE `show_on_home_page` = 1 and `status` = 1 LIMIT 5";
         var resp = {};
+        resp.query = query;
 
         db.query(query, function(err, result)
         {
