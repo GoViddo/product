@@ -95,29 +95,94 @@ module.exports = {
         let videoGenereName = req.body.videoGenereName;
         var resp = {};
 
-       
-            let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenereName+"'";
+        let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '" + videoGenereName + "'";
 
-            db.query(query, function(err, result)
+        db.query(query, function (err, result) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            else {
+                resp.message = "success";
+                row = result[0];
+                resp.genereId = row.video_genere_id;
+                resp.genereName = row.video_genere_name;
+                resp.status = row.status;
+
+                return res.status(200).send(resp);
+            }
+        })
+    },
+
+    bannerImages: (req, res) =>
+    {
+
+        let query = "SELECT * FROM `video_table` WHERE `show_on_home_page` = 1 and `status` = 1 LIMIT 5";
+        var resp = {};
+
+        db.query(query, function(err, result)
+        {
+            if(err)
             {
-                if(err)
-                {
-                    return res.status(400).send(err);
+                return res.status(400).send(err);
+            }
+            else{
+                resp.message = "success";
+
+                data = [];
+                bannerDetails = {};
+
+                for (var i = 0; i < result.length; i++) {
+                    bannerDetails.video_id = result[i].video_id;
+                    
+                    bannerDetails.show_name = result[i].show_name;
+                    
+                    bannerDetails.created_date = result[i].created_date;
+                    
+                    bannerDetails.director = result[i].director;
+                    
+                    bannerDetails.duration = result[i].duration;
+                    
+                    bannerDetails.home_image = result[i].home_image;
+                    
+                    bannerDetails.banner_image = result[i].banner_image;
+                    
+                    bannerDetails.producer = result[i].producer;
+                    
+                    bannerDetails.shorten_text = result[i].shorten_text;
+                    
+                    bannerDetails.show_on_home_page = result[i].show_on_home_page;
+                    
+                    bannerDetails.slug = result[i].slug;
+
+                    bannerDetails.starring = result[i].starring;
+
+                    bannerDetails.vdo_cipher_id = result[i].vdo_cipher_id;
+
+                    bannerDetails.video_tags = result[i].video_tags;
+
+                    bannerDetails.video_description = result[i].video_description;
+
+                    bannerDetails.video_genere_type = result[i].video_genere_type;
+
+                    bannerDetails.video_channel_name = result[i].video_channel_name;
+
+                    bannerDetails.production_name = result[i].production_name;
+
+                    bannerDetails.video_views_count = result[i].video_views_count;
+
+                    bannerDetails.video_earnings = result[i].video_earnings;
+
+                    bannerDetails.status = result[i].status;
+                    
+                    data.push(bannerDetails);
                 }
-                else{
-                    resp.message = "success";
 
-                    row = result[0];
+                resp.data = data;
 
-                    resp.genereId = row.video_genere_id;
-                    resp.genereName = row.video_genere_name;
-                    resp.status = row.status;
-
-                    return res.status(200).send(resp);
-                }
-            })
-
-        
+                return res.status(200).send(resp);
+    
+            }
+        })
 
     },
 
@@ -273,5 +338,7 @@ module.exports = {
             }
         });
     }
-    
+
 };
+
+
