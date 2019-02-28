@@ -69,6 +69,8 @@ module.exports = {
         let lastName = req.body.lastName;
         let walletName = req.body.walletName;
         var resp = {};
+        var activeKeys = [];
+        var ownerKeys = [];
         if (!email || !password || !firstName || !lastName || !walletName) {
 
             resp.message = "Missing first name, last name, email, wallet name or password";
@@ -141,13 +143,7 @@ module.exports = {
                         cmd.get(
                             cleosCreateActiveKeys,
                             function (err, data, stderr) {
-                                if(err == null)
-                                {
-                                    resp.createActiveKeyMsg = "Active Keys Not Created";
-                                    reject("Active Keys Not Created");
-                                }
-                                else
-                                {
+                                
                                 var arr = data.split(": ");
                                 var Key = arr[1].split("Public key");
                                 var activePrivateKey = Key[0];
@@ -155,13 +151,17 @@ module.exports = {
                                 var activePrivateKey = activePrivateKey.replace(/\n/g, '');
                                 var activePublicKey = activePublicKey.replace(/\n/g, '');
                                 resp.createActiveKeyMsg = "Keys Not Created";
-                                resp.activePrivateKey = activePrivateKey;
-                                resp.activePublicKey = activePublicKey;
+
+                                
+                                activeKeys.activePrivateKey = activePrivateKey;
+                                activeKeys.activePublicKey = activePublicKey;
+
+                                resp.activeKeys = activeKeys;
 
                                 console.log("Active Private Key =" + activePrivateKey);
                                 console.log("Active Public Key =" + activePublicKey);
                                 resolve(resp);
-                                }
+                                
                             }
                         )
                     })
@@ -170,13 +170,7 @@ module.exports = {
                         cmd.get(
                             cleosCreateOwnerKeys,
                             function (err, data, stderr) {
-                                if(err == null)
-                                {
-                                    resp.createOwnerKeysMsg = "Owner Keys Creation Failed";
-                                    reject("Owner Keys Creation Failed");
-                                }
-                                else
-                                {
+                                
                                 var arr = data.split(": ");
                                 var Key = arr[1].split("Public key");
                                 var ownerPrivateKey = Key[0];
@@ -185,8 +179,10 @@ module.exports = {
                                 var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
                                 resp.createOwnerKeysMsg = "Owner Keys Created";
 
-                                resp.ownerPrivateKey = ownerPrivateKey;
-                                resp.ownerPublicKey = ownerPublicKey;
+                                ownerKeys.ownerPrivateKey = ownerPrivateKey;
+                                ownerKeys.ownerPublicKey = ownerPublicKey;
+
+                                resp.ownerKeys = ownerKeys;
 
                                 console.log("Owner Private Key =" + ownerPrivateKey);
                                 console.log("Owner Public Key =" + ownerPublicKey);
@@ -196,7 +192,7 @@ module.exports = {
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
                                 resolve(resp);
-                                }
+                                
                             }
                         );
                     })
