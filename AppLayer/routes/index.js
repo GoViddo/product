@@ -89,6 +89,30 @@ module.exports = {
 
     },
 
+
+    getVideoGenereId: (req, res) => {
+
+        let videoGenereName = req.body.videoGenereName;
+
+       
+            let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenereName+"'";
+
+            db.query(query, function(err, result)
+            {
+                if(err)
+                {
+                    return res.status.send(err);
+                }
+                else{
+                    resp.message = "success";
+                    console.log(result);
+                }
+            })
+
+        
+
+    },
+
     register: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;
@@ -240,32 +264,6 @@ module.exports = {
                 });
             }
         });
-    },
-
-    getVideoGenereId: (req, res) => {
-
-        let videoGenereName = req.body.videoGenereName;
-
-       
-            let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenereName+"'";
-
-            db.query(query, function(err, result)
-            {
-                if(err)
-                {
-                    return res.status.send(err);
-                }
-                else{
-                    resp.message = "success";
-                    console.log(result);
-                }
-            })
-
-        
-
     }
-
-
-
-
+    
 };
