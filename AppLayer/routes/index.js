@@ -132,7 +132,7 @@ module.exports = {
                 data = [];
                 bannerDetails = {};
 
-                disp.aa = i;
+                resp.aa = i;
 
                 for (var i = 0; i < result.length; i++) {
                     
