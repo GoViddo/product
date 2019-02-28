@@ -132,10 +132,51 @@ module.exports = {
                 data = [];
                 bannerDetails = {};
 
+                disp.aa = i;
+
                 for (var i = 0; i < result.length; i++) {
-                    resp.id = i;
                     
                     bannerDetails.video_id = result[i].video_id;
+                    
+                    bannerDetails.show_name = result[i].show_name;
+                    
+                    bannerDetails.created_date = result[i].created_date;
+                    
+                    bannerDetails.director = result[i].director;
+                    
+                    bannerDetails.duration = result[i].duration;
+                    
+                    bannerDetails.home_image = result[i].home_image;
+                    
+                    bannerDetails.banner_image = result[i].banner_image;
+                    
+                    bannerDetails.producer = result[i].producer;
+                    
+                    bannerDetails.shorten_text = result[i].shorten_text;
+                    
+                    bannerDetails.show_on_home_page = result[i].show_on_home_page;
+                    
+                    bannerDetails.slug = result[i].slug;
+
+                    bannerDetails.starring = result[i].starring;
+
+                    bannerDetails.vdo_cipher_id = result[i].vdo_cipher_id;
+
+                    bannerDetails.video_tags = result[i].video_tags;
+
+                    bannerDetails.video_description = result[i].video_description;
+
+                    bannerDetails.video_genere_type = result[i].video_genere_type;
+
+                    bannerDetails.video_channel_name = result[i].video_channel_name;
+
+                    bannerDetails.production_name = result[i].production_name;
+
+                    bannerDetails.video_views_count = result[i].video_views_count;
+
+                    bannerDetails.video_earnings = result[i].video_earnings;
+
+                    bannerDetails.status = result[i].status;
                     
                     data.push(bannerDetails);
                 }
