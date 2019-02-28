@@ -102,11 +102,18 @@ module.exports = {
             {
                 if(err)
                 {
-                    return res.status.send(err);
+                    return res.status(400).send(err);
                 }
                 else{
                     resp.message = "success";
-                    console.log(result);
+
+                    row = result[0];
+
+                    resp.genereId = row.video_genere_id;
+                    resp.genereName = row.video_genere_name;
+                    resp.status = row.status;
+
+                    return res.status(200).send(resp);
                 }
             })
 
