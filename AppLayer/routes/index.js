@@ -69,8 +69,8 @@ module.exports = {
         let lastName = req.body.lastName;
         let walletName = req.body.walletName;
         var resp = {};
-        var activeKeys = [];
-        var ownerKeys = [];
+        var activeKeys = {};
+        var ownerKeys = {};
         if (!email || !password || !firstName || !lastName || !walletName) {
 
             resp.message = "Missing first name, last name, email, wallet name or password";
@@ -156,7 +156,9 @@ module.exports = {
                                 activeKeys.activePrivateKey = activePrivateKey;
                                 activeKeys.activePublicKey = activePublicKey;
 
-                                resp.activeKeys = activeKeys;
+                                activeKeysArray = [];
+                                activeKeysArray.push(activeKeys);
+                                resp.activeKeys = activeKactiveKeysArrayeys;
 
                                 console.log("Active Private Key =" + activePrivateKey);
                                 console.log("Active Public Key =" + activePublicKey);
@@ -182,7 +184,10 @@ module.exports = {
                                 ownerKeys.ownerPrivateKey = ownerPrivateKey;
                                 ownerKeys.ownerPublicKey = ownerPublicKey;
 
-                                resp.ownerKeys = ownerKeys;
+                                ownerKeysArray = [];
+                                ownerKeysArray.push(ownerKeys);
+
+                                resp.ownerKeys = ownerKeysArray;
 
                                 console.log("Owner Private Key =" + ownerPrivateKey);
                                 console.log("Owner Public Key =" + ownerPublicKey);
