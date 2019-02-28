@@ -129,11 +129,11 @@ module.exports = {
             else{
                 resp.message = "success";
 
-               var data = [];
+               data = [];
                 
                
                 for (var dd = 0; dd < result.length; dd++) {
-                   var bannerDetails = {};
+                   bannerDetails = {};
 
                     
                     bannerDetails.video_id = result[dd].video_id;
