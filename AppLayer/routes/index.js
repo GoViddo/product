@@ -103,10 +103,12 @@ module.exports = {
                         cleosCheckWalletName,
                         function (err, data, stderr) {
                             if (err == null) {
+                                resp.walletMessage = "Wallet Name Not Available";
                                 console.log("Account Name Not Avilabile" + data);
-                                reject("Account Name Not Avilabile" + data);
+                                reject("Account Name Not Avilabile");
                             }
                             else {
+                                resp.walletMessage = "Wallet Name Available";
                                 console.log("Wallet Name Avilabile" + err);
                                 resolve("Wallet Name Avilabile");
                             }
@@ -119,14 +121,18 @@ module.exports = {
                         cmd.get(
                             cleosWalletUnlockQuery,
                             function (err, data, stderr) {
-                                console.log("Wallet Unlocking status = " + data);
-                                console.log("Wallet Unlocking Error = " + err);
-
-                                // if (err != null) {
-                                //  reject(err);
-                                // } else {
+                                if(err == null)
+                                {
+                                    resp.walletUnlockingMessage = "Wallet Not Unlocked - Password is wrong";
+                                    console.log("Wallet Unlocking status = " + data);
+                                }
+                                else{
+                                    resp.walletUnlockingMessage = "Wallet Unlocked Successfully";
+                                    console.log("Wallet Unlocking Error = " + err);
+                                }
                                 resolve(data);
-                                // }
+                                
+                                
                             }
                         );
                     });
@@ -135,19 +141,27 @@ module.exports = {
                         cmd.get(
                             cleosCreateActiveKeys,
                             function (err, data, stderr) {
+                                if(err == null)
+                                {
+                                    resp.createActiveKeyMsg = "Active Keys Not Created";
+                                    reject("Active Keys Not Created");
+                                }
+                                else
+                                {
                                 var arr = data.split(": ");
                                 var Key = arr[1].split("Public key");
                                 var activePrivateKey = Key[0];
                                 var activePublicKey = arr[2];
                                 var activePrivateKey = activePrivateKey.replace(/\n/g, '');
                                 var activePublicKey = activePublicKey.replace(/\n/g, '');
-
+                                resp.createActiveKeyMsg = "Keys Not Created";
                                 resp.activePrivateKey = activePrivateKey;
                                 resp.activePublicKey = activePublicKey;
 
                                 console.log("Active Private Key =" + activePrivateKey);
                                 console.log("Active Public Key =" + activePublicKey);
                                 resolve(resp);
+                                }
                             }
                         )
                     })
@@ -156,12 +170,20 @@ module.exports = {
                         cmd.get(
                             cleosCreateOwnerKeys,
                             function (err, data, stderr) {
+                                if(err == null)
+                                {
+                                    resp.createOwnerKeysMsg = "Owner Keys Creation Failed";
+                                    reject("Owner Keys Creation Failed");
+                                }
+                                else
+                                {
                                 var arr = data.split(": ");
                                 var Key = arr[1].split("Public key");
                                 var ownerPrivateKey = Key[0];
                                 var ownerPrivateKey = ownerPrivateKey.replace(/\n/g, '');
                                 var ownerPublicKey = arr[2];
                                 var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
+                                resp.createOwnerKeysMsg = "Owner Keys Created";
 
                                 resp.ownerPrivateKey = ownerPrivateKey;
                                 resp.ownerPublicKey = ownerPublicKey;
@@ -174,6 +196,7 @@ module.exports = {
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
                                 resolve(resp);
+                                }
                             }
                         );
                     })
