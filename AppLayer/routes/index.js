@@ -212,6 +212,6 @@ module.exports = {
                     });
                 });
             }
-        });
+        }).catch(console.log("Wallet Name Not Available"));
     }
 };
