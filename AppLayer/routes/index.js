@@ -67,9 +67,13 @@ module.exports = {
         let password = req.body.password;
         let firstName = req.body.firstName;
         let lastName = req.body.lastName;
+        let walletName = req.body.walletName;
+        var resp = {};
+        if (!email || !password || !firstName || !lastName || !walletName) {
 
-        if (!email || !password || !firstName || !lastName) {
-            return res.status(400).send("Missing first name, last name, email or password");
+            resp.message = "Missing first name, last name, email, wallet name or password";
+            return res.status(400).send(resp);
+
         }
 
         let userQuery = "SELECT * FROM user_table WHERE email_id = '" + email + "';";
@@ -83,9 +87,8 @@ module.exports = {
                 return res.status(400).send("User with this email already exists");
             } else {
 
-                let encodedPassword = "demopassword=";
-                let buff = new Buffer(encodedPassword, 'base64');
-                let password = buff.toString('ascii');
+                let password = "demopassword=";
+                
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + password;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
                 let cleosCreateOwnerKeys = "cleos create key --to-console";
