@@ -158,7 +158,7 @@ module.exports = {
 
                                 activeKeysArray = [];
                                 activeKeysArray.push(activeKeys);
-                                resp.activeKeys = activeKactiveKeysArrayeys;
+                                resp.activeKeys = activeKeysArray;
 
                                 console.log("Active Private Key =" + activePrivateKey);
                                 console.log("Active Public Key =" + activePublicKey);
