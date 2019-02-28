@@ -83,7 +83,7 @@ module.exports = {
                 }
             }
         );
-         
+
 
 
 
@@ -119,11 +119,11 @@ module.exports = {
             } else {
 
                 let password = "demopassword=";
-                
+
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + password;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
                 let cleosCreateOwnerKeys = "cleos create key --to-console";
-                
+
                 var checkWalletNamePromise = new Promise(function (resolve, reject) {
                     //to check account name avilability
                     let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
@@ -150,18 +150,17 @@ module.exports = {
                         cmd.get(
                             cleosWalletUnlockQuery,
                             function (err, data, stderr) {
-                                if(err == null)
-                                {
+                                if (err == null) {
                                     resp.walletUnlockingMessage = "Wallet Not Unlocked - Password is wrong";
                                     console.log("Wallet Unlocking status = " + data);
                                 }
-                                else{
+                                else {
                                     resp.walletUnlockingMessage = "Wallet Unlocked Successfully";
                                     console.log("Wallet Unlocking Error = " + err);
                                 }
                                 resolve(data);
-                                
-                                
+
+
                             }
                         );
                     });
@@ -170,7 +169,7 @@ module.exports = {
                         cmd.get(
                             cleosCreateActiveKeys,
                             function (err, data, stderr) {
-                                
+
                                 var arr = data.split(": ");
                                 var Key = arr[1].split("Public key");
                                 var activePrivateKey = Key[0];
@@ -179,7 +178,7 @@ module.exports = {
                                 var activePublicKey = activePublicKey.replace(/\n/g, '');
                                 //resp.createActiveKeyMsg = "Active Keys Created";
 
-                                
+
                                 activeKeys.activePrivateKey = activePrivateKey;
                                 activeKeys.activePublicKey = activePublicKey;
 
@@ -190,7 +189,7 @@ module.exports = {
                                 console.log("Active Private Key =" + activePrivateKey);
                                 console.log("Active Public Key =" + activePublicKey);
                                 resolve(resp);
-                                
+
                             }
                         )
                     })
@@ -199,7 +198,7 @@ module.exports = {
                         cmd.get(
                             cleosCreateOwnerKeys,
                             function (err, data, stderr) {
-                                
+
                                 var arr = data.split(": ");
                                 var Key = arr[1].split("Public key");
                                 var ownerPrivateKey = Key[0];
@@ -224,7 +223,7 @@ module.exports = {
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
                                 resolve(resp);
-                                
+
                             }
                         );
                     })
@@ -241,5 +240,32 @@ module.exports = {
                 });
             }
         });
+    },
+
+    getVideoGenereId: (req, res) => {
+
+        let videoGenereName = res.body.videoGenereName;
+
+       
+            let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenereName+"'";
+
+            db.query(query, function(err, result)
+            {
+                if(err)
+                {
+                    return res.status.send(err);
+                }
+                else{
+                    resp.message = "success";
+                    console.log(result);
+                }
+            })
+
+        
+
     }
+
+
+
+
 };
