@@ -93,6 +93,7 @@ module.exports = {
     getVideoGenereId: (req, res) => {
 
         let videoGenereName = req.body.videoGenereName;
+        var resp = {};
 
        
             let query = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenereName+"'";
