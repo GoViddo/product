@@ -132,51 +132,50 @@ module.exports = {
                 data = [];
                 bannerDetails = {};
 
-                resp.aa = i;
-
-                for (var i = 0; i < result.length; i++) {
+               
+                for (var dd = 0; dd < result.length; dd++) {
                     
-                    bannerDetails.video_id = result[i].video_id;
+                    bannerDetails.video_id = result[dd].video_id;
                     
-                    bannerDetails.show_name = result[i].show_name;
+                    bannerDetails.show_name = result[dd].show_name;
                     
-                    bannerDetails.created_date = result[i].created_date;
+                    bannerDetails.created_date = result[dd].created_date;
                     
-                    bannerDetails.director = result[i].director;
+                    bannerDetails.director = result[dd].director;
                     
-                    bannerDetails.duration = result[i].duration;
+                    bannerDetails.duration = result[dd].duration;
                     
-                    bannerDetails.home_image = result[i].home_image;
+                    bannerDetails.home_image = result[dd].home_image;
                     
-                    bannerDetails.banner_image = result[i].banner_image;
+                    bannerDetails.banner_image = result[dd].banner_image;
                     
-                    bannerDetails.producer = result[i].producer;
+                    bannerDetails.producer = result[dd].producer;
                     
-                    bannerDetails.shorten_text = result[i].shorten_text;
+                    bannerDetails.shorten_text = result[dd].shorten_text;
                     
-                    bannerDetails.show_on_home_page = result[i].show_on_home_page;
+                    bannerDetails.show_on_home_page = result[dd].show_on_home_page;
                     
-                    bannerDetails.slug = result[i].slug;
+                    bannerDetails.slug = result[dd].slug;
 
-                    bannerDetails.starring = result[i].starring;
+                    bannerDetails.starring = result[dd].starring;
 
-                    bannerDetails.vdo_cipher_id = result[i].vdo_cipher_id;
+                    bannerDetails.vdo_cipher_id = result[dd].vdo_cipher_id;
 
-                    bannerDetails.video_tags = result[i].video_tags;
+                    bannerDetails.video_tags = result[dd].video_tags;
 
-                    bannerDetails.video_description = result[i].video_description;
+                    bannerDetails.video_description = result[dd].video_description;
 
-                    bannerDetails.video_genere_type = result[i].video_genere_type;
+                    bannerDetails.video_genere_type = result[dd].video_genere_type;
 
-                    bannerDetails.video_channel_name = result[i].video_channel_name;
+                    bannerDetails.video_channel_name = result[dd].video_channel_name;
 
-                    bannerDetails.production_name = result[i].production_name;
+                    bannerDetails.production_name = result[dd].production_name;
 
-                    bannerDetails.video_views_count = result[i].video_views_count;
+                    bannerDetails.video_views_count = result[dd].video_views_count;
 
-                    bannerDetails.video_earnings = result[i].video_earnings;
+                    bannerDetails.video_earnings = result[dd].video_earnings;
 
-                    bannerDetails.status = result[i].status;
+                    bannerDetails.status = result[dd].status;
                     
                     data.push(bannerDetails);
                 }
