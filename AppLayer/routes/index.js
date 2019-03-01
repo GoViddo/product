@@ -280,6 +280,8 @@ module.exports = {
                                 activeKeys.activePrivateKey = activePrivateKey;
                                 activeKeys.activePublicKey = activePublicKey;
 
+                                resp.activePublicKey = activePublicKey;
+
                                 activeKeysArray = [];
                                 activeKeysArray.push(activeKeys);
                                 resp.activeKeys = activeKeysArray;
@@ -317,7 +319,7 @@ module.exports = {
                                 console.log("Owner Public Key =" + ownerPublicKey);
                                 
 
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activeKeys.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
                                 console.log('Command to be executed', createEOSWalletCommand);
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
