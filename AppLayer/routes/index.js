@@ -216,7 +216,7 @@ module.exports = {
                 return res.status(400).send(resp);
             } else {
 
-                let walletPassword = "demopassword-";
+                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
@@ -246,6 +246,13 @@ module.exports = {
                         }
                     );
                 });
+
+                checkWalletNamePromise.catch(function () {
+                    resp.message = "Wallet Not Available please try new name";
+                    console.log("Promise Rejected");
+                    return res.status(500).send(resp);
+               });
+               
 
                 checkWalletNamePromise.then(function () {
                     return new Promise(function (resolve, reject) {
