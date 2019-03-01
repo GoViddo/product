@@ -259,7 +259,7 @@ module.exports = {
                         cmd.get(
                             cleosWalletUnlockQuery,
                             function (err, data, stderr) {
-                                if (err == null) {
+                                if (err != null) {
                                     resp.walletUnlockingMessage = "Wallet Not Unlocked - Password is wrong";
                                     console.log("Wallet Unlocking status = " + data);
                                 }
