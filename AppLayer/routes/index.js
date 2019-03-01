@@ -216,7 +216,7 @@ module.exports = {
                 return res.status(400).send(resp);
             } else {
 
-                let walletPassword = "demopassword=";
+                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
@@ -224,7 +224,11 @@ module.exports = {
 
                 var checkWalletNamePromise = new Promise(function (resolve, reject) {
                     //to check account name avilability
-                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+                    //mainnet url
+                    //let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+
+                    //testnet url
+                    let cleosCheckWalletName = "cleos -u http://junglehistory.cryptolions.io get account " + walletName + " --json";
 
                     cmd.get(
                         cleosCheckWalletName,
@@ -318,10 +322,31 @@ module.exports = {
                                 console.log("Owner Private Key =" + ownerPrivateKey);
                                 console.log("Owner Public Key =" + ownerPublicKey);
                                 
-
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                //mainnet account creation command
+                                //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                
+                                
+                                //testnet account creation command
+                                let createEOSWalletCommand = "cleos -u http://junglehistory.cryptolions.io system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                
+                                
                                 console.log('Command to be executed', createEOSWalletCommand);
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
+
+                                cmd.get(
+                                    createEOSWalletCommand,
+                                    function (err, data, stderr) {
+                                        if (err == null) {
+                                            resp.accountCreatedMsg = "Account Created Successfully";
+                                            console.log("Account Created Successfully" + data);
+                                        }
+                                        else {
+                                            resp.accountCreatedMsg = "Account creation failed";
+                                            console.log("Account creation failed" + err);
+                                        }
+                                    }
+                                );
+                            
 
                                 resolve(resp);
 
