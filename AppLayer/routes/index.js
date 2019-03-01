@@ -216,9 +216,9 @@ module.exports = {
                 return res.status(400).send(resp);
             } else {
 
-                let password = "demopassword=";
+                let walletPassword = "demopassword=";
 
-                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + password;
+                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
                 let cleosCreateOwnerKeys = "cleos create key --to-console";
 
@@ -327,7 +327,7 @@ module.exports = {
                     })
                 }).then(function (resp) {
                     // send the user's details to the database
-                    let query = "INSERT INTO user_table (first_name, last_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "')";
+                    let query = "INSERT INTO user_table (first_name, last_name, eosio_account_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + walletName + "', '"+ email + "', '" + password + "')";
                     db.query(query, function (err, result) {
                         if (err) {
                             return res.status(500).send(err);
