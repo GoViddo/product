@@ -216,7 +216,7 @@ module.exports = {
                 return res.status(400).send(resp);
             } else {
 
-                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
+                let walletPassword = "demopassword-";
 
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
