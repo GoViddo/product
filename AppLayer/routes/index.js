@@ -335,8 +335,6 @@ module.exports = {
                         if (err) {
                             return res.status(500).send(err);
                         }
-                        delete resp[activePublicKey];
-                        
                         resp.message = "Registration successful";
                         return res.status(200).send(resp);
                     });
