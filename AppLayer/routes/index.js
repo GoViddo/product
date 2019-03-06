@@ -210,11 +210,11 @@ module.exports = {
             var resp = {};
             if (err) {
                 resp.message = err;
-                return res.status(500).send(resp);
+                return res.status(200).send(resp);
             }
             if (result.length) {
                 resp.message = "User with this email already exists";
-                return res.status(500).send(resp);
+                return res.status(200).send(resp);
             } else {
 
                 let walletPassword = "demopassword-";
@@ -366,7 +366,8 @@ module.exports = {
                     let query = "INSERT INTO user_table (first_name, last_name, eosio_account_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + walletName + "', '"+ email + "', '" + password + "')";
                     db.query(query, function (err, result) {
                         if (err) {
-                            return res.status(500).send(err);
+                            resp.message = "Registration Failed due to database error";
+                            return res.status(200).send(err);
                         }
                         resp.message = "Registration successful";
                         return res.status(200).send(resp);
