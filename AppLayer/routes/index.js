@@ -49,6 +49,7 @@ module.exports = {
                         firstname: row.first_name,
                         lastname: row.last_name,
                         email: row.email_id,
+                        walletName: row.eosio_account_name,
                         address: row.address,
                         country: row.country,
                         phone: row.phone_no,
