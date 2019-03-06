@@ -40,7 +40,8 @@ module.exports = {
                 return res.status(500).send(err);
             }
             if (!result || !result.length) {
-                return res.status(400).send("User does not exist");
+
+                return res.status(400).send({message: "User does not exist"});
             } else {
                 const row = result[0];
                 if (row.password == password) {
@@ -57,7 +58,8 @@ module.exports = {
                         dob: row.birth_date
                     });
                 } else {
-                    return res.status(400).send("Invalid Password");
+                    
+                    return res.status(400).send(new Error({message: "Invalid Password"}));
                 }
             }
         });
@@ -201,6 +203,7 @@ module.exports = {
 
             resp.message = "Missing first name, last name, email, wallet name or password";
             return res.status(400).send(resp);
+
 
         }
 
