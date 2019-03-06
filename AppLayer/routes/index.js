@@ -59,7 +59,7 @@ module.exports = {
                     });
                 } else {
                     
-                    return res.status(400).send(new Error({message: "Invalid Password"}));
+                    return res.status(400).send(new Error("Invalid Password"));
                 }
             }
         });
