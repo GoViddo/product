@@ -41,7 +41,7 @@ module.exports = {
             }
             if (!result || !result.length) {
 
-                return res.status(400).send({message: "User does not exist"});
+                return res.status(200).send({message: "User does not exist"});
             } else {
                 const row = result[0];
                 if (row.password == password) {
@@ -59,7 +59,7 @@ module.exports = {
                     });
                 } else {
                     
-                    return res.status(400).send(new Error("Invalid Password"));
+                    return res.status(200).send({message: "Invalid Password"});
                 }
             }
         });
