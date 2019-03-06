@@ -214,7 +214,7 @@ module.exports = {
             }
             if (result.length) {
                 resp.message = "User with this email already exists";
-                return res.status(400).send(resp);
+                return res.status(500).send(resp);
             } else {
 
                 let walletPassword = "demopassword-";
