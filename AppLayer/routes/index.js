@@ -20,9 +20,8 @@ module.exports = {
             for (var i = 0; i < result.length; i++) {
                 if(i == 3)
                 {
-                    data = result[i].config_value;
-                    console.log(data);
-                    data[result[i].config_key] = data;
+                    datajson = result[i].config_value;
+                    data[result[i].config_key] = datajson;
                 }
                 else{
                 data[result[i].config_key] = result[i].config_value;
