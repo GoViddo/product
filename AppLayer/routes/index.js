@@ -18,7 +18,13 @@ module.exports = {
             let data = {};
 
             for (var i = 0; i < result.length; i++) {
-                data[result[i].config_key] = JSON.stringify(result[i].config_value);
+                if(i == 3)
+                {
+                    data[result[i].config_key] = JSON.parse(result[i].config_value);
+                }
+                else{
+                data[result[i].config_key] = result[i].config_value;
+                }
             }
 
             return res.status(200).send(data);
