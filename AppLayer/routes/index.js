@@ -21,7 +21,7 @@ module.exports = {
                 if(i == 3)
                 {
                     data = result[i].config_value;
-                    console.log(JSON.parse(data));
+                    console.log(data);
                     data[result[i].config_key] = data;
                 }
                 else{
