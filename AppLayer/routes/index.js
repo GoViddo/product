@@ -24,7 +24,7 @@ module.exports = {
                     data[result[i].config_key] = datajson;
                 }
                 else{
-                data[result[i].config_key] = result[i].config_value;
+                //data[result[i].config_key] = result[i].config_value;
                 }
             }
 
