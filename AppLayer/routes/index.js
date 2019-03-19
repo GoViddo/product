@@ -40,6 +40,8 @@ module.exports = {
 
     
         resp.msg = videoGenereIdQuery;
+        console.log(videoGenereIdQuery);
+        console.log(req);
 
         db.query(videoGenereIdQuery, function(err, result)
         {
