@@ -27,6 +27,70 @@ module.exports = {
         });
     },
 
+    getVideoData: (req, res) => {
+        let videoGenere = req.body.videoGenere;
+        let videoEndLimit = req.body.videoLimit;
+        let videoLastId = req.body.videoLastId;
+
+        var video_genere_id = 0;
+
+        var resp = {};
+
+        let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenere+"'";
+
+        db.query(videoGenereIdQuery, function(err, result)
+        {
+            if(err)
+            {
+                return res.status(500).send(err);
+            }
+
+            const row = result[0];
+
+            videoGenereId = row.video_genere_id;
+
+
+
+        let videoDataQuery = "SELECT * FROM `video_table` WHERE `video_genere_type` = "+videoGenereId+" and `video_id` > "+videoLastId+" ORDER BY `video_id` ASC LIMIT "+videoEndLimit;
+
+        db.query(videoDataQuery, function(err, result)
+        {
+            if(err)
+            {
+                return res.status(500).send(err);
+            }
+            
+
+            resp.message = "success";
+            data = [];
+                
+                for (var i = 0; i < result.length; i++) {
+
+                    videoDetails = {};
+
+                    videoDetails.video_id = result[i].video_id;
+                    videoDetails.home_image = result[i].videoDetails;
+                    videoDetails.shorten_text = result[i].videoDetails;
+                    videoDetails.vdo_cipher_id = result[i].videoDetails;
+
+                    data.push(videoDetails);
+
+                }
+
+                resp.data = data;
+
+
+                return res.status(200).send(resp);
+
+        });
+
+
+            
+
+        });
+
+    },
+
     login: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;

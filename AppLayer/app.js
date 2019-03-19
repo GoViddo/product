@@ -9,7 +9,7 @@ const cmd = require('node-cmd');
 // List globals
 global.cmd = cmd
 
-const { login, register, getConfig , checkWalletName, getVideoGenereId, bannerImages } = require('./routes/index');
+const { login, register, getConfig , checkWalletName, getVideoGenereId, bannerImages, getVideoData} = require('./routes/index');
 
 const port = config.port;
 
@@ -59,6 +59,7 @@ app.post('/login', login);
 app.post('/checkWalletName', checkWalletName);
 app.post('/getVideoGenereId', getVideoGenereId);
 app.get('/bannerImages', bannerImages);
+app.post('/getVideoData', getVideoData);
 
 
 // set the app to listen on the port
