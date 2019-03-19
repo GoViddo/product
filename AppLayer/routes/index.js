@@ -52,12 +52,10 @@ module.exports = {
 
             videoGenereId = row.video_genere_id;
 
-            console.log(videoGenereId);
-
+           
 
         let videoDataQuery = "SELECT * FROM `video_table` WHERE `video_genere_type` = "+videoGenereId+" and `video_id` > "+videoLastId+" ORDER BY `video_id` ASC LIMIT "+videoEndLimit;
 
-        console.log(videoDataQuery);
         
         db.query(videoDataQuery, function(err, result)
         {
@@ -75,9 +73,9 @@ module.exports = {
                     videoDetails = {};
 
                     videoDetails.video_id = result[i].video_id;
-                    videoDetails.home_image = result[i].videoDetails;
-                    videoDetails.shorten_text = result[i].videoDetails;
-                    videoDetails.vdo_cipher_id = result[i].videoDetails;
+                    videoDetails.home_image = result[i].home_image;
+                    videoDetails.shorten_text = result[i].shorten_text;
+                    videoDetails.vdo_cipher_id = result[i].vdo_cipher_id;
 
                     data.push(videoDetails);
 
