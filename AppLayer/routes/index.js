@@ -39,12 +39,10 @@ module.exports = {
         let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenere+"'";
 
     
-        resp.msg = videoGenereIdQuery;
-        console.log(videoGenereIdQuery);
-        console.log(req);
-
+        
         db.query(videoGenereIdQuery, function(err, result)
         {
+
             if(err)
             {
                 return res.status(500).send(err);
@@ -54,10 +52,13 @@ module.exports = {
 
             videoGenereId = row.video_genere_id;
 
+            console.log(videoGenereId);
 
 
         let videoDataQuery = "SELECT * FROM `video_table` WHERE `video_genere_type` = "+videoGenereId+" and `video_id` > "+videoLastId+" ORDER BY `video_id` ASC LIMIT "+videoEndLimit;
 
+        console.log(videoDataQuery);
+        
         db.query(videoDataQuery, function(err, result)
         {
             if(err)
