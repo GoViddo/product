@@ -38,6 +38,9 @@ module.exports = {
 
         let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenere+"'";
 
+    
+        resp.msg = videoGenereIdQuery;
+
         db.query(videoGenereIdQuery, function(err, result)
         {
             if(err)
