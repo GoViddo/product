@@ -35,7 +35,7 @@ module.exports = {
         db.query(selectSliderImagesQuery, function (err, result) {
 
             let resp = {};
-            
+
             if (err) {
                 resp.message = "failed";
                 resp.data = err;
@@ -153,6 +153,7 @@ module.exports = {
                     videoDetails.home_image = result[i].home_image;
                     videoDetails.shorten_text = result[i].shorten_text;
                     videoDetails.vdo_cipher_id = result[i].vdo_cipher_id;
+                    videoDetails.video_genere = videoGenere;
 
                     data.push(videoDetails);
 
