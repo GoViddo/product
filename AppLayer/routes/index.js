@@ -64,6 +64,46 @@ module.exports = {
 
     },
 
+
+    getPreviewData: (req, res) => {
+        let previewMaxCount = req.body.previewMaxCount;
+        let previewLastId = req.body.previewLastId;
+        
+
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" ORDER BY video_id DESC LIMIT "+previewMaxCount;
+
+        db.query(selectSliderImagesQuery, function (err, result) {
+
+            if (err) {
+                resp.message = "failed";
+                resp.data = err;
+                return res.status(500).send(resp);
+            }
+            let resp = {};
+            let data = [];
+            resp.message = "success";
+            for (var i = 0; i < result.length; i++) {
+                previewDetails = {};
+
+                previewDetails.video_id = result[i].video_id;
+                previewDetails.slider_image = result[i].banner_image;
+                previewDetails.shorten_text = result[i].shorten_text;
+                previewDetails.vdo_cipher_id = result[i].vdo_cipher_id;
+
+                data.push(previewDetails);
+
+            }
+
+            resp.data = data;
+
+
+            return res.status(200).send(resp);
+
+
+        });
+
+    },
+
     getVideoData: (req, res) => {
         let videoGenere = req.body.videoGenere;
         let videoEndLimit = req.body.videoLimit;
