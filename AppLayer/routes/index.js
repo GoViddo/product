@@ -18,9 +18,9 @@ module.exports = {
             let data = {};
 
             for (var i = 0; i < result.length; i++) {
-                 
-                    data[result[i].config_key] = result[i].config_value;;
-                
+
+                data[result[i].config_key] = result[i].config_value;;
+
             }
 
             return res.status(200).send(data);
@@ -30,12 +30,11 @@ module.exports = {
     getSliderImageData: (req, res) => {
         let sliderMaxCount = req.body.sliderMaxCount;
 
-        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE `banner_image` != '' ORDER BY video_id DESC LIMIT "+sliderMaxCount;
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE `banner_image` != '' ORDER BY video_id DESC LIMIT " + sliderMaxCount;
 
-        db.query(selectSliderImagesQuery, function(err, result){
+        db.query(selectSliderImagesQuery, function (err, result) {
 
-            if(err)
-            {
+            if (err) {
                 resp.message = "failed";
                 resp.data = err;
                 return res.status(500).send(resp);
@@ -43,8 +42,7 @@ module.exports = {
             let resp = {};
             let data = [];
             resp.message = "success";
-            for(var i=0; i< result.length; i++)
-            {
+            for (var i = 0; i < result.length; i++) {
                 sliderDetails = {};
 
                 sliderDetails.video_id = result[i].video_id;
@@ -56,10 +54,10 @@ module.exports = {
 
             }
 
-                resp.data = data;
+            resp.data = data;
 
 
-                return res.status(200).send(resp);
+            return res.status(200).send(resp);
 
 
         });
@@ -75,15 +73,13 @@ module.exports = {
 
         var resp = {};
 
-        let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '"+videoGenere+"'";
+        let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '" + videoGenere + "'";
 
-    
-        
-        db.query(videoGenereIdQuery, function(err, result)
-        {
 
-            if(err)
-            {
+
+        db.query(videoGenereIdQuery, function (err, result) {
+
+            if (err) {
                 return res.status(500).send(err);
             }
 
@@ -91,22 +87,20 @@ module.exports = {
 
             videoGenereId = row.video_genere_id;
 
-           
 
-        let videoDataQuery = "SELECT * FROM `video_table` WHERE `video_genere_type` = "+videoGenereId+" and `video_id` > "+videoLastId+" ORDER BY `video_id` ASC LIMIT "+videoEndLimit;
 
-        
-        db.query(videoDataQuery, function(err, result)
-        {
-            if(err)
-            {
-                return res.status(500).send(err);
-            }
-            
+            let videoDataQuery = "SELECT * FROM `video_table` WHERE `video_genere_type` = " + videoGenereId + " and `video_id` > " + videoLastId + " ORDER BY `video_id` ASC LIMIT " + videoEndLimit;
 
-            resp.message = "success";
-            data = [];
-                
+
+            db.query(videoDataQuery, function (err, result) {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+
+
+                resp.message = "success";
+                data = [];
+
                 for (var i = 0; i < result.length; i++) {
 
                     videoDetails = {};
@@ -125,10 +119,10 @@ module.exports = {
 
                 return res.status(200).send(resp);
 
-        });
+            });
 
 
-            
+
 
         });
 
@@ -150,7 +144,7 @@ module.exports = {
             }
             if (!result || !result.length) {
 
-                return res.status(200).send({message: "User does not exist"});
+                return res.status(200).send({ message: "User does not exist" });
             } else {
                 const row = result[0];
                 if (row.password == password) {
@@ -167,8 +161,8 @@ module.exports = {
                         dob: row.birth_date
                     });
                 } else {
-                    
-                    return res.status(200).send({message: "Invalid Password"});
+
+                    return res.status(200).send({ message: "Invalid Password" });
                 }
             }
         });
@@ -225,46 +219,43 @@ module.exports = {
         })
     },
 
-    bannerImages: (req, res) =>
-    {
+    bannerImages: (req, res) => {
 
         let query = "SELECT * FROM `video_table` WHERE `show_on_home_page` = 1 and `status` = 1 ORDER BY `video_id` DESC LIMIT 5";
         var resp = {};
 
-        db.query(query, function(err, result)
-        {
-            if(err)
-            {
+        db.query(query, function (err, result) {
+            if (err) {
                 return res.status(400).send(err);
             }
-            else{
+            else {
                 resp.message = "success";
 
                 data = [];
-                
+
                 for (var i = 0; i < result.length; i++) {
                     bannerDetails = {};
 
                     bannerDetails.video_id = result[i].video_id;
-                    
+
                     bannerDetails.show_name = result[i].show_name;
-                    
+
                     bannerDetails.created_date = result[i].created_date;
-                    
+
                     bannerDetails.director = result[i].director;
-                    
+
                     bannerDetails.duration = result[i].duration;
-                    
+
                     bannerDetails.home_image = result[i].home_image;
-                    
+
                     bannerDetails.banner_image = result[i].banner_image;
-                    
+
                     bannerDetails.producer = result[i].producer;
-                    
+
                     bannerDetails.shorten_text = result[i].shorten_text;
-                    
+
                     bannerDetails.show_on_home_page = result[i].show_on_home_page;
-                    
+
                     bannerDetails.slug = result[i].slug;
 
                     bannerDetails.starring = result[i].starring;
@@ -286,14 +277,14 @@ module.exports = {
                     bannerDetails.video_earnings = result[i].video_earnings;
 
                     bannerDetails.status = result[i].status;
-                    
+
                     data.push(bannerDetails);
                 }
 
                 resp.data = data;
 
                 return res.status(200).send(resp);
-    
+
             }
         })
 
@@ -364,8 +355,8 @@ module.exports = {
                     resp.message = "Wallet Not Available please try new name";
                     console.log("Promise Rejected");
                     return res.status(500).send(resp);
-               });
-               
+                });
+
 
                 checkWalletNamePromise.then(function () {
                     return new Promise(function (resolve, reject) {
@@ -441,15 +432,15 @@ module.exports = {
 
                                 console.log("Owner Private Key =" + ownerPrivateKey);
                                 console.log("Owner Public Key =" + ownerPublicKey);
-                                
+
                                 //mainnet account creation command
                                 //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
-                                
-                                
+
+
                                 //testnet account creation command
                                 let createEOSWalletCommand = "cleos -u http://junglehistory.cryptolions.io system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
-                                
-                                
+
+
                                 console.log('Command to be executed', createEOSWalletCommand);
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
 
@@ -466,7 +457,7 @@ module.exports = {
                                         }
                                     }
                                 );
-                            
+
 
                                 resolve(resp);
 
@@ -475,7 +466,7 @@ module.exports = {
                     })
                 }).then(function (resp) {
                     // send the user's details to the database
-                    let query = "INSERT INTO user_table (first_name, last_name, eosio_account_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + walletName + "', '"+ email + "', '" + password + "')";
+                    let query = "INSERT INTO user_table (first_name, last_name, eosio_account_name, email_id, password) VALUES ('" + firstName + "', '" + lastName + "', '" + walletName + "', '" + email + "', '" + password + "')";
                     db.query(query, function (err, result) {
                         if (err) {
                             resp.message = "Registration Failed due to database error";
