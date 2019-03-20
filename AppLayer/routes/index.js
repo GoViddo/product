@@ -34,12 +34,14 @@ module.exports = {
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
+            let resp = {};
+            
             if (err) {
                 resp.message = "failed";
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            let resp = {};
+            
             let data = [];
             resp.message = "success";
             for (var i = 0; i < result.length; i++) {
@@ -74,12 +76,14 @@ module.exports = {
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
+            let resp = {};
+
             if (err) {
                 resp.message = "failed";
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            let resp = {};
+            
             let data = [];
             resp.message = "success";
             for (var i = 0; i < result.length; i++) {
