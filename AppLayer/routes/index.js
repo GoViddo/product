@@ -50,7 +50,7 @@ module.exports = {
                 sliderDetails.shorten_text = result[i].shorten_text;
                 sliderDetails.vdo_cipher_id = result[i].vdo_cipher_id;
 
-                data.push(videoDetails);
+                data.push(sliderDetails);
 
             }
 
