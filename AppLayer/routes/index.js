@@ -27,6 +27,13 @@ module.exports = {
         });
     },
 
+    generateVideoOtp: (req, res) => {
+        let videoId = req.videoId;
+
+        console.log(videoId);
+
+    },
+
     getSliderImageData: (req, res) => {
         let sliderMaxCount = req.body.sliderMaxCount;
 
