@@ -34,10 +34,12 @@ module.exports = {
         let videoId = arr[1];
         
 
+        console.log(videoId);
+
         var request = require("request");
 
         var options = { method: 'POST',
-        url: 'https://dev.vdocipher.com/api/videos/videoId/otp',
+        url: 'https://dev.vdocipher.com/api/videos/'+videoId+'/otp',
         headers:
         {
             Accept: 'application/json',
@@ -118,7 +120,7 @@ module.exports = {
                 previewDetails = {};
 
                 previewDetails.video_id = result[i].video_id;
-                previewDetails.slider_image = result[i].banner_image;
+                previewDetails.slider_image = result[i].home_image;
                 previewDetails.shorten_text = result[i].shorten_text;
                 previewDetails.vdo_cipher_id = result[i].vdo_cipher_id;
 
