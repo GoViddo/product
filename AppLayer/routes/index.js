@@ -52,7 +52,10 @@ module.exports = {
         if (error) throw new Error(error);
 
         console.log(body);
+        return res.status(200).send(body);
         });
+
+        
 
 
     },
