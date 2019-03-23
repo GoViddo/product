@@ -55,7 +55,7 @@ module.exports = {
         return res.status(200).send(body);
         });
 
-        
+
 
 
     },
@@ -63,7 +63,7 @@ module.exports = {
     getSliderImageData: (req, res) => {
         let sliderMaxCount = req.body.sliderMaxCount;
 
-        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE `banner_image` != '' ORDER BY video_id DESC LIMIT " + sliderMaxCount;
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE `banner_image` != '' and `status` = 1 ORDER BY video_id DESC LIMIT " + sliderMaxCount;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -105,7 +105,7 @@ module.exports = {
         let previewLastId = req.body.previewLastId;
         
 
-        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" ORDER BY video_id DESC LIMIT "+previewMaxCount;
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" and `status` = 1 ORDER BY video_id DESC LIMIT "+previewMaxCount;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -166,7 +166,7 @@ module.exports = {
 
 
 
-            let videoDataQuery = "SELECT * FROM `video_table` WHERE `video_genere_type` = " + videoGenereId + " and `video_id` > " + videoLastId + " ORDER BY `video_id` ASC LIMIT " + videoEndLimit;
+            let videoDataQuery = "SELECT * FROM `video_table` WHERE `status` = 1 and `video_genere_type` = " + videoGenereId + " and `video_id` > " + videoLastId + " ORDER BY `video_id` ASC LIMIT " + videoEndLimit;
 
 
             db.query(videoDataQuery, function (err, result) {
