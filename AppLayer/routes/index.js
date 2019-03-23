@@ -32,7 +32,26 @@ module.exports = {
 
         let arr = urlPath.split("=",-1);
         let videoId = arr[1];
-        console.log(videoId);
+        
+
+        var request = require("request");
+
+        var options = { method: 'POST',
+        url: 'https://dev.vdocipher.com/api/videos/videoId/otp',
+        headers:
+        {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: 'Apisecret 8522c382576c20779b543c305ada4a1459323eeba69604ab06410536f03ad718' },
+        body: { ttl: 300 },
+        json: true };
+
+        request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+
+        console.log(body);
+        });
+
 
     },
 
