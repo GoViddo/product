@@ -62,7 +62,7 @@ app.get('/bannerImages', bannerImages);
 app.post('/getVideoData', getVideoData);
 app.post('/getSliderImageData', getSliderImageData);
 app.post('/getPreviewData', getPreviewData);
-app.post('/generateVideoOtp', generateVideoOtp);
+app.get('/generateVideoOtp', generateVideoOtp);
 
 
 // set the app to listen on the port
