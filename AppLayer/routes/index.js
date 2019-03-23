@@ -30,8 +30,9 @@ module.exports = {
     generateVideoOtp: (req, res) => {
         let urlPath = req.originalUrl;
 
-        let arr = urlPath.split("?",-1);
-        console.log(arr);
+        let arr = urlPath.split("=",-1);
+        let videoId = arr[1];
+        console.log(videoId);
 
     },
 
