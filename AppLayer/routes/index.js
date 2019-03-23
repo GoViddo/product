@@ -34,7 +34,7 @@ module.exports = {
         let videoId = arr[1];
         
 
-        console.log(videoId);
+        //console.log(videoId);
 
         var request = require("request");
 
@@ -51,7 +51,7 @@ module.exports = {
         request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        console.log(body);
+        //console.log(body);
         return res.status(200).send(body);
         });
 
