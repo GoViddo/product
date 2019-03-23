@@ -30,6 +30,8 @@ module.exports = {
     generateVideoOtp: (req, res) => {
         let videoId = req.videoId;
 
+        console.log(req.get('host') + req.originalUrl);
+
         console.log(videoId);
 
     },
