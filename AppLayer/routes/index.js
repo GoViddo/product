@@ -161,10 +161,7 @@ module.exports = {
             }
 
             const row = result[0];
-
-
-
-
+            var videoGenereId = 1;
             let videoDataQuery = "SELECT * FROM `video_table` WHERE `status` = 1 and `video_genere_type` = " + videoGenereId + " and `video_id` > " + videoLastId + " ORDER BY `video_id` ASC LIMIT " + videoEndLimit;
 
 
