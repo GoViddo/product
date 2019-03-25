@@ -104,8 +104,7 @@ module.exports = {
         let previewMaxCount = req.body.previewMaxCount;
         let previewLastId = req.body.previewLastId;
         
-
-        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" and `status` = 1 ORDER BY video_id DESC LIMIT "+previewMaxCount;
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" and `status` = 1 ORDER BY video_id ASC LIMIT "+previewMaxCount;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -152,6 +151,7 @@ module.exports = {
 
         let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '" + videoGenere + "'";
 
+        resp.video_genere = videoGenere;
 
 
         db.query(videoGenereIdQuery, function (err, result) {
@@ -162,7 +162,6 @@ module.exports = {
 
             const row = result[0];
 
-            videoGenereId = row.video_genere_id;
 
 
 
