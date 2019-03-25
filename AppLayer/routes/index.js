@@ -105,7 +105,7 @@ module.exports = {
         let previewLastId = req.body.previewLastId;
         
 
-        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" and `status` = 1 ORDER BY video_id DESC LIMIT "+previewMaxCount;
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" and `status` = 1 ORDER BY video_id ASC LIMIT "+previewMaxCount;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
