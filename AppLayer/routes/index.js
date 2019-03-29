@@ -141,6 +141,49 @@ module.exports = {
 
     },
 
+
+
+    getSubscriptionList: (req, res) => {
+        let previewMaxCount = req.body.previewMaxCount;
+        let previewLastId = req.body.previewLastId;
+        
+
+        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` > "+previewLastId+" ORDER BY `channel_id` ASC LIMIT "+previewMaxCount;
+
+        db.query(selectSliderImagesQuery, function (err, result) {
+
+            let resp = {};
+
+            if (err) {
+                resp.message = "failed";
+                resp.data = err;
+                return res.status(500).send(resp);
+            }
+            
+            let data = [];
+            resp.message = "success";
+            for (var i = 0; i < result.length; i++) {
+                previewDetails = {};
+
+                previewDetails.video_id = result[i].channel_id;
+                previewDetails.slider_image = result[i].channel_logo_url;
+                previewDetails.shorten_text = result[i].channel_name;
+
+                data.push(previewDetails);
+
+            }
+
+            resp.data = data;
+
+
+            return res.status(200).send(resp);
+
+
+        });
+
+    },
+
+
     getVideoData: (req, res) => {
         let videoGenere = req.body.videoGenere;
         let videoEndLimit = req.body.videoLimit;
