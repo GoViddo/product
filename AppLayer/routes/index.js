@@ -192,7 +192,6 @@ module.exports = {
 
         let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = "+channelId;
 
-        console.log(selectSliderImagesQuery);
         db.query(selectSliderImagesQuery, function (err, result) {
 
             let resp = {};
@@ -208,11 +207,9 @@ module.exports = {
             
                 var chnnelName = result[0].channel_name;
 
-                console.log(chnnelName);
                 
                 let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '"+chnnelName+"'";
 
-                console.log(selectDataQuery);
                 db.query(selectDataQuery, function (error, resultm){
                     if(error)
                     {
@@ -234,16 +231,16 @@ module.exports = {
                             data.push(videoDetails);
         
                         }
+                        resp.data = data;
+                        return res.status(200).send(resp);
+
         
                     }
 
                 })
 
             
-            resp.data = data;
 
-
-            return res.status(200).send(resp);
 
 
         });
