@@ -143,6 +143,7 @@ module.exports = {
 
 
 
+
     getSubscriptionList: (req, res) => {
         let previewMaxCount = req.body.previewMaxCount;
         let previewLastId = req.body.previewLastId;
@@ -182,6 +183,71 @@ module.exports = {
         });
 
     },
+
+
+
+    getSubscriptionData: (req, res) => {
+        let channelId= req.body.channelId;
+        
+
+        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = "+channelId;
+
+        db.query(selectSliderImagesQuery, function (err, result) {
+
+            let resp = {};
+
+            if (err) {
+                resp.message = "failed";
+                resp.data = err;
+                return res.status(500).send(resp);
+            }
+            
+            let data = [];
+                resp.message = "success";
+            
+                var chnnelName = result[0].channel_name;
+                
+                let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '"+chnnelName+"'";
+
+                db.query(selectDataQuery, function (error, resultm){
+                    if(error)
+                    {
+                        resp.message = "failed";
+                        resp.data = err;
+                        return res.status(500).send(resp);
+                    }
+                    else{
+                       
+                        for (var i = 0; i < resultm.length; i++) {
+        
+                            videoDetails = {};
+        
+                            videoDetails.video_id = resultm[i].video_id;
+                            videoDetails.home_image = resultm[i].home_image;
+                            videoDetails.shorten_text = resultm[i].shorten_text;
+                            videoDetails.vdo_cipher_id = resultm[i].vdo_cipher_id;
+                            videoDetails.video_genere = videoGenere;
+        
+                            data.push(videoDetails);
+        
+                        }
+        
+                    }
+
+                })
+
+            
+            resp.data = data;
+
+
+            return res.status(200).send(resp);
+
+
+        });
+
+    },
+
+
 
 
     getVideoData: (req, res) => {
