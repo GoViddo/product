@@ -207,9 +207,12 @@ module.exports = {
                 resp.message = "success";
             
                 var chnnelName = result[0].channel_name;
+
+                console.log(chnnelName);
                 
                 let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '"+chnnelName+"'";
 
+                console.log(selectDataQuery);
                 db.query(selectDataQuery, function (error, resultm){
                     if(error)
                     {
