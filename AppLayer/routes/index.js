@@ -30,29 +30,32 @@ module.exports = {
     generateVideoOtp: (req, res) => {
         let urlPath = req.originalUrl;
 
-        let arr = urlPath.split("=",-1);
+        let arr = urlPath.split("=", -1);
         let videoId = arr[1];
-        
+
 
         //console.log(videoId);
 
         var request = require("request");
 
-        var options = { method: 'POST',
-        url: 'https://dev.vdocipher.com/api/videos/'+videoId+'/otp',
-        headers:
-        {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: 'Apisecret 8522c382576c20779b543c305ada4a1459323eeba69604ab06410536f03ad718' },
-        body: { ttl: 300 },
-        json: true };
+        var options = {
+            method: 'POST',
+            url: 'https://dev.vdocipher.com/api/videos/' + videoId + '/otp',
+            headers:
+            {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: 'Apisecret 8522c382576c20779b543c305ada4a1459323eeba69604ab06410536f03ad718'
+            },
+            body: { ttl: 300 },
+            json: true
+        };
 
         request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+            if (error) throw new Error(error);
 
-        //console.log(body);
-        return res.status(200).send(body);
+            //console.log(body);
+            return res.status(200).send(body);
         });
 
 
@@ -74,7 +77,7 @@ module.exports = {
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            
+
             let data = [];
             resp.message = "success";
             for (var i = 0; i < result.length; i++) {
@@ -103,9 +106,9 @@ module.exports = {
     getPreviewData: (req, res) => {
         let previewMaxCount = req.body.previewMaxCount;
         let previewLastId = req.body.previewLastId;
-        
 
-        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > "+previewLastId+" and `status` = 1 ORDER BY video_id ASC LIMIT "+previewMaxCount;
+
+        let selectSliderImagesQuery = "SELECT * FROM `video_table` WHERE video_id > " + previewLastId + " and `status` = 1 ORDER BY video_id ASC LIMIT " + previewMaxCount;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -116,7 +119,7 @@ module.exports = {
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            
+
             let data = [];
             resp.message = "success";
             for (var i = 0; i < result.length; i++) {
@@ -147,9 +150,9 @@ module.exports = {
     getSubscriptionList: (req, res) => {
         let previewMaxCount = req.body.previewMaxCount;
         let previewLastId = req.body.previewLastId;
-        
 
-        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` > "+previewLastId+" ORDER BY `channel_id` ASC LIMIT "+previewMaxCount;
+
+        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` > " + previewLastId + " ORDER BY `channel_id` ASC LIMIT " + previewMaxCount;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -160,7 +163,7 @@ module.exports = {
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            
+
             let data = [];
             resp.message = "success";
             for (var i = 0; i < result.length; i++) {
@@ -189,9 +192,9 @@ module.exports = {
         let vdoCipherId = req.body.vdoCipherId;
         let userEmailId = req.body.userEmailId;
         let videoViewDuration = req.body.videoViewDuration;
-        
 
-        let selectVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+vdoCipherId+"'";
+
+        let selectVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '" + vdoCipherId + "'";
 
         db.query(selectVideoIdQuery, function (err, result) {
 
@@ -202,15 +205,14 @@ module.exports = {
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            
+
             let videoId = result[0].video_id;
 
-            let userDetailsQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+userEmailId+"'";
+            let userDetailsQuery = "SELECT * FROM `user_table` WHERE `email_id` = '" + userEmailId + "'";
 
-            db.query(userDetailsQuery, function(err1, result1){
+            db.query(userDetailsQuery, function (err1, result1) {
 
-                if(err1)
-                {
+                if (err1) {
                     resp.message = "failed";
                     resp.data = err;
                     return res.status(500).send(resp);
@@ -219,41 +221,39 @@ module.exports = {
                 let userId = result1[0].user_id;
 
 
-                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES ("+userId+","+videoId+",'"+videoViewDuration+"')";
-
-            console.log(insertIntoVideoViewQuery);
-
-            db.query(insertIntoVideoViewQuery, function(err2, result2){
-
-                if(err1)
-                {
-                    resp.message = "failed";
-                    resp.data = err;
-                    return res.status(500).send(resp);
-                }
+                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
 
 
-                let data = [];
-                resp.message = "success";
-                
-                reviewDetails = {};
+                db.query(insertIntoVideoViewQuery, function (err2, result2) {
 
-                reviewDetails.userId = userId;
-                reviewDetails.videoId = videoId;
+                    if (err1) {
+                        resp.message = "failed";
+                        resp.data = err;
+                        return res.status(500).send(resp);
+                    }
 
-                data.push(reviewDetails);
 
-                resp.data = data;
-                return res.status(200).send(resp);
-    
+                    let data = [];
+                    resp.message = "success";
 
-            });
+                    reviewDetails = {};
+
+                    reviewDetails.userId = userId;
+                    reviewDetails.videoId = videoId;
+
+                    data.push(reviewDetails);
+
+                    resp.data = data;
+                    return res.status(200).send(resp);
+
+
+                });
 
 
             });
 
-            
-    
+
+
 
         });
 
@@ -262,10 +262,10 @@ module.exports = {
 
 
     getSubscriptionData: (req, res) => {
-        let channelId= req.body.channelId;
-        
+        let channelId = req.body.channelId;
 
-        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = "+channelId;
+
+        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = " + channelId;
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -276,45 +276,44 @@ module.exports = {
                 resp.data = err;
                 return res.status(500).send(resp);
             }
-            
+
             let data = [];
-                resp.message = "success";
-            
-                var chnnelName = result[0].channel_name;
+            resp.message = "success";
 
-                
-                let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '"+chnnelName+"'";
+            var chnnelName = result[0].channel_name;
 
-                db.query(selectDataQuery, function (error, resultm){
-                    if(error)
-                    {
-                        resp.message = "failed";
-                        resp.data = err;
-                        return res.status(500).send(resp);
+
+            let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '" + chnnelName + "'";
+
+            db.query(selectDataQuery, function (error, resultm) {
+                if (error) {
+                    resp.message = "failed";
+                    resp.data = err;
+                    return res.status(500).send(resp);
+                }
+                else {
+
+                    for (var i = 0; i < resultm.length; i++) {
+
+                        videoDetails = {};
+
+                        videoDetails.video_id = resultm[i].video_id;
+                        videoDetails.home_image = resultm[i].home_image;
+                        videoDetails.shorten_text = resultm[i].shorten_text;
+                        videoDetails.vdo_cipher_id = resultm[i].vdo_cipher_id;
+
+                        data.push(videoDetails);
+
                     }
-                    else{
-                       
-                        for (var i = 0; i < resultm.length; i++) {
-        
-                            videoDetails = {};
-        
-                            videoDetails.video_id = resultm[i].video_id;
-                            videoDetails.home_image = resultm[i].home_image;
-                            videoDetails.shorten_text = resultm[i].shorten_text;
-                            videoDetails.vdo_cipher_id = resultm[i].vdo_cipher_id;
-                           
-                            data.push(videoDetails);
-        
-                        }
-                        resp.data = data;
-                        return res.status(200).send(resp);
+                    resp.data = data;
+                    return res.status(200).send(resp);
 
-        
-                    }
 
-                })
+                }
 
-            
+            })
+
+
 
 
 
