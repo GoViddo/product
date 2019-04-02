@@ -218,9 +218,8 @@ module.exports = {
 
                 let userId = result1[0].user_id;
 
-            });
 
-            let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES ("+userId+","+videoId+",'"+videoViewDuration+"')";
+                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES ("+userId+","+videoId+",'"+videoViewDuration+"')";
 
             console.log(insertIntoVideoViewQuery);
 
@@ -250,6 +249,10 @@ module.exports = {
 
             });
 
+
+            });
+
+            
     
 
         });
