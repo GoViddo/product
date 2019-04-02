@@ -185,6 +185,78 @@ module.exports = {
     },
 
 
+    saveViewInformation: (req, res) => {
+        let vdoCipherId = req.body.vdoCipherId;
+        let userEmailId = req.body.userEmailId;
+        let videoViewDuration = req.body.videoViewDuration;
+        
+
+        let selectVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+vdoCipherId+"'";
+
+        db.query(selectVideoIdQuery, function (err, result) {
+
+            let resp = {};
+
+            if (err) {
+                resp.message = "failed";
+                resp.data = err;
+                return res.status(500).send(resp);
+            }
+            
+            let videoId = result[0].video_id;
+
+            let userDetailsQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+userEmailId+"'";
+
+            db.query(userDetailsQuery, function(err1, result1){
+
+                if(err1)
+                {
+                    resp.message = "failed";
+                    resp.data = err;
+                    return res.status(500).send(resp);
+                }
+
+                let userId = result1[0].user_id;
+
+            });
+
+            let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES ("+userId+","+videoId+",'"+videoViewDuration+"')";
+
+            console.log(insertIntoVideoViewQuery);
+
+            db.query(insertIntoVideoViewQuery, function(err2, result2){
+
+                if(err1)
+                {
+                    resp.message = "failed";
+                    resp.data = err;
+                    return res.status(500).send(resp);
+                }
+
+
+                let data = [];
+                resp.message = "success";
+                
+                reviewDetails = {};
+
+                reviewDetails.userId = userId;
+                reviewDetails.videoId = videoId;
+
+                data.push(previewDetails);
+
+                resp.data = data;
+                return res.status(200).send(resp);
+    
+
+            });
+
+    
+
+        });
+
+    },
+
+
 
     getSubscriptionData: (req, res) => {
         let channelId= req.body.channelId;
