@@ -241,7 +241,7 @@ module.exports = {
                 reviewDetails.userId = userId;
                 reviewDetails.videoId = videoId;
 
-                data.push(previewDetails);
+                data.push(reviewDetails);
 
                 resp.data = data;
                 return res.status(200).send(resp);
