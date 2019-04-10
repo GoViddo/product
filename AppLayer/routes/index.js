@@ -582,7 +582,7 @@ module.exports = {
 
                     let channelidquerry = "SELECT * FROM `channel_list` WHERE `channel_name` = '"+channelname+"'";
 
-                    db.query(checkupdation, function (err, resultm) {
+                    db.query(channelidquerry, function (err, resultm) {
 
                         let channelid = resultm[0].channel_id;
 
