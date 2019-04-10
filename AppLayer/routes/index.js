@@ -459,6 +459,44 @@ module.exports = {
     },
 
 
+    likeUnlikeSstore: (req, res) => {
+        let emailid = req.body.emailid;
+        let likedislikestatus = req.body.likestatus;
+        let videoid = req.body.videoid;
+        resp = {};       
+
+       let query = "SELECT * FROM `user_table` WHERE `email_id` = '" + emailid + "'";
+
+       db.query(query, function (err, result) {
+        if (err) {
+            return res.status(400).send(err);
+        }
+        else {
+            row = result[0];
+            let userid = row.user_id;
+            
+            let queryinsert = "INSERT INTO `video_like_table` (`video_like_id`, `video_id`, `user_id`, `like_status`) VALUES (NULL, '"+videoid+"', '"+userid+"', '"+likedislikestatus+"');";
+
+            db.query(queryinsert, function (err, result) {
+
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+                    resp.message = "success";
+            
+                    return res.status(200).send(resp);
+                }
+
+            });
+
+        }
+    })
+
+    },
+
+
+
     getVideoGenereId: (req, res) => {
 
         let videoGenereName = req.body.videoGenereName;
