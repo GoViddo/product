@@ -487,7 +487,7 @@ module.exports = {
                     let videoid = row.video_id;
 
                     let checkupdation = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
-                    db.query(selectVideoId, function (err, resultm) {
+                    db.query(checkupdation, function (err, resultm) {
 
                         console.log(resultm.length)
 
