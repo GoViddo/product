@@ -511,7 +511,7 @@ module.exports = {
 
                         }
                         else{
-                            let queryinsert = "UPDATE `video_like_table` SET `like_status`= "+likedislikestatus+" WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
+                            let queryinsert = "UPDATE `video_like_table` SET `like_status`= '"+likedislikestatus+"' WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
 
                             db.query(queryinsert, function (err, result) {
 
@@ -546,6 +546,115 @@ module.exports = {
     })
 
     },
+
+
+
+
+
+
+
+    subscriptChannel: (req, res) => {
+        let emailid = req.body.emailid;
+        let subscriptionstatus = req.body.subscriptionstatus;
+        let videocipherid = req.body.videoid;
+        resp = {};       
+
+       let query = "SELECT * FROM `user_table` WHERE `email_id` = '" + emailid + "'";
+
+       db.query(query, function (err, result) {
+        if (err) {
+            return res.status(400).send(err);
+        }
+        else {
+            row = result[0];
+            let userid = row.user_id;
+
+            let selectVideoId = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videocipherid+"'";
+            db.query(selectVideoId, function (err, result) {
+
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+       
+                    row = result[0];
+                    let channelname = row.video_channel_name;
+
+                    let channelidquerry = "SELECT * FROM `channel_list` WHERE `channel_name` = '"+channelname+"'";
+
+                    db.query(checkupdation, function (err, resultm) {
+
+                        let channelid = resultm[0].channel_id;
+
+
+                    let checkupdation = "SELECT * FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userid+"'";
+                    db.query(checkupdation, function (err, resultm) {
+
+                        console.log(resultm.length)
+
+                        if(resultm.length < 1)
+                        {
+                        let queryinsert = "INSERT INTO `subscirption_list` (`subsciption_id`, `subscription_channel_id`, `user_id`) VALUES (NULL, '"+channelid+"', '"+userid+"');";
+
+                            db.query(queryinsert, function (err, result) {
+
+                                if (err) {
+                                    return res.status(400).send(err);
+                                }
+                                else {
+                                    resp.message = "success";
+                            
+                                    return res.status(200).send(resp);
+                                }
+                
+                            });
+                
+
+                        }
+                        else{
+                            let queryinsert = "UPDATE `video_like_table` SET `like_status`= '"+likedislikestatus+"' WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
+
+                            db.query(queryinsert, function (err, result) {
+
+                                if (err) {
+                                    return res.status(400).send(err);
+                                }
+                                else {
+                                    resp.message = "success";
+                            
+                                    return res.status(200).send(resp);
+                                }
+                
+                            });
+                
+                        }
+
+
+            
+           
+
+
+
+                    });
+
+
+
+
+                    });
+
+
+                }
+
+            });
+
+            
+        }
+    })
+
+    },
+
+
+
 
 
 
