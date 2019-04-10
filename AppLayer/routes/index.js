@@ -493,26 +493,42 @@ module.exports = {
                         {
                             let queryinsert = "INSERT INTO `video_like_table` (`video_like_id`, `video_id`, `user_id`, `like_status`) VALUES (NULL, '"+videoid+"', '"+userid+"', '"+likedislikestatus+"');";
 
+                            db.query(queryinsert, function (err, result) {
+
+                                if (err) {
+                                    return res.status(400).send(err);
+                                }
+                                else {
+                                    resp.message = "success";
+                            
+                                    return res.status(200).send(resp);
+                                }
+                
+                            });
+                
+
                         }
                         else{
                             let queryinsert = "";
+
+                            db.query(queryinsert, function (err, result) {
+
+                                if (err) {
+                                    return res.status(400).send(err);
+                                }
+                                else {
+                                    resp.message = "success";
+                            
+                                    return res.status(200).send(resp);
+                                }
+                
+                            });
+                
                         }
 
 
             
-            db.query(queryinsert, function (err, result) {
-
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                else {
-                    resp.message = "success";
-            
-                    return res.status(200).send(resp);
-                }
-
-            });
-
+           
 
 
 
