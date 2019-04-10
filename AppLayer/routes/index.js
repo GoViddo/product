@@ -587,6 +587,8 @@ module.exports = {
                         let channelid = resultm[0].channel_id;
 
 
+                        if(subscriptionstatus == 1)
+                        {
                     let checkupdation = "SELECT * FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userid+"'";
                     db.query(checkupdation, function (err, resultm) {
 
@@ -637,7 +639,25 @@ module.exports = {
 
                     });
 
+                }
+                else{
 
+                    let deletequery = "DELETE FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userid+"'";
+
+                    db.query(queryinsert, function (err, result) {
+                     
+                        if (err) {
+                            return res.status(400).send(err);
+                        }
+                        else {
+                            resp.message = "success";
+                    
+                            return res.status(200).send(resp);
+                        }
+                        
+                    });
+
+                }
 
 
                     });
