@@ -462,7 +462,7 @@ module.exports = {
     likeUnlikeSstore: (req, res) => {
         let emailid = req.body.emailid;
         let likedislikestatus = req.body.likestatus;
-        let videoid = req.body.videoid;
+        let videocipherid = req.body.videoid;
         resp = {};       
 
        let query = "SELECT * FROM `user_table` WHERE `email_id` = '" + emailid + "'";
@@ -474,7 +474,19 @@ module.exports = {
         else {
             row = result[0];
             let userid = row.user_id;
-            
+
+            let selectVideoId = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videocipherid+"'";
+            db.query(selectVideoId, function (err, result) {
+
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                else {
+       
+                    row = result[0];
+                    let videoid = row.video_id;
+
+
             let queryinsert = "INSERT INTO `video_like_table` (`video_like_id`, `video_id`, `user_id`, `like_status`) VALUES (NULL, '"+videoid+"', '"+userid+"', '"+likedislikestatus+"');";
 
             db.query(queryinsert, function (err, result) {
@@ -490,6 +502,13 @@ module.exports = {
 
             });
 
+
+
+                }
+
+            });
+
+            
         }
     })
 
