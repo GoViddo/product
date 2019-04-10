@@ -613,6 +613,10 @@ module.exports = {
                 
 
                         }
+                        else{
+
+                            return res.status(200).send(resp);
+                        }
                         
 
                     });
@@ -652,6 +656,94 @@ module.exports = {
     },
 
 
+    getVideoRelatedDetails:(req, res) => {
+
+        let videoId = req.body.videoId;
+        let userEmail = req.body.userEmail;
+
+        resp = {};
+      
+        let query = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videoId+"'";
+
+        db.query(query, function (err, result) {
+
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else{
+
+                var videoName = result[0].show_name;
+                resp.videoName = videoName;
+                var channelName = result[0].video_channel_name;
+                resp.channelName = channelName;
+                var videoDescription = result[0].video_description;
+                resp.videoDescription = videoDescription;
+                var videoIdd = result[0].video_id;
+
+                let channelidquerry = "SELECT * FROM `channel_list` WHERE `channel_name` = '"+channelname+"'";
+
+                db.query(channelidquerry, function (err, resultm) {
+
+                    var channelid = resultm[0].channel_id;
+                    var channelLogo = resultm[0].channel_logo_url;
+                    resp.channelLogo = channelLogo;
+
+                    let getuserdetials = "SELECT * FROM `user_table` WHERE `email_id` = '"+userEmail+"'";
+
+                    db.query(getuserdetials, function(err, resultu)
+                    {
+
+                        var userId = resultu[0].user_id;
+
+                        let userLikeStatus = "SELECT * FROM `video_like_table` WHERE `user_id` = '"+userId+"' and `video_id` = '"+videoIdd+"' ";
+
+                    db.query(getuserdetials, function(err, resultum)
+                    {
+                        if(resultum.length > 0)
+                        {
+                            var likestatus = resultum[0].like_status;
+                        }
+                        else{
+                            var likestatus = 2;
+                        }
+
+                        resp.likestatus = likestatus;
+
+                        let subcriptionStatus = "SELECT * FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userId+"'";
+
+                        db.query(getuserdetials, function(err, resultuc)
+                    {
+                        if(resultuc.length > 0)
+                        {
+                            var subscriptionstatus = 1;
+                        }
+                        else{
+                            var subscriptionstatus = 0;
+                        }
+                        resp.subscriptionstatus = subscriptionstatus;
+
+                        
+
+                    });
+
+
+
+                    });
+
+                    });
+
+
+                });
+
+                
+            }
+
+        });
+        
+
+
+    },
 
 
 
