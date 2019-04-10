@@ -698,7 +698,7 @@ module.exports = {
 
                         let userLikeStatus = "SELECT * FROM `video_like_table` WHERE `user_id` = '"+userId+"' and `video_id` = '"+videoIdd+"' ";
 
-                    db.query(getuserdetials, function(err, resultum)
+                    db.query(userLikeStatus, function(err, resultum)
                     {
                         if(resultum.length > 0)
                         {
@@ -711,7 +711,7 @@ module.exports = {
                         
                         let subcriptionStatus = "SELECT * FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userId+"'";
 
-                        db.query(getuserdetials, function(err, resultuc)
+                        db.query(subcriptionStatus, function(err, resultuc)
                     {
                         if(resultuc.length > 0)
                         {
