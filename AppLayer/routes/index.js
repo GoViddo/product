@@ -613,29 +613,7 @@ module.exports = {
                 
 
                         }
-                        else{
-                            let queryinsert = "UPDATE `video_like_table` SET `like_status`= '"+likedislikestatus+"' WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
-
-                            db.query(queryinsert, function (err, result) {
-
-                                if (err) {
-                                    return res.status(400).send(err);
-                                }
-                                else {
-                                    resp.message = "success";
-                            
-                                    return res.status(200).send(resp);
-                                }
-                
-                            });
-                
-                        }
-
-
-            
-           
-
-
+                        
 
                     });
 
@@ -644,16 +622,16 @@ module.exports = {
 
                     let deletequery = "DELETE FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userid+"'";
 
-                    db.query(queryinsert, function (err, result) {
+                    db.query(deletequery, function (err, result) {
                      
                         if (err) {
-                            return res.status(400).send(err);
-                        }
-                        else {
-                            resp.message = "success";
-                    
-                            return res.status(200).send(resp);
-                        }
+                                    return res.status(400).send(err);
+                                }
+                                else {
+                                    resp.message = "success";
+                            
+                                    return res.status(200).send(resp);
+                                }
                         
                     });
 
