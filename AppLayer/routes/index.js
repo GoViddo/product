@@ -723,8 +723,18 @@ module.exports = {
                         resp.likestatus = likestatus;
 
                         resp.subscriptionstatus = subscriptionstatus;
-                        return res.status(200).send(resp);
+                        
 
+                        let viewCount = "SELECT * FROM `video_views_table` WHERE `video_id` = '"+videoIdd+"'";
+
+                        db.query(viewCount, function(err, resultvc){
+
+                            var viewCount = resultvc.length;
+                            resp.viewCount = viewCount;
+                            return res.status(200).send(resp);
+
+                        });
+                       
                         
 
                     });
