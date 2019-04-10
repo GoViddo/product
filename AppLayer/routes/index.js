@@ -486,9 +486,20 @@ module.exports = {
                     row = result[0];
                     let videoid = row.video_id;
 
+                    let checkupdation = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
+                    db.query(selectVideoId, function (err, result) {
 
-            let queryinsert = "INSERT INTO `video_like_table` (`video_like_id`, `video_id`, `user_id`, `like_status`) VALUES (NULL, '"+videoid+"', '"+userid+"', '"+likedislikestatus+"');";
+                        if(result.length == 0)
+                        {
+                            let queryinsert = "INSERT INTO `video_like_table` (`video_like_id`, `video_id`, `user_id`, `like_status`) VALUES (NULL, '"+videoid+"', '"+userid+"', '"+likedislikestatus+"');";
 
+                        }
+                        else{
+                            let queryinsert = "";
+                        }
+
+
+            
             db.query(queryinsert, function (err, result) {
 
                 if (err) {
@@ -502,6 +513,10 @@ module.exports = {
 
             });
 
+
+
+
+                    });
 
 
                 }
