@@ -722,6 +722,7 @@ module.exports = {
                             var subscriptionstatus = 0;
                         }
                         resp.subscriptionstatus = subscriptionstatus;
+                        return res.status(200).send(resp);
 
                         
 
