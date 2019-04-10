@@ -681,7 +681,7 @@ module.exports = {
                 resp.videoDescription = videoDescription;
                 var videoIdd = result[0].video_id;
 
-                let channelidquerry = "SELECT * FROM `channel_list` WHERE `channel_name` = '"+channelname+"'";
+                let channelidquerry = "SELECT * FROM `channel_list` WHERE `channel_name` = '"+channelName+"'";
 
                 db.query(channelidquerry, function (err, resultm) {
 
