@@ -708,8 +708,7 @@ module.exports = {
                             var likestatus = 2;
                         }
 
-                        resp.likestatus = likestatus;
-
+                        
                         let subcriptionStatus = "SELECT * FROM `subscirption_list` WHERE `subscription_channel_id` = '"+channelid+"' and `user_id` = '"+userId+"'";
 
                         db.query(getuserdetials, function(err, resultuc)
@@ -721,6 +720,8 @@ module.exports = {
                         else{
                             var subscriptionstatus = 0;
                         }
+                        resp.likestatus = likestatus;
+
                         resp.subscriptionstatus = subscriptionstatus;
                         return res.status(200).send(resp);
 
