@@ -511,7 +511,7 @@ module.exports = {
 
                         }
                         else{
-                            let queryinsert = "";
+                            let queryinsert = "UPDATE `video_like_table` SET `like_status`= "+likedislikestatus+" WHERE `video_id` = '"+videoid+"' and `user_id` = '"+userid+"'";
 
                             db.query(queryinsert, function (err, result) {
 
