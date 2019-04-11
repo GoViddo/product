@@ -763,8 +763,31 @@ module.exports = {
 
                             var viewCount = resultvc.length;
                             resp.viewCount = viewCount;
-                            return res.status(200).send(resp);
 
+
+
+                            let likeCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoIdd+"' and `like_status` = '1'";
+
+                            db.query(likeCount, function(erre, resultlc){
+
+                                var likeCount = resultlc.length;
+                                resp.likeCount = likeCount;
+
+                                let dislikeCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoIdd+"' and `like_status` = '0'";
+
+                                db.query(dislikeCount, function(errm, resultdlc){
+                                    var dilikeCount = resultdlc.length;
+                                    resp.dilikeCount = dilikeCount;
+
+                                    return res.status(200).send(resp);
+
+
+                                });
+
+
+                            });
+
+                            
                         });
                        
                         
