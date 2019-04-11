@@ -832,7 +832,34 @@ module.exports = {
         db.query(getVideoIdQuery, function (err, result) {
 
                 var videoIdd = result[0].video_id;
-            
+
+                let chkQuery = "SELECT * FROM `video_comments_table` WHERE `user_id` = '"+userId+"' and `video_id` = '"+videoIdd+"'";
+
+                db.query(chkQuery, function(errr, resulchk){
+
+                    if(resulchk.length > 0)
+                    {
+
+                        let updateQuery = "UPDATE `video_comments_table` SET `comment`='"+comment+"' WHERE `user_id` = '"+userId+"' and `video_id` = '"+videoIdd+"' ";
+                
+                        db.query(updateQuery, function(errm, resultm){
+
+                            if(err)
+                            {
+                                return res.status(400).send(err);
+                            }
+                            else{
+                                resp.messgae = "success";
+                                return res.status(200).send(resp);
+                            }
+        
+                        });
+        
+
+                    }
+                    else{
+
+
                 let insertDataQuery = "INSERT INTO `video_comments_table` (`comment_id`, `user_id`, `video_id`, `comment`) VALUES (NULL, '"+userId+"', '"+videoIdd+"', '"+comment+"');";
 
                 db.query(insertDataQuery, function(errm, resultm){
@@ -847,6 +874,14 @@ module.exports = {
                     }
 
                 });
+
+                    }
+
+                });
+
+                
+
+
         });
 
 
