@@ -159,6 +159,8 @@ module.exports = {
 
         let selectSliderImagesQuery = "SELECT * FROM `subscirption_list` WHERE `user_id` = '"+userid+"'";
 
+        console.log(selectSliderImagesQuery);
+
         db.query(selectSliderImagesQuery, function (err, result) {
 
             let resp = {};
