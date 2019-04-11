@@ -159,8 +159,7 @@ module.exports = {
 
         let selectSliderImagesQuery = "SELECT * FROM `subscirption_list` WHERE `user_id` = '"+userid+"'";
 
-        console.log(selectSliderImagesQuery);
-
+       
         db.query(selectSliderImagesQuery, function (err, result) {
 
             let resp = {};
@@ -180,6 +179,8 @@ module.exports = {
                 previewDetails.video_id = result[i].subscription_channel_id;
                 
                 let channelDetailsQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = '"+channelId+"' and `status` = 1";
+
+                console.log(channelDetailsQuery);
 
                 db.query(channelDetailsQuery, function(errr, resultm){
 
