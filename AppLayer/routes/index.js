@@ -186,14 +186,13 @@ module.exports = {
                     previewDetails.slider_image = resultm[0].channel_logo_url;
                     previewDetails.shorten_text = resultm[0].channel_name;
     
-                    console.log(previewDetails)
-
                     data.push(previewDetails);
 
                 });
 
                 
             }
+            console.log(data);
 
             resp.data = data;
 
