@@ -148,11 +148,16 @@ module.exports = {
 
 
     getSubscriptionList: (req, res) => {
-        let previewMaxCount = req.body.previewMaxCount;
-        let previewLastId = req.body.previewLastId;
+        let emailId = req.body.emailId;
+
+        let userIdSelectionQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+emailId+"'";  
+        
+        db.query(userIdSelectionQuery, function(erre, result1){
+
+            var userid = result1[0].user_id;
 
 
-        let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` > " + previewLastId + " ORDER BY `channel_id` ASC LIMIT " + previewMaxCount;
+        let selectSliderImagesQuery = "SELECT * FROM `subscirption_list` WHERE `user_id` = '"+userid+"'";
 
         db.query(selectSliderImagesQuery, function (err, result) {
 
@@ -169,18 +174,31 @@ module.exports = {
             for (var i = 0; i < result.length; i++) {
                 previewDetails = {};
 
-                previewDetails.video_id = result[i].channel_id;
-                previewDetails.slider_image = result[i].channel_logo_url;
-                previewDetails.shorten_text = result[i].channel_name;
+                var channelId = result[i].subscription_channel_id;
+                previewDetails.video_id = result[i].subscription_channel_id;
+                
+                let channelDetailsQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = '"+channelId+"' and `status` = 1";
 
-                data.push(previewDetails);
+                db.query(channelDetailsQuery, function(errr, resultm){
 
+                    previewDetails.slider_image = resultm[0].channel_logo_url;
+                    previewDetails.shorten_text = resultm[0].channel_name;
+    
+                    data.push(previewDetails);
+
+                });
+
+                
             }
 
             resp.data = data;
 
 
             return res.status(200).send(resp);
+
+
+        });
+
 
 
         });
@@ -884,7 +902,7 @@ module.exports = {
                 return res.status(200).send(resp);
             } else {
 
-                let walletPassword = "demopassword-";
+                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                 let cleosCreateActiveKeys = "cleos create key --to-console";
