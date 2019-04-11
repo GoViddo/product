@@ -916,7 +916,7 @@ module.exports = {
 
                     data = [];
                     for (var i = 0; i < resultgc.length; i++) {
-
+                        
                         commentsData = {};
 
                         commentsData.comment_id = resultgc[i].comment_id;
@@ -934,6 +934,30 @@ module.exports = {
                 }
 
             });
+
+        });
+
+    },
+
+    getUserProfilePics:(req, res) => {
+
+        let userId = req.body.userId;
+        resp = {};
+
+        let userDetailsQuery = "";
+
+        db.query(userDetailsQuery, function(err, result){
+
+            if(err)
+            {
+                return res.status(400).send(err);
+            }
+            else{
+                resp.profilPic = result[0].user_profile_picture;
+                resp.userName = result[0].first_name+" "+result[0].last_name;
+
+                return res.status(200).send(resp);
+            }
 
         });
 
