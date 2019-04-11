@@ -921,7 +921,7 @@ module.exports = {
                         var userIdd = resultgc[i].user_id;
                         commentsData.comment = resultgc[i].comment;
                         
-                        data.push(videoDetails);
+                        data.push(commentsData);
 
                     }
                     resp.data = data;
