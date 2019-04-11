@@ -890,6 +890,50 @@ module.exports = {
     },
 
 
+    getCommentList: (req, res) => {
+
+        let videoCipherId = req.body.videoCipherId;
+
+        let getVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videoCipherId+"'";;
+
+        db.query(getVideoIdQuery, function(err, result)
+        {
+
+            var videoId = result[0].video_id;
+
+            let getCommentsQuery = "SELECT * FROM `video_comments_table` WHERE `video_id` = '"+videoId+"'";
+
+            db.query(getCommentsQuery, function(errr, resultgc){
+
+                if(errr)
+                {
+                    res.status(400).send(err);
+                }
+                else{
+
+                    for (var i = 0; i < resultgc.length; i++) {
+
+                        commentsData = {};
+
+                        commentsData.comment_id = resultgc[i].comment_id;
+                        commentsData.userId = resultgc[i].user_id;
+                        var userIdd = resultgc[i].user_id;
+                        commentsData.comment = resultgc[i].comment;
+                        
+                        data.push(videoDetails);
+
+                    }
+                    resp.data = data;
+                    return res.status(200).send(resp);
+
+
+                }
+
+            });
+
+        });
+
+    },
 
     getUserInfoForAccount: (req, res)=> {
 
