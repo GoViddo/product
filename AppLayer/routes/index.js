@@ -206,6 +206,7 @@ module.exports = {
                 
         db.query(channelDetailsQuery, function(errr, resultm){
 
+            previewDetails.channelId = channelId;
             previewDetails.slider_image = resultm[0].channel_logo_url;
             previewDetails.shorten_text = resultm[0].channel_name;
 
@@ -315,8 +316,7 @@ module.exports = {
 
             let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '" + chnnelName + "'";
 
-            console.log(selectDataQuery);
-
+            
             db.query(selectDataQuery, function (error, resultm) {
                 if (error) {
                     resp.message = "failed";
