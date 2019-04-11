@@ -296,6 +296,8 @@ module.exports = {
 
         let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = " + channelId;
 
+        console.log(selectSliderImagesQuery);
+
         db.query(selectSliderImagesQuery, function (err, result) {
 
             let resp = {};
