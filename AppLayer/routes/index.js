@@ -829,7 +829,7 @@ module.exports = {
 
             let getVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videoCipherId+"'";
 
-        db.query(query, function (err, result) {
+        db.query(getVideoIdQuery, function (err, result) {
 
                 var videoIdd = result[0].video_id;
             
