@@ -814,6 +814,47 @@ module.exports = {
 
 
 
+    addComment:(req, res) => {
+
+        let emailId = req.body.emailId;
+        let comment = req.body.comment;
+        let videoCipherId = req.body.videoCipherId;
+        var resp = {};
+
+        let getUserId = "SELECT * FROM `user_table` WHERE `email_id` = '"+emailId+"'";
+
+        db.query(getUserId, function(err, result){
+            var userId = result[0].user_id;
+
+
+            let getVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videoCipherId+"'";
+
+        db.query(query, function (err, result) {
+
+                var videoIdd = result[0].video_id;
+            
+                let insertDataQuery = "INSERT INTO `video_comments_table` (`comment_id`, `user_id`, `video_id`, `comment`) VALUES (NULL, '"+userId+"', '"+videoIdd+"', '"+comment+"');";
+
+                db.query(insertDataQuery, function(errm, resultm){
+
+                    if(err)
+                    {
+                        return res.status(400).send(err);
+                    }
+                    else{
+                        resp.messgae = "success";
+                        return res.status(200).send(resp);
+                    }
+
+                });
+        });
+
+
+        });
+
+    },
+
+
 
     getUserInfoForAccount: (req, res)=> {
 
