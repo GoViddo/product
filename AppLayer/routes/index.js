@@ -815,6 +815,44 @@ module.exports = {
 
 
 
+    getUserInfoForAccount: (req, res)=> {
+
+
+        let emailId = req.body.emailId;
+
+        let resp = {};
+
+        let userDetailsQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+emailId+"'";
+
+        db.query(userDetailsQuery, function(err, result){
+
+            resp.user_id = result[0].user_id;
+            resp.first_name = result[0].first_name;
+            resp.last_name = result[0].last_name;
+            resp.email_id = result[0].email_id;
+            resp.eosio_account_name = result[0].eosio_account_name;
+            resp.gender = result[0].gender;
+            resp.phone_no = result[0].phone_no;
+            resp.birth_date = result[0].birth_date;
+            resp.address = result[0].address;
+            resp.country = result[0].country;
+            resp.user_video_choice = result[0].user_video_choice;
+            resp.user_profile_picture = result[0].user_profile_picture;
+            resp.notification_token = result[0].notification_token;
+            resp.register_as_advisor = result[0].register_as_advisor;
+            resp.register_as_producer = result[0].register_as_producer;
+            resp.registration_date = result[0].registration_date;
+            resp.status = result[0].status;
+            
+            return res.status(200).send(resp);
+        
+
+        });
+
+    },
+
+
+
     getVideoGenereId: (req, res) => {
 
         let videoGenereName = req.body.videoGenereName;
