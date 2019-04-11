@@ -911,6 +911,7 @@ module.exports = {
                 }
                 else{
 
+                    data = [];
                     for (var i = 0; i < resultgc.length; i++) {
 
                         commentsData = {};
