@@ -178,31 +178,13 @@ module.exports = {
                 var channelId = result[i].subscription_channel_id;
                 previewDetails.video_id = result[i].subscription_channel_id;
                 
-                let channelDetailsQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = '"+channelId+"' and `status` = 1";
-
-                
-                db.query(channelDetailsQuery, function(errr, resultm){
-
-                    previewDetails.slider_image = resultm[0].channel_logo_url;
-                    previewDetails.shorten_text = resultm[0].channel_name;
-
-                    data.push(previewDetails);
-                
-
-                });
-
+           
                 
             }
            
-          
-            setTimeout(function () {
-              
-                console.log(data);
-
                 resp.data = data;
 
                 return res.status(200).send(resp);
-            }, 5000);
             
 
         });
@@ -210,6 +192,26 @@ module.exports = {
 
 
         });
+
+    },
+
+    getChannelList: (req, res) => {
+    
+        let channelId = req.body.channelId;
+
+        let channelDetailsQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = '"+channelId+"' and `status` = 1";
+
+        var previewDetails = {};
+                
+        db.query(channelDetailsQuery, function(errr, resultm){
+
+            previewDetails.slider_image = resultm[0].channel_logo_url;
+            previewDetails.shorten_text = resultm[0].channel_name;
+
+            return res.status(200).send(previewDetails);
+
+        });
+
 
     },
 
