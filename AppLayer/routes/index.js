@@ -296,8 +296,7 @@ module.exports = {
 
         let selectSliderImagesQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = " + channelId;
 
-        console.log(selectSliderImagesQuery);
-
+        
         db.query(selectSliderImagesQuery, function (err, result) {
 
             let resp = {};
@@ -315,6 +314,8 @@ module.exports = {
 
 
             let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '" + chnnelName + "'";
+
+            console.log(selectDataQuery);
 
             db.query(selectDataQuery, function (error, resultm) {
                 if (error) {
