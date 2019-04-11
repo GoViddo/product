@@ -894,7 +894,8 @@ module.exports = {
 
         let videoCipherId = req.body.videoCipherId;
 
-        let getVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videoCipherId+"'";;
+        let getVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+videoCipherId+"'";
+        var resp = {};
 
         db.query(getVideoIdQuery, function(err, result)
         {
@@ -910,6 +911,8 @@ module.exports = {
                     res.status(400).send(err);
                 }
                 else{
+
+                    resp.message = "success";
 
                     data = [];
                     for (var i = 0; i < resultgc.length; i++) {
