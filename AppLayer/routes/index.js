@@ -185,19 +185,25 @@ module.exports = {
 
                     previewDetails.slider_image = resultm[0].channel_logo_url;
                     previewDetails.shorten_text = resultm[0].channel_name;
-    
+
+                    data.push(previewDetails);
+                
+
                 });
 
-                data.push(previewDetails);
                 
             }
-            console.log(data);
+           
+          
+            setTimeout(function () {
+              
+                console.log(data);
 
-            resp.data = data;
+                resp.data = data;
 
-
-            return res.status(200).send(resp);
-
+                return res.status(200).send(resp);
+            }, 5000);
+            
 
         });
 
