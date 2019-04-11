@@ -179,6 +179,7 @@ module.exports = {
                 previewDetails.video_id = result[i].subscription_channel_id;
                 
            
+                data.push(previewDetails);
                 
             }
            
