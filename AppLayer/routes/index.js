@@ -180,13 +180,14 @@ module.exports = {
                 
                 let channelDetailsQuery = "SELECT * FROM `channel_list` WHERE `channel_id` = '"+channelId+"' and `status` = 1";
 
-                console.log(channelDetailsQuery);
-
+                
                 db.query(channelDetailsQuery, function(errr, resultm){
 
                     previewDetails.slider_image = resultm[0].channel_logo_url;
                     previewDetails.shorten_text = resultm[0].channel_name;
     
+                    console.log(previewDetails)
+
                     data.push(previewDetails);
 
                 });
