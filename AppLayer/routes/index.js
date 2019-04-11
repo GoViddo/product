@@ -944,7 +944,7 @@ module.exports = {
         let userId = req.body.userId;
         resp = {};
 
-        let userDetailsQuery = "";
+        let userDetailsQuery = "SELECT * FROM `user_table` WHERE `user_id` = '"+userId+"'";
 
         db.query(userDetailsQuery, function(err, result){
 
