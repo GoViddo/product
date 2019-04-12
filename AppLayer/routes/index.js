@@ -219,16 +219,16 @@ module.exports = {
 
                 for (var i = 0; i < resulthq.length; i++) {
 
-                    ress = {};
 
                     var videoId = resulthq[i].video_id;
-                    ress.videoId = videoId;
-
+                    
                     let getVideoDetailsQuery = "SELECT * FROM `video_table` WHERE `video_id` = '" + videoId + "'";
 
                    
 
                     db.query(getVideoDetailsQuery, function (errm, resultm) {
+
+                        ress = {};
 
                         var videoName = resultm[0].show_name;
                         var home_image = resultm[0].home_image;
@@ -236,6 +236,7 @@ module.exports = {
                         var vdo_cipher_id = resultm[0].vdo_cipher_id;
                         var video_description = resultm[0].video_description;
 
+                        ress.videoId = videoId;
                         ress.videoName = videoName;
                         ress.home_image = home_image;
                         ress.shorten_text = shorten_text;
