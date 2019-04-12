@@ -243,6 +243,8 @@ module.exports = {
 
                         data.push(ress);
 
+                    resp.data = data;
+
                     });
 
                 }
@@ -250,7 +252,6 @@ module.exports = {
 
                 if(j == chk)
                 {
-                    resp.data = data;
                     return res.status(200).send(resp);
                 }
 
