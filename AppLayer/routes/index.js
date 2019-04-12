@@ -242,13 +242,8 @@ module.exports = {
 
                         data.push(ress);
 
-                        if(j == chk)
-                        {
-                            resp.data = data;
-                            return res.status(200).send(resp);
-                        }
         
-                        console.log(ress);
+                        console.log(j + " chk = "+ chk );
 
                     });
 
