@@ -226,8 +226,7 @@ module.exports = {
 
                     let getVideoDetailsQuery = "SELECT * FROM `video_table` WHERE `video_id` = '" + videoId + "'";
 
-                    console.log(getVideoDetailsQuery);
-
+                   
 
                     db.query(getVideoDetailsQuery, function (errm, resultm) {
 
@@ -242,6 +241,9 @@ module.exports = {
                         ress.shorten_text = shorten_text;
                         ress.vdoCipherId = vdo_cipher_id;
                         ress.videoDescription = video_description;
+
+                        console.log(ress);
+
 
                         data.push(ress);
                         j = j + 1;
