@@ -247,8 +247,12 @@ module.exports = {
 
                 }
 
-                console.log(j+" "+chk);
-                
+
+                if(j == chk)
+                {
+                    resp.data = data;
+                    return res.status(200).send(resp);
+                }
 
             });
 
