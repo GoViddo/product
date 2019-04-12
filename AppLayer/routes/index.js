@@ -58,9 +58,6 @@ module.exports = {
             return res.status(200).send(body);
         });
 
-
-
-
     },
 
     getSliderImageData: (req, res) => {
@@ -191,6 +188,69 @@ module.exports = {
         });
 
 
+
+        });
+
+    },
+
+
+    getUserHistory: (req, res)=> {
+
+        let userEmail = req.body.userEmial;
+        resp = {};
+        data = [];
+        
+        let getUserIdQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+userEmail+"'";
+
+        db.query(getUserIdQuery, function(err, result){
+
+            var userId = result[0].user_id;
+
+            let getHistoryQuery = "SELECT * FROM `video_views_table` WHERE `view_user` = '"+userId+"' ORDER BY `view_id` DESC LIMIT 10";
+
+            db.query(getHistoryQuery, function(errr , resulthq){
+
+                resp.message = "success";
+
+                var chk = resulthq.length;
+
+                var j = 0;
+
+                for (var i = 0; i < result.length; i++) {
+                     j = j + 1;
+            
+                    ress = {};
+
+                    var videoId = result[i].video_id;
+                    ress.videoId = videoId;
+
+                    let getVideoDetailsQuery = "SELECT * FROM `video_table` WHERE `video_id` = '"+videoId+"'";
+
+                    db.query(getVideoDetailsQuery, function(errm, resultm){
+
+                        var videoName = resultm[0].show_name;
+                        var home_image = resultm[0].home_image;
+                        var shorten_text = resultm[0].shorten_text;
+                        var vdo_cipher_id = resultm[0].vdo_cipher_id;
+                        var video_description = resultm[0].video_description;
+                        
+                        ress.videoName = videoName;
+                        ress.home_image = home_image;
+                        ress.shorten_text = shorten_text;
+                        ress.vdoCipherId = vdo_cipher_id;
+                        ress.videoDescription = video_description;
+
+
+                        data.push(ress);
+
+                    });
+
+                }
+
+                console.log(j+" "+chk);
+                
+
+            });
 
         });
 
