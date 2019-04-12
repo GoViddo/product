@@ -240,15 +240,15 @@ module.exports = {
                         ress.vdoCipherId = vdo_cipher_id;
                         ress.videoDescription = video_description;
 
-
                         data.push(ress);
 
                         if(j == chk)
                         {
                             resp.data = data;
-                            return res.status(200).send(resp);
+                            //return res.status(200).send(resp);
                         }
         
+                        console.log(ress);
 
                     });
 
