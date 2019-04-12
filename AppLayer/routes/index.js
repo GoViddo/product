@@ -230,13 +230,14 @@ module.exports = {
 
                         ress = {};
 
+                        var videoIdAdd = resultm[0].video_id;
                         var videoName = resultm[0].show_name;
                         var home_image = resultm[0].home_image;
                         var shorten_text = resultm[0].shorten_text;
                         var vdo_cipher_id = resultm[0].vdo_cipher_id;
                         var video_description = resultm[0].video_description;
 
-                        ress.videoId = videoId;
+                        ress.videoId = videoIdAdd;
                         ress.videoName = videoName;
                         ress.home_image = home_image;
                         ress.shorten_text = shorten_text;
