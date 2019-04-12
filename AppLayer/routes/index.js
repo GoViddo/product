@@ -242,7 +242,7 @@ module.exports = {
                         ress.vdoCipherId = vdo_cipher_id;
                         ress.videoDescription = video_description;
 
-                        console.log(resultm);
+                        console.log(videoName);
 
 
                         data.push(ress);
