@@ -217,7 +217,6 @@ module.exports = {
                 var j = 0;
 
                 for (var i = 0; i < resulthq.length; i++) {
-                     j = j + 1;
             
                     ress = {};
 
@@ -241,6 +240,8 @@ module.exports = {
                         ress.videoDescription = video_description;
 
                         data.push(ress);
+                        j = j + 1;
+
 
         
                         console.log(j + " chk = "+ chk );
