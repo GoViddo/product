@@ -208,8 +208,7 @@ module.exports = {
 
             let getHistoryQuery = "SELECT * FROM `video_views_table` WHERE `view_user` = '" + userId + "' ORDER BY `view_id` DESC LIMIT 10";
 
-            console.log(getHistoryQuery);
-
+           
             db.query(getHistoryQuery, function (errr, resulthq) {
 
                 resp.message = "success";
@@ -226,6 +225,9 @@ module.exports = {
                     ress.videoId = videoId;
 
                     let getVideoDetailsQuery = "SELECT * FROM `video_table` WHERE `video_id` = '" + videoId + "'";
+
+                    console.log(getVideoDetailsQuery);
+
 
                     db.query(getVideoDetailsQuery, function (errm, resultm) {
 
