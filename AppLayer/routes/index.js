@@ -216,12 +216,12 @@ module.exports = {
 
                 var j = 0;
 
-                for (var i = 0; i < result.length; i++) {
+                for (var i = 0; i < resulthq.length; i++) {
                      j = j + 1;
             
                     ress = {};
 
-                    var videoId = result[i].video_id;
+                    var videoId = resulthq[i].video_id;
                     ress.videoId = videoId;
 
                     let getVideoDetailsQuery = "SELECT * FROM `video_table` WHERE `video_id` = '"+videoId+"'";
