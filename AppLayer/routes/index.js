@@ -243,17 +243,18 @@ module.exports = {
 
                         data.push(ress);
 
-                    resp.data = data;
+                        if(j == chk)
+                        {
+                            resp.data = data;
+                            return res.status(200).send(resp);
+                        }
+        
 
                     });
 
                 }
 
 
-                if(j == chk)
-                {
-                    return res.status(200).send(resp);
-                }
 
             });
 
