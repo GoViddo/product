@@ -902,7 +902,7 @@ module.exports = {
 
             var videoId = result[0].video_id;
 
-            let getCommentsQuery = "SELECT * FROM `video_comments_table` WHERE `video_id` = '"+videoId+"'";
+            let getCommentsQuery = "SELECT * FROM `video_comments_table` WHERE `video_id` = '"+videoId+"' LIMIT 10";
 
             db.query(getCommentsQuery, function(errr, resultgc){
 
