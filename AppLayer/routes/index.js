@@ -975,6 +975,8 @@ module.exports = {
 
                         let updateQuery = "UPDATE `video_comments_table` SET `comment`='" + comment + "' WHERE `user_id` = '" + userId + "' and `video_id` = '" + videoIdd + "' ";
 
+                        console.log(updateQuery)
+
                         db.query(updateQuery, function (errm, resultm) {
 
                             if (err) {
@@ -1052,6 +1054,8 @@ module.exports = {
                         commentsData.userId = resultgc[i].user_id;
                         var userIdd = resultgc[i].user_id;
                         commentsData.comment = resultgc[i].comment;
+
+                        
 
                         data.push(commentsData);
 
