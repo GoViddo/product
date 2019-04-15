@@ -389,6 +389,33 @@ module.exports = {
                     }
                     else{
 
+                        let updateQuery = "UPDATE `video_views_table` SET `total_video_played_time`= '"+videoViewDuration+"' WHERE `video_id` = '"+videoId+"' and `view_user` = '"+userId+"'";
+
+                        db.query(updateQuery, function (err2, result2) {
+
+                            if (err1) {
+                                resp.message = "failed";
+                                resp.data = err;
+                                return res.status(500).send(resp);
+                            }
+        
+        
+                            let data = [];
+                            resp.message = "success";
+        
+                            reviewDetails = {};
+        
+                            reviewDetails.userId = userId;
+                            reviewDetails.videoId = videoId;
+        
+                            data.push(reviewDetails);
+        
+                            resp.data = data;
+                            return res.status(200).send(resp);
+        
+        
+                        });
+        
                         
 
                     }
