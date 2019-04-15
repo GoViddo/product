@@ -169,6 +169,31 @@ module.exports = {
 
                 let data = [];
                 resp.message = "success";
+
+                if(result.length == 0)
+                {
+                    let queryNewList = "SELECT * FROM `channel_list` WHERE `status` = 1";
+                    db.query(queryNewList, function(errm, resultm){
+
+                        for (var i = 0; i < resultm.length; i++) {
+                            previewDetails = {};
+        
+                            var channelId = resultm[i].channel_id;
+                            previewDetails.video_id = resultm[i].channel_id;
+        
+        
+                            data.push(previewDetails);
+        
+                        }
+        
+                        resp.data = data;
+        
+                        return res.status(200).send(resp);
+         
+
+                    });
+                }
+                else{
                 for (var i = 0; i < result.length; i++) {
                     previewDetails = {};
 
@@ -184,6 +209,9 @@ module.exports = {
 
                 return res.status(200).send(resp);
 
+            }
+
+             
 
             });
 
