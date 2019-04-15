@@ -1075,6 +1075,9 @@ module.exports = {
     getUserProfilePics: (req, res) => {
 
         let userId = req.body.userId;
+        let comment = req.body.comment;
+        let commentId = req.body.commentId;
+        
         resp = {};
 
         let userDetailsQuery = "SELECT * FROM `user_table` WHERE `user_id` = '" + userId + "'";
@@ -1087,6 +1090,9 @@ module.exports = {
             else {
                 resp.profilPic = result[0].user_profile_picture;
                 resp.userName = result[0].first_name + " " + result[0].last_name;
+                resp.comment = comment;
+                resp.commentId = commentId;
+                resp.userId = userId;
 
                 return res.status(200).send(resp);
             }
