@@ -349,6 +349,13 @@ module.exports = {
 
                 let userId = result1[0].user_id;
 
+                let verifyDetails = "SELECT * FROM `video_views_table` WHERE `view_user` = '"+userId+"' and `video_id` = '"+videoId+"'";
+
+                db.query(verifyDetails, function(merr, mresult){
+
+                    if(mresult.length == 0)
+                    {
+
 
                 let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
 
@@ -375,6 +382,16 @@ module.exports = {
                     resp.data = data;
                     return res.status(200).send(resp);
 
+
+                });
+
+
+                    }
+                    else{
+
+                        
+
+                    }
 
                 });
 
