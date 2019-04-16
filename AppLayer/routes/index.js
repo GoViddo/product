@@ -35,8 +35,7 @@ module.exports = {
         let arr = urlPath.split("=", -1);
         let videoId = arr[1];
 
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
+    
       // Windows Phone must come first because its UA also contains "Android"
       return "https://play.google.com/store/apps/details?id=com.imfapp.dell.mytabsapp";
     
