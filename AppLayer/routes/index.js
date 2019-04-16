@@ -38,15 +38,8 @@ module.exports = {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return "windows-link";
-    }
-    else if (/android/i.test(userAgent)) {
-        return "https://play.google.com/store/apps/details?id=com.imfapp.dell.mytabsapp";
-    }
-    else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "ios-link";
-    }
+      return "https://play.google.com/store/apps/details?id=com.imfapp.dell.mytabsapp";
+    
 
     },
 
