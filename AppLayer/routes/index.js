@@ -676,8 +676,22 @@ module.exports = {
                                     }
                                     else {
                                         resp.message = "success";
+                                        let getCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `like_status` = 1";
+                                        db.query(getCount, function(errmd, resultmd){
 
-                                        return res.status(200).send(resp);
+                                            resp.likeCount = resultmd.length;
+
+                                            let getDislikeCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `like_status` = 0";
+
+                                            db.query(getDislikeCount, function(merr, mresult){
+                                            resp.dislikeCount = mresult.length;
+
+                                            return res.status(200).send(resp);
+
+                                            });
+
+                                        });
+
                                     }
 
                                 });
@@ -695,7 +709,22 @@ module.exports = {
                                     else {
                                         resp.message = "success";
 
-                                        return res.status(200).send(resp);
+                                        let getCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `like_status` = 1";
+                                        db.query(getCount, function(errmd, resultmd){
+
+                                            resp.likeCount = resultmd.length;
+
+                                            let getDislikeCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `like_status` = 0";
+
+                                            db.query(getDislikeCount, function(merr, mresult){
+                                            resp.dislikeCount = mresult.length;
+
+                                            return res.status(200).send(resp);
+
+                                            });
+
+                                        });
+
                                     }
 
                                 });
@@ -1071,6 +1100,8 @@ module.exports = {
         });
 
     },
+
+
 
     getUserProfilePics: (req, res) => {
 
