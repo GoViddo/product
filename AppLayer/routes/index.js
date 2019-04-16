@@ -682,6 +682,10 @@ module.exports = {
                                 });
 
                             } 
+                            else{
+                                resp.msg = "success";
+                                        return res.status(200).send(resp);
+                            }
 
                         });
 
