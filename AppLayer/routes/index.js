@@ -37,8 +37,9 @@ module.exports = {
 
     
       // Windows Phone must come first because its UA also contains "Android"
-      return "https://play.google.com/store/apps/details?id=com.imfapp.dell.mytabsapp";
-    
+      
+      window.location.href= "market://details?id=com.imfapp.dell.mytabsapp";
+      return res.status(200).send("success");
 
     },
 
