@@ -661,7 +661,7 @@ module.exports = {
 
                         let checkQuery = "SELECT * FROM `watch_later` WHERE `watch_letter_video_id` = '"+videoid+"' and `watch_letter_user_id` = '"+userid+"'";
 
-                        db.query(chkQuery, function(errmm, resutt){
+                        db.query(checkQuery, function(errmm, resutt){
 
                             if(resutt.length == 0)
                             {
