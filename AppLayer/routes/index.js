@@ -628,15 +628,78 @@ module.exports = {
             }
         );
 
+    },
 
+
+    addToWatchList:(req, res) => {
+
+        let emailId = req.body.emailid;
+        let videoCipherId = req.body.videoCipherId;
+
+        resp = {};
+
+        let query = "SELECT * FROM `user_table` WHERE `email_id` = '" + emailid + "'";
+
+        db.query(query, function (err, result) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            else {
+                row = result[0];
+                let userid = row.user_id;
+
+                let selectVideoId = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '" + videocipherid + "'";
+                db.query(selectVideoId, function (err, result) {
+
+                    if (err) {
+                        return res.status(400).send(err);
+                    }
+                    else {
+
+                        row = result[0];
+                        let videoid = row.video_id;
+
+                        let checkQuery = "SELECT * FROM `watch_later` WHERE `watch_letter_video_id` = '"+videoid+"' and `watch_letter_user_id` = '"+userid+"'";
+
+                        db.query(chkQuery, function(errmm, resutt){
+
+                            if(resutt.length == 0)
+                            {
+
+                                let insertquery = "INSERT INTO `watch_later`(`watch_letter_video_id`, `watch_letter_user_id`) VALUES ('"+videoid+"','"+userid+"')";
+
+                                db.query(insertquery, function(mterr, mtresult){
+
+                                    if(mterr)
+                                    {
+                                        return res.status(400).send(err);
+                                    }
+                                    else{
+                                        resp.msg = "success";
+                                        return res.status(200).send(resp);
+                                    }
+
+                                });
+
+                            } 
+
+                        });
+
+                    }
+                });
+
+            }
+        });
 
 
     },
+    
 
 
     likeUnlikeSstore: (req, res) => {
         let emailid = req.body.emailid;
         let likedislikestatus = req.body.likestatus;
+
         let videocipherid = req.body.videoid;
         resp = {};
 
@@ -664,8 +727,7 @@ module.exports = {
                         let checkupdation = "SELECT * FROM `video_like_table` WHERE `video_id` = '" + videoid + "' and `user_id` = '" + userid + "'";
                         db.query(checkupdation, function (err, resultm) {
 
-                            console.log(resultm.length)
-
+                           
                             if (resultm.length < 1) {
                                 let queryinsert = "INSERT INTO `video_like_table` (`video_like_id`, `video_id`, `user_id`, `like_status`) VALUES (NULL, '" + videoid + "', '" + userid + "', '" + likedislikestatus + "');";
 
