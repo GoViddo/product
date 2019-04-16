@@ -27,14 +27,34 @@ module.exports = {
         });
     },
 
-    generateVideoOtp: (req, res) => {
+
+    shareUrl: (req, res) => {
+        
         let urlPath = req.originalUrl;
 
         let arr = urlPath.split("=", -1);
         let videoId = arr[1];
 
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-        //console.log(videoId);
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "windows-link";
+    }
+    else if (/android/i.test(userAgent)) {
+        return "https://play.google.com/store/apps/details?id=com.imfapp.dell.mytabsapp";
+    }
+    else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "ios-link";
+    }
+
+    },
+
+    generateVideoOtp: (req, res) => {
+        let urlPath = req.originalUrl;
+
+        let arr = urlPath.split("=", -1);
+        let videoId = arr[1];
 
         var request = require("request");
 
@@ -1259,6 +1279,7 @@ module.exports = {
         })
     },
 
+
     bannerImages: (req, res) => {
 
         let query = "SELECT * FROM `video_table` WHERE `show_on_home_page` = 1 and `status` = 1 ORDER BY `video_id` DESC LIMIT 5";
@@ -1513,7 +1534,14 @@ module.exports = {
                             return res.status(200).send(err);
                         }
                         resp.message = "Registration successful";
-                        return res.status(200).send(resp);
+
+                        let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"1.00\", \"memo\":\"Rewards for Register With GoViddo\"}' -p hellogoviddo";
+                                cmd.get(
+                                    sendEOSTokensRegistration,
+                                    function (err, data, stderr) {
+                                        return res.status(200).send(resp);
+                                    }
+                                );  
                     });
                 });
             }
