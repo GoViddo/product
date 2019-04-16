@@ -35,10 +35,25 @@ module.exports = {
         let arr = urlPath.split("=", -1);
         let videoId = arr[1];
 
+
+        var express = require('express');
+var deeplink = require('node-deeplink');
+ 
+var app = express();
+ 
+app.get(
+  '/deeplink',
+  deeplink({
+    fallback: 'https://goviddo.com',
+    android_package_name: 'com.imfapp.dell.mytabsapp',
+    ios_store_link:
+      'https://itunes.apple.com/us/app/cups-unlimited-coffee/id556462755?mt=8&uo=4'
+  })
+);
     
       // Windows Phone must come first because its UA also contains "Android"
       
-      window.location.href= "market://details?id=com.imfapp.dell.mytabsapp";
+      //window.location.href= "market://details?id=com.imfapp.dell.mytabsapp";
       return res.status(200).send("success");
 
     },
