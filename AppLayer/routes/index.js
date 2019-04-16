@@ -638,7 +638,7 @@ module.exports = {
 
         resp = {};
 
-        let query = "SELECT * FROM `user_table` WHERE `email_id` = '" + emailid + "'";
+        let query = "SELECT * FROM `user_table` WHERE `email_id` = '" + emailId + "'";
 
         db.query(query, function (err, result) {
             if (err) {
