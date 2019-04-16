@@ -648,7 +648,7 @@ module.exports = {
                 row = result[0];
                 let userid = row.user_id;
 
-                let selectVideoId = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '" + videocipherid + "'";
+                let selectVideoId = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '" + videoCipherId + "'";
                 db.query(selectVideoId, function (err, result) {
 
                     if (err) {
