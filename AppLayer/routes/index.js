@@ -426,6 +426,25 @@ app.get(
                                             sendTokens,
                                                     function (err, data, stderr) {
                         
+                                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','For 10 Unique Video Views','hellogoviddo')";
+
+                                                        db.query(queryInsertTransactions, function(mresr, mresultmm){
+
+                                                            let data = [];
+                                                            resp.message = "success";
+                                        
+                                                            reviewDetails = {};
+                                        
+                                                            reviewDetails.userId = userId;
+                                                            reviewDetails.videoId = videoId;
+                                        
+                                                            data.push(reviewDetails);
+                                        
+                                                            resp.data = data;
+                                                            return res.status(200).send(resp);
+
+                                                        });
+
                                                     }
                                                 );
                         
@@ -434,18 +453,7 @@ app.get(
                 
                 
                 
-                                    let data = [];
-                                    resp.message = "success";
-                
-                                    reviewDetails = {};
-                
-                                    reviewDetails.userId = userId;
-                                    reviewDetails.videoId = videoId;
-                
-                                    data.push(reviewDetails);
-                
-                                    resp.data = data;
-                                    return res.status(200).send(resp);
+                                    
                 
                 
                                 });
