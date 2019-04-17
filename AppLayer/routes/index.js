@@ -376,6 +376,8 @@ app.get(
                 }
 
                 let userId = result1[0].user_id;
+                let walletName = result1[0].eosio_account_name;  
+                    
 
                 let verifyDetails = "SELECT * FROM `video_views_table` WHERE `view_user` = '"+userId+"' and `video_id` = '"+videoId+"'";
 
@@ -395,6 +397,21 @@ app.get(
                         resp.data = err;
                         return res.status(500).send(resp);
                     }
+
+
+
+                let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"0.001 GOV\", \"memo\":\"Rewards for Unique View\"}' -p hellogoviddo";
+                        
+                        
+                cmd.get(
+                            sendEOSTokensRegistration,
+                            function (err, data, stderr) {
+
+
+
+                                return res.status(200).send(resp);
+                            }
+                        );
 
 
                     let data = [];
@@ -1547,7 +1564,6 @@ app.get(
 
                         let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"1.00 GOV\", \"memo\":\"Rewards for Register With GoViddo\"}' -p hellogoviddo";
                         
-                        console.log(sendEOSTokensRegistration)
                         
                         cmd.get(
                                     sendEOSTokensRegistration,
