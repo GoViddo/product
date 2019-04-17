@@ -400,7 +400,7 @@ app.get(
 
 
 
-                let sendTokens = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo]\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
+                let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo]\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
                 console.log(sendTokens); 
                         
                 cmd.get(
@@ -1559,7 +1559,7 @@ app.get(
                         }
                         resp.message = "Registration successful";
 
-                        let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo]\":\"Reward for new Registration\"}' -p  hellogoviddo";
+                        let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo]\":\"Reward for new Registration\"}' -p  hellogoviddo";
                                       
                         cmd.get(
                                     sendEOSTokensRegistration,
