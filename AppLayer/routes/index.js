@@ -390,7 +390,9 @@ app.get(
 
                         db.query(qrn, function(mrre, mrresult){
 
-                            if(mrresult.length%10 == 0)
+                            console.log(mrresult.length);
+
+                            if((mrresult.length % 10) == 0)
                             {
 
                                 let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
