@@ -390,9 +390,11 @@ app.get(
 
                         db.query(qrn, function(mrre, mrresult){
 
-                            console.log(mrresult.length);
+                            var countSendToken = mrresult.length + 1;
 
-                            if(((mrresult.length+1) % 10) == 0)
+                            console.log(countSendToken % 10);
+
+                            if((countSendToken % 10) == 0)
                             {
 
                                 let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
