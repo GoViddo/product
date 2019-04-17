@@ -398,17 +398,27 @@ app.get(
                         return res.status(500).send(resp);
                     }
 
+                    let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
-
-                let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
-                console.log(sendTokens); 
-                        
+                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
+                
                 cmd.get(
-                    sendTokens,
-                            function (err, data, stderr) {
+                    cleosWalletUnlockQuery, 
+                    function(err1, data1, stderr1){
 
-                            }
-                        );
+                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
+                        console.log(sendTokens); 
+                                
+                        cmd.get(
+                            sendTokens,
+                                    function (err, data, stderr) {
+        
+                                    }
+                                );
+        
+                    }
+                );
+
 
 
                     let data = [];
