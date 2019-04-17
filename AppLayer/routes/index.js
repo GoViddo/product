@@ -883,14 +883,14 @@ app.get(
                     cleosWalletUnlockQuery, 
                     function(err1, data1, stderr1){
 
-                        let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                        let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
                                     function (err, data, stderr) {
 
 
-                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userid+"','For Registration of New User','hellogoviddo')";
+                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userid+"','2 videos upvoting','hellogoviddo')";
 
                                         db.query(queryInsertTransactions, function(mresr, mresultmm){
 
