@@ -392,7 +392,10 @@ app.get(
 
                             var countSendToken = mrresult.length + 1;
 
-                            console.log(countSendToken % 10);
+                            console.log("count = "+countSendToken);
+                            console.log("rlength = "+mrresult.length);
+
+                            console.log("test"+countSendToken % 10);
 
                             if((countSendToken % 10) == 0)
                             {
