@@ -856,10 +856,15 @@ app.get(
 
                                             resp.likeCount = resultmd.length;
 
+                                            var likeCountTest = resultmd.length;
+
                                             let getDislikeCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `like_status` = 0";
 
                                             db.query(getDislikeCount, function(merr, mresult){
                                             resp.dislikeCount = mresult.length;
+
+                                            if(likeCountTest % 2 == 0)
+                                            {
 
                                             let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
@@ -869,19 +874,36 @@ app.get(
                     cleosWalletUnlockQuery, 
                     function(err1, data1, stderr1){
 
-                        // let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
-                        // console.log(sendTokens); 
-                                
-                        // cmd.get(
-                        //     sendTokens,
-                        //             function (err, data, stderr) {
-        
-                        //             }
-                        //         );
+                        let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                        console.log(sendEOSTokensRegistration);              
+                        cmd.get(
+                                    sendEOSTokensRegistration,
+                                    function (err, data, stderr) {
+
+                                        let chkingQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+email+"'";
+
+                                        db.query(chkingQuery, function(mern, mresn){
+
+                                        var userId = mresn[0].user_id;
+
+
+                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','For Registration of New User','hellogoviddo')";
+
+                                        db.query(queryInsertTransactions, function(mresr, mresultmm){
+
+                                        return res.status(200).send(resp);
+
+                                        });
+
+                                        });
+
+                                    }
+                                );
+
         
                     }
                 );
-
+                }
 
                                             return res.status(200).send(resp);
 
