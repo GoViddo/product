@@ -386,56 +386,97 @@ app.get(
                     if(mresult.length == 0)
                     {
 
+                        let qrn = "SELECT * FROM `video_views_table` WHERE `view_user` = '"+userId+"'";
 
-                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
+                        db.query(qrn, function(mrre, mrresult){
+
+                            if(mrresult.length%10 == 0)
+                            {
+
+                                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
 
 
-                db.query(insertIntoVideoViewQuery, function (err2, result2) {
-
-                    if (err1) {
-                        resp.message = "failed";
-                        resp.data = err;
-                        return res.status(500).send(resp);
-                    }
-
-                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
-
-                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
+                                db.query(insertIntoVideoViewQuery, function (err2, result2) {
                 
-                cmd.get(
-                    cleosWalletUnlockQuery, 
-                    function(err1, data1, stderr1){
-
-                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo\":\"Reward for unique video view\"}' -p  hellogoviddo";
-                        console.log(sendTokens); 
+                                    if (err1) {
+                                        resp.message = "failed";
+                                        resp.data = err;
+                                        return res.status(500).send(resp);
+                                    }
+                
+                                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
+                
+                                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                                 
-                        cmd.get(
-                            sendTokens,
-                                    function (err, data, stderr) {
-        
+                                cmd.get(
+                                    cleosWalletUnlockQuery, 
+                                    function(err1, data1, stderr1){
+                
+                                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for unique video view\"}' -p  hellogoviddo";
+                                        console.log(sendTokens); 
+                                                
+                                        cmd.get(
+                                            sendTokens,
+                                                    function (err, data, stderr) {
+                        
+                                                    }
+                                                );
+                        
                                     }
                                 );
-        
-                    }
-                );
+                
+                
+                
+                                    let data = [];
+                                    resp.message = "success";
+                
+                                    reviewDetails = {};
+                
+                                    reviewDetails.userId = userId;
+                                    reviewDetails.videoId = videoId;
+                
+                                    data.push(reviewDetails);
+                
+                                    resp.data = data;
+                                    return res.status(200).send(resp);
+                
+                
+                                });
+                
+                
+                                
+                            }
+                            else{
+                                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
 
 
+                                db.query(insertIntoVideoViewQuery, function (err2, result2) {
+                
+                                    if (err1) {
+                                        resp.message = "failed";
+                                        resp.data = err;
+                                        return res.status(500).send(resp);
+                                    }
+                
+                                    let data = [];
+                                    resp.message = "success";
+                
+                                    reviewDetails = {};
+                
+                                    reviewDetails.userId = userId;
+                                    reviewDetails.videoId = videoId;
+                
+                                    data.push(reviewDetails);
+                
+                                    resp.data = data;
+                                    return res.status(200).send(resp);
+                
+                                });
+                
+                
+                            }
 
-                    let data = [];
-                    resp.message = "success";
-
-                    reviewDetails = {};
-
-                    reviewDetails.userId = userId;
-                    reviewDetails.videoId = videoId;
-
-                    data.push(reviewDetails);
-
-                    resp.data = data;
-                    return res.status(200).send(resp);
-
-
-                });
+                        });
 
 
                     }
