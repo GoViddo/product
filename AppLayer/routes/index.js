@@ -398,7 +398,7 @@ app.get(
                         return res.status(500).send(resp);
                     }
 
-                    let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
+                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
                 
@@ -406,7 +406,7 @@ app.get(
                     cleosWalletUnlockQuery, 
                     function(err1, data1, stderr1){
 
-                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
+                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
                         console.log(sendTokens); 
                                 
                         cmd.get(
@@ -768,6 +768,7 @@ app.get(
             else {
                 row = result[0];
                 let userid = row.user_id;
+                let walletName = row.eosio_account_name;
 
                 let selectVideoId = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '" + videocipherid + "'";
                 db.query(selectVideoId, function (err, result) {
@@ -803,6 +804,28 @@ app.get(
 
                                             db.query(getDislikeCount, function(merr, mresult){
                                             resp.dislikeCount = mresult.length;
+
+                                            let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
+
+                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
+                
+                cmd.get(
+                    cleosWalletUnlockQuery, 
+                    function(err1, data1, stderr1){
+
+                        // let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
+                        // console.log(sendTokens); 
+                                
+                        // cmd.get(
+                        //     sendTokens,
+                        //             function (err, data, stderr) {
+        
+                        //             }
+                        //         );
+        
+                    }
+                );
+
 
                                             return res.status(200).send(resp);
 
@@ -1570,7 +1593,7 @@ app.get(
                         resp.message = "Registration successful";
 
                         let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
-                                      
+                        console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
                                     function (err, data, stderr) {
