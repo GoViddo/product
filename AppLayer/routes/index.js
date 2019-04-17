@@ -856,12 +856,19 @@ app.get(
 
                                             resp.likeCount = resultmd.length;
 
-                                            var likeCountTest = resultmd.length;
 
                                             let getDislikeCount = "SELECT * FROM `video_like_table` WHERE `video_id` = '"+videoid+"' and `like_status` = 0";
 
                                             db.query(getDislikeCount, function(merr, mresult){
                                             resp.dislikeCount = mresult.length;
+
+                                            let queryCountChk = "SELECT * FROM `video_like_table` WHERE `user_id` = '"+userid+"'";
+
+                                            db.query(queryCountChk, function(errcnt, resultcnt){
+
+
+                                            var likeCountTest = resultcnt.length;
+
 
                                             console.log(likeCountTest);
 
@@ -883,7 +890,7 @@ app.get(
                                     function (err, data, stderr) {
 
 
-                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','For Registration of New User','hellogoviddo')";
+                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userid+"','For Registration of New User','hellogoviddo')";
 
                                         db.query(queryInsertTransactions, function(mresr, mresultmm){
 
@@ -898,6 +905,10 @@ app.get(
                     }
                 );
                 }
+
+
+                                            });
+
 
 
                                             });
