@@ -1545,7 +1545,7 @@ app.get(
                         }
                         resp.message = "Registration successful";
 
-                        let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"1.00\", \"memo\":\"Rewards for Register With GoViddo\"}' -p hellogoviddo";
+                        let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"1.00 GOV\", \"memo\":\"Rewards for Register With GoViddo\"}' -p hellogoviddo";
                         
                         console.log(sendEOSTokensRegistration)
                         
