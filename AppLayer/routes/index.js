@@ -1592,17 +1592,19 @@ app.get(
                         }
                         resp.message = "Registration successful";
 
-                        let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                        setTimeout(function(){ 
+
+                            let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
                                     function (err, data, stderr) {
-
-
-
                                         return res.status(200).send(resp);
                                     }
-                                );  
+                                );
+
+                         }, 1000);
+                          
                     });
                 });
             }
