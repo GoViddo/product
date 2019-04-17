@@ -1403,6 +1403,8 @@ app.get(
                     //testnet url
                     let cleosCheckWalletName = "cleos -u http://junglehistory.cryptolions.io get account " + walletName + " --json";
 
+                    
+
                     cmd.get(
                         cleosCheckWalletName,
                         function (err, data, stderr) {
@@ -1544,7 +1546,10 @@ app.get(
                         resp.message = "Registration successful";
 
                         let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"1.00\", \"memo\":\"Rewards for Register With GoViddo\"}' -p hellogoviddo";
-                                cmd.get(
+                        
+                        console.log(sendEOSTokensRegistration)
+                        
+                        cmd.get(
                                     sendEOSTokensRegistration,
                                     function (err, data, stderr) {
 
