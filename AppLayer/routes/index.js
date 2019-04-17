@@ -406,10 +406,7 @@ app.get(
                 cmd.get(
                             sendEOSTokensRegistration,
                             function (err, data, stderr) {
-
-
-
-                                return res.status(200).send(resp);
+                                
                             }
                         );
 
