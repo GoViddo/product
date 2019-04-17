@@ -406,7 +406,7 @@ app.get(
                     cleosWalletUnlockQuery, 
                     function(err1, data1, stderr1){
 
-                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
+                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo\":\"Reward for unique video view\"}' -p  hellogoviddo";
                         console.log(sendTokens); 
                                 
                         cmd.get(
