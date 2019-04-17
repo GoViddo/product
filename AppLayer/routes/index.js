@@ -400,11 +400,11 @@ app.get(
 
 
 
-                let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"0.001 GOV\", \"memo\":\"Rewards for Unique View\"}' -p hellogoviddo";
-                       console.log(sendEOSTokensRegistration); 
+                let sendTokens = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.001 GOV\", \"memo]\":\"Reward for uniqeue view\"}' -p  hellogoviddo";
+                console.log(sendTokens); 
                         
                 cmd.get(
-                            sendEOSTokensRegistration,
+                    sendTokens,
                             function (err, data, stderr) {
 
                             }
@@ -1559,9 +1559,8 @@ app.get(
                         }
                         resp.message = "Registration successful";
 
-                        let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"1.00 GOV\", \"memo\":\"Rewards for Register With GoViddo\"}' -p hellogoviddo";
-                        
-                        
+                        let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo]\":\"Reward for new Registration\"}' -p  hellogoviddo";
+                                      
                         cmd.get(
                                     sendEOSTokensRegistration,
                                     function (err, data, stderr) {
