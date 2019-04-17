@@ -401,12 +401,12 @@ app.get(
 
 
                 let sendEOSTokensRegistration = "cleos --url https://jungle.eosio.cr:443 push action hellogoviddo issue '{\"to\":\""+walletName+"\",\"quantity\":\"0.001 GOV\", \"memo\":\"Rewards for Unique View\"}' -p hellogoviddo";
-                        
+                       console.log(sendEOSTokensRegistration); 
                         
                 cmd.get(
                             sendEOSTokensRegistration,
                             function (err, data, stderr) {
-                                
+
                             }
                         );
 
