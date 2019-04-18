@@ -857,7 +857,7 @@ app.get(
                             cleosWalletUnlockQuery, 
                             function(err1, data1, stderr1){
         
-                                let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
+                                let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"10 shares','hellogoviddo\"}' -p  hellogoviddo";
                                 console.log(sendEOSTokensRegistration);              
                                 cmd.get(
                                             sendEOSTokensRegistration,
@@ -873,7 +873,6 @@ app.get(
         
                                             }
                                         );
-        
                 
                             }
                         );
