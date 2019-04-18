@@ -805,6 +805,101 @@ app.get(
 
 
     },
+
+
+
+    sahreUrlTokens: (req, res) =>{
+
+        let emailId = req.body.emailid;
+        let sharedVideoId = req.body.videoId;
+
+        let getUserDetaislQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+emailId+"'";
+
+        db.query(getUserDetaislQuery, function(err, result){
+
+            var userId = result[0].user_id;
+            var walletName = result[0].eosio_account_name;
+            resp = {};
+
+            let getVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '"+sharedVideoId+"'";
+
+            db.query(getVideoIdQuery, function(errr, resultt){
+
+                var videoIdd = resultt[0].video_id;
+
+                insertQuery = "INSERT INTO `share_table`(`user_id`, `video_id`) VALUES ('"+userId+"','"+videoIdd+"')";
+
+                db.query(insertQuery, function(erre, rsulte){
+
+                    if(erre){
+                        resp.messgae = "Error";
+                        return res.status(400).send(resp);
+                    }
+                    else{
+                        resp.message = "Success";
+
+
+                        let queryCheckCount = "SELECT * FROM `share_table` WHERE `user_id` = '"+userId+"'";
+
+                        db.query(queryCheckCount, function(ree, resulttm){
+
+                            var count = resulttm.length;
+
+                            if((count % 10) == 0)
+                            {
+
+
+                        let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
+
+                        let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
+                        
+                        cmd.get(
+                            cleosWalletUnlockQuery, 
+                            function(err1, data1, stderr1){
+        
+                                let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
+                                console.log(sendEOSTokensRegistration);              
+                                cmd.get(
+                                            sendEOSTokensRegistration,
+                                            function (err, data, stderr) {
+        
+                                                let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','10 shares','hellogoviddo')";
+        
+                                                db.query(queryInsertTransactions, function(mresr, mresultmm){
+        
+                                                return res.status(200).send(resp);
+        
+                                                });
+        
+                                            }
+                                        );
+        
+                
+                            }
+                        );
+        
+
+
+                            }
+                            else{
+                                return res.status(200).send(resp);
+                            }
+
+                        });
+
+
+                    }
+
+
+                });
+
+            });
+
+
+        });
+
+
+    },
     
 
 
