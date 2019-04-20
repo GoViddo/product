@@ -565,7 +565,7 @@ app.get(
             var chnnelName = result[0].channel_name;
 
 
-            let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '" + chnnelName + "'";
+            let selectDataQuery = "SELECT * FROM `video_table` WHERE `video_channel_name` = '" + chnnelName + "' and `status` = 1";
 
 
             db.query(selectDataQuery, function (error, resultm) {
