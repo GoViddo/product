@@ -173,14 +173,12 @@ app.get(
     updateApp: (req, res) => {
 
         data = {
-            "is_run_mode":"true",
-            "name":"GoViddo AndroidAppUpdater",
-            "uri_current":"blockchainvideoapp.com.goviddo.goviddo",
-            "version_code_current":"3",
-            "version_code_min":"1",
-            "update_info":"On version 1.3 we added App Update Notification",
-            "update_date":"24/04/2019"
-        };
+            "newVersion": "1.3",
+            "apkUrl": "https://play.google.com/store/apps/details?id=blockchainvideoapp.com.goviddo.goviddo",
+            "versionNotes": [
+              "- Bug fixes"
+            ]
+          };
 
         return res.status(200).send(data);
 
