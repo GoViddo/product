@@ -170,6 +170,21 @@ app.get(
     },
 
 
+    updateApp: (req, res) => {
+
+        data = {
+            "is_run_mode":"true",
+            "name":"AndroidAppUpdater Sample",
+            "uri_current":"com.mobapphome.mahandroidupdater.sample",
+            "version_code_current":"2",
+            "version_code_min":"1",
+            "update_info":"On version 1.0 we added bla bla",
+            "update_date":"16/07/2016"
+        };
+
+        return res.status(200).send(data);
+
+    },
 
 
     getSubscriptionList: (req, res) => {
