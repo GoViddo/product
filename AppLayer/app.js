@@ -78,7 +78,7 @@ app.post('/getUserHistory', getUserHistory);
 app.post('/addToWatchList', addToWatchList);
 app.get('/shareUrl', shareUrl);
 app.post('/sahreUrlTokens', sahreUrlTokens);
-app.post('/updateApp', updateApp);
+app.get('/updateApp', updateApp);
 
 // set the app to listen on the port
 app.listen(port, () => {
