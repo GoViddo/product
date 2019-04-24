@@ -174,12 +174,12 @@ app.get(
 
         data = {
             "is_run_mode":"true",
-            "name":"AndroidAppUpdater Sample",
+            "name":"GoViddo AndroidAppUpdater",
             "uri_current":"com.mobapphome.mahandroidupdater.sample",
-            "version_code_current":"2",
+            "version_code_current":"3",
             "version_code_min":"1",
-            "update_info":"On version 1.0 we added bla bla",
-            "update_date":"16/07/2016"
+            "update_info":"On version 1.3 we added App Update Notification",
+            "update_date":"24/04/2019"
         };
 
         return res.status(200).send(data);
