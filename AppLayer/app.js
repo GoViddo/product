@@ -79,7 +79,7 @@ app.post('/addToWatchList', addToWatchList);
 app.get('/shareUrl', shareUrl);
 app.post('/sahreUrlTokens', sahreUrlTokens);
 app.get('/updateApp', updateApp);
-app.port('/transactionDetails', transactionDetails);
+app.post('/transactionDetails', transactionDetails);
 
 // set the app to listen on the port
 app.listen(port, () => {
