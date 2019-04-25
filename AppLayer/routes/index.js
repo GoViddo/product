@@ -169,6 +169,60 @@ app.get(
 
     },
 
+    transactionDetails: (req, res) => {
+
+        let email = req.body.email;
+
+        let query = "SELECT * FROM `user_table` WHERE `email_id` = '"+email+"'";
+
+        resp = {};
+
+        db.query(query, function(err, result){
+
+            let userId  = result[0].user_id;
+
+            let transactionQuery = "SELECT * FROM `video_transactions` WHERE `transaction_user_id` = '"+userId+"'";
+
+            datam = [];
+
+            db.query(transactionQuery, function(err, resultu){
+
+                if(err)
+                {
+                    resp.message = "failed";
+                    return res.status(400).send(resp);
+                }
+                else{
+                    resp.message = "success";
+                for (var i = 0; i < resultm.length; i++) {
+                       
+                    data = {};
+
+                let transaction_amount = resultu[i].transaction_amount;
+                let transaction_memo = resultu[i].transaction_memo;
+                let transaction_date = resultu[i].transaction_date;
+
+                data.transaction_amount = transaction_amount;
+                data.transaction_memo = transaction_memo;
+                data.transaction_date = transaction_date;
+
+                datam.push(data);
+
+                }
+
+                resp.data = data;
+                return res.status(200).send(resp);
+
+            }
+
+                
+                
+
+            });
+
+        });
+
+    },
 
     updateApp: (req, res) => {
 
