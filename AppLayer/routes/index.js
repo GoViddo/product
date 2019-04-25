@@ -472,7 +472,7 @@ app.get(
                                 memo = "Token for video "+videoName;    
                             }
                             else{
-                                memo = "Token for video id = "+mrresult[cid].video_id+",video "+videoName;
+                                memo = "Token for video id = "+mrresult[cid].video_name+",video "+videoName;
                             }
 
                             console.log("count = "+countSendToken);
@@ -483,7 +483,7 @@ app.get(
                             if((countSendToken % 10) == 0)
                             {
 
-                                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
+                                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`, `video_name`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "', '"+videoName+"')";
 
 
                                 db.query(insertIntoVideoViewQuery, function (err2, result2) {
