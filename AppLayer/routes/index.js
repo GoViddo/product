@@ -480,7 +480,7 @@ app.get(
                                 memo = "Token for video "+videoName;    
                             }
                             else{
-                                memo = "Token for video "+mrresult[cid].video_name+", video "+mrresult[cid1].video_name+", video "+mrresult[cid2].video_name+", video "+mrresult[cid3].video_name+", video "+mrresult[cid4].video_name+", video "+mrresult[cid5].video_name+", video "+mrresult[cid6].video_name+", video "+mrresult[cid7].video_name+", video "+mrresult[cid8].video_name+", video "+videoName;
+                                memo = "Token for unique video view for videos "+mrresult[cid].video_name+", "+mrresult[cid1].video_name+", "+mrresult[cid2].video_name+", "+mrresult[cid3].video_name+", "+mrresult[cid4].video_name+", "+mrresult[cid5].video_name+", "+mrresult[cid6].video_name+", "+mrresult[cid7].video_name+", "+mrresult[cid8].video_name+", "+videoName;
                             }
 
                             console.log("count = "+countSendToken);
