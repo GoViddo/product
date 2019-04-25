@@ -419,6 +419,8 @@ app.get(
         let userEmailId = req.body.userEmailId;
         let videoViewDuration = req.body.videoViewDuration;
 
+        var memo;
+
 
         let selectVideoIdQuery = "SELECT * FROM `video_table` WHERE `vdo_cipher_id` = '" + vdoCipherId + "'";
 
@@ -433,6 +435,7 @@ app.get(
             }
 
             let videoId = result[0].video_id;
+            let videoName = result[0].show_name;
 
             let userDetailsQuery = "SELECT * FROM `user_table` WHERE `email_id` = '" + userEmailId + "'";
 
@@ -446,6 +449,7 @@ app.get(
 
                 let userId = result1[0].user_id;
                 let walletName = result1[0].eosio_account_name;  
+
                     
 
                 let verifyDetails = "SELECT * FROM `video_views_table` WHERE `view_user` = '"+userId+"' and `video_id` = '"+videoId+"'";
@@ -460,6 +464,10 @@ app.get(
                         db.query(qrn, function(mrre, mrresult){
 
                             var countSendToken = mrresult.length + 1;
+
+                            var cid = mrresult.length - 1;
+
+                            memo = "Token for video id = "+mrresult[cid].video_id+",video "+videoName;
 
                             console.log("count = "+countSendToken);
                             console.log("rlength = "+mrresult.length);
@@ -495,7 +503,7 @@ app.get(
                                             sendTokens,
                                                     function (err, data, stderr) {
                         
-                                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','For 10 Unique Video Views','hellogoviddo')";
+                                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','"+memo+"','hellogoviddo')";
 
                                                         db.query(queryInsertTransactions, function(mresr, mresultmm){
 
