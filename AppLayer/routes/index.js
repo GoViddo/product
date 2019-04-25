@@ -541,6 +541,7 @@ app.get(
                             else{
                                 let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "')";
 
+                                console.log(insertIntoVideoViewQuery);
 
                                 db.query(insertIntoVideoViewQuery, function (err2, result2) {
                 
