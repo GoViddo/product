@@ -467,7 +467,7 @@ app.get(
 
                             var cid = mrresult.length - 1;
                             
-                            if(mresult.length == 0)
+                            if(mrresult.length == 0)
                             {
                                 memo = "Token for video "+videoName;    
                             }
