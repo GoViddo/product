@@ -194,7 +194,7 @@ app.get(
                 }
                 else{
                     resp.message = "success";
-                for (var i = 0; i < resultm.length; i++) {
+                for (var i = 0; i < resultu.length; i++) {
                        
                     data = {};
 
