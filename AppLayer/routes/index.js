@@ -210,7 +210,7 @@ app.get(
 
                 }
 
-                resp.data = data;
+                resp.data = datam;
                 return res.status(200).send(resp);
 
             }
