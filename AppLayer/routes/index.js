@@ -466,8 +466,14 @@ app.get(
                             var countSendToken = mrresult.length + 1;
 
                             var cid = mrresult.length - 1;
-
-                            memo = "Token for video id = "+mrresult[cid].video_id+",video "+videoName;
+                            
+                            if(mresult.length == 0)
+                            {
+                                memo = "Token for video "+videoName;    
+                            }
+                            else{
+                                memo = "Token for video id = "+mrresult[cid].video_id+",video "+videoName;
+                            }
 
                             console.log("count = "+countSendToken);
                             console.log("rlength = "+mrresult.length);
