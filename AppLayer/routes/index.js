@@ -466,13 +466,21 @@ app.get(
                             var countSendToken = mrresult.length + 1;
 
                             var cid = mrresult.length - 1;
+                            var cid1 = cid - 1;
+                            var cid2 = cid1 - 1;
+                            var cid3 = cid2 - 1;
+                            var cid4 = cid3 - 1;
+                            var cid5 = cid4 - 1;
+                            var cid6 = cid5 - 1;
+                            var cid7 = cid6 - 1;
+                            var cid8 = cid7 - 1;
                             
                             if(mrresult.length == 0)
                             {
                                 memo = "Token for video "+videoName;    
                             }
                             else{
-                                memo = "Token for video id = "+mrresult[cid].video_name+",video "+videoName;
+                                memo = "Token for video "+mrresult[cid].video_name+", video "+mrresult[cid1].video_name+", video "+mrresult[cid2].video_name+", video "+mrresult[cid3].video_name+", video "+mrresult[cid4].video_name+", video "+mrresult[cid5].video_name+", video "+mrresult[cid6].video_name+", video "+mrresult[cid7].video_name+", video "+mrresult[cid8].video_name+", video "+videoName;
                             }
 
                             console.log("count = "+countSendToken);
