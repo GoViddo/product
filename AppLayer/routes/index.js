@@ -766,6 +766,65 @@ app.get(
 
     },
 
+
+    watchLaterList: (req, res) => {
+
+        let email = req.body.email;
+
+
+        let userQuery = "SELECT * FROM user_table WHERE email_id = '" + email + "';";
+        resp = {};
+        data = [];
+
+        db.query(userQuery, function (err, result) {
+
+            const row = result[0];
+            let id = row.user_id;
+
+
+            let getListQuery = "SELECT * FROM `watch_later` WHERE `watch_letter_user_id` = '"+id+"'";
+
+            db.query(getListQuery, function(errm, resultm){
+
+                
+                for(var i = 0; i< resultm.length; i++)
+                {
+                    var videoId = resultm[0].watch_letter_video_id;
+
+                    var query = "SELECT * FROM `video_table` WHERE `video_id` = '"+videoId+"'";
+
+                    
+                    db.query(query, function(emr, rs){
+
+                        var videoName = rs[0].show_name;
+                        var vdoCipherId = rs[0].vdo_cipher_id;
+                        var home_image = rs[0].home_image;
+
+
+                            commentsData = {};
+    
+                            commentsData.videoName = videoName;
+                            commentsData.vdoCipherId = vdoCipherId;
+                            commentsData.home_image = home_image;
+    
+                            
+    
+                            data.push(commentsData);
+    
+                    
+                    });
+
+                }
+
+                resp.data = data;
+                return res.status(200).send(resp);
+
+            });
+
+        });
+
+    },
+
     login: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;
