@@ -786,7 +786,7 @@ app.get(
 
             db.query(getListQuery, function(errm, resultm){
 
-                
+                var j = 0;
                 
                 for(var i = 0; i< resultm.length; i++)
                 {
@@ -812,8 +812,9 @@ app.get(
     
                             data.push(commentsData);
 
+                            j = j + 1;
                             console.log(data);
-                            console.log(i+"="+resultm.length);
+                            console.log(j+"="+resultm.length);
     
                             if(i == resultm.length)
                             {
