@@ -787,6 +787,7 @@ app.get(
             db.query(getListQuery, function(errm, resultm){
 
                 
+                
                 for(var i = 0; i< resultm.length; i++)
                 {
                     var videoId = resultm[0].watch_letter_video_id;
@@ -811,14 +812,20 @@ app.get(
     
                             data.push(commentsData);
     
-                            console.log(data);
+                            if(i == (resultm.length - 1))
+                            {
+
+
+                                resp.message = "success";
+                                resp.data = data;
+                                return res.status(200).send(resp);
+
+
+                            }
                     
                     });
 
                 }
-
-                resp.data = data;
-                return res.status(200).send(resp);
 
             });
 
