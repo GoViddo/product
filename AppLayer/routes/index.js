@@ -812,6 +812,8 @@ app.get(
     
                             data.push(commentsData);
     
+                            console.log(i+"="+resultm.length)
+
                             if(i == (resultm.length - 1))
                             {
 
