@@ -813,16 +813,14 @@ app.get(
                             data.push(commentsData);
 
                             j = j + 1;
-                            console.log(data);
-                            console.log(j+"="+resultm.length);
-    
-                            if(i == resultm.length)
+                            
+                            if(j == resultm.length)
                             {
 
 
                                 resp.message = "success";
                                 resp.data = data;
-                              //  return res.status(200).send(resp);
+                                return res.status(200).send(resp);
 
 
                             }
