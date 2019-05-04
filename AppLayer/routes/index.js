@@ -811,6 +811,7 @@ app.get(
     
                             data.push(commentsData);
     
+                            console.log(data);
                     
                     });
 
