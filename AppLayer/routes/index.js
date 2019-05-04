@@ -811,6 +811,9 @@ app.get(
                             
     
                             data.push(commentsData);
+
+                            console.log(data);
+                            console.log(i+"="+resultm.length);
     
                             if(i == resultm.length)
                             {
@@ -818,7 +821,7 @@ app.get(
 
                                 resp.message = "success";
                                 resp.data = data;
-                                return res.status(200).send(resp);
+                              //  return res.status(200).send(resp);
 
 
                             }
