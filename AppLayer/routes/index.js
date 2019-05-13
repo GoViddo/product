@@ -230,9 +230,9 @@ app.get(
             "is_run_mode":"true",
             "name":"GoViddo AndroidAppUpdater",
             "uri_current":"blockchainvideoapp.com.goviddo.goviddo",
-            "version_code_current":6,
+            "version_code_current":8,
             "version_code_min":1,
-            "update_info":"On version 1.3 we added App Update Notification",
+            "update_info":"On version 1.8 watch later page added",
             "update_date":"24/04/2019"
         };
 
