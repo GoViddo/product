@@ -790,7 +790,7 @@ app.get(
                 
                 for(var i = 0; i< resultm.length; i++)
                 {
-                    var videoId = resultm[0].watch_letter_video_id;
+                    var videoId = resultm[i].watch_letter_video_id;
 
                     var query = "SELECT * FROM `video_table` WHERE `video_id` = '"+videoId+"'";
 
