@@ -230,9 +230,9 @@ app.get(
             "is_run_mode":"true",
             "name":"GoViddo AndroidAppUpdater",
             "uri_current":"blockchainvideoapp.com.goviddo.goviddo",
-            "version_code_current":9,
+            "version_code_current":10,
             "version_code_min":1,
-            "update_info":"In version 1.9 Android Pi related issues solved",
+            "update_info":"In version 1.10 Android Pi related issues solved",
             "update_date":"10/05/2019"
         }; 
 
