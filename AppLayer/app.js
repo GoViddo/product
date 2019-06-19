@@ -9,7 +9,7 @@ const cmd = require('node-cmd');
 // List globals
 global.cmd = cmd
 
-const { login, register, shareUrl, updateApp, watchLaterList, transactionDetails, subscriptChannel, sahreUrlTokens, addComment, addToWatchList, getUserProfilePics, getUserHistory, getCommentList, getChannelList, getUserInfoForAccount, getVideoRelatedDetails, likeUnlikeSstore, getConfig , checkWalletName, saveViewInformation, getSubscriptionData, getVideoGenereId, bannerImages, getVideoData,getSubscriptionList, getSliderImageData, getPreviewData, generateVideoOtp} = require('./routes/index');
+const { login, createEosMainNetWallet, register, shareUrl, updateApp, watchLaterList, transactionDetails, subscriptChannel, sahreUrlTokens, addComment, addToWatchList, getUserProfilePics, getUserHistory, getCommentList, getChannelList, getUserInfoForAccount, getVideoRelatedDetails, likeUnlikeSstore, getConfig , checkWalletName, saveViewInformation, getSubscriptionData, getVideoGenereId, bannerImages, getVideoData,getSubscriptionList, getSliderImageData, getPreviewData, generateVideoOtp} = require('./routes/index');
 
 const port = config.port;
 
@@ -81,6 +81,7 @@ app.get('/shareUrl', shareUrl);
 app.post('/sahreUrlTokens', sahreUrlTokens);
 app.get('/updateApp', updateApp);
 app.post('/transactionDetails', transactionDetails);
+app.post('/createEosMainNetWallet', createEosMainNetWallet);
 
 // set the app to listen on the port
 app.listen(port, () => {

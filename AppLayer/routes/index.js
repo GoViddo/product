@@ -1743,6 +1743,172 @@ app.get(
 
     },
 
+   
+
+    createEosMainNetWallet: (req, res) => {
+       
+        let walletName = req.body.walletName;
+        var resp = {};
+        var activeKeys = {};
+        var ownerKeys = {};
+       
+        
+                let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
+
+                let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
+                let cleosCreateActiveKeys = "cleos create key --to-console";
+                let cleosCreateOwnerKeys = "cleos create key --to-console";
+
+                var checkWalletNamePromise = new Promise(function (resolve, reject) {
+                    //to check account name avilability
+                    //mainnet url
+                    //let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+
+                    //testnet url
+                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+
+                
+                    cmd.get(
+                        cleosCheckWalletName,
+                        function (err, data, stderr) {
+                            if (err == null) {
+                                resp.walletMessage = "Wallet Name Not Available";
+                                console.log("Account Name Not Avilabile" + data);
+                                reject("Account Name Not Avilabile");
+                            }
+                            else {
+                                resp.walletMessage = "Wallet Name Available";
+                                console.log("Wallet Name Avilabile" + err);
+                                resolve("Wallet Name Avilabile");
+                            }
+                        }
+                    );
+                });
+
+                checkWalletNamePromise.catch(function () {
+                    resp.message = "Wallet Not Available please try new name";
+                    console.log("Promise Rejected");
+                    return res.status(500).send(resp);
+                });
+
+
+                checkWalletNamePromise.then(function () {
+                    return new Promise(function (resolve, reject) {
+                        cmd.get(
+                            cleosWalletUnlockQuery,
+                            function (err, data, stderr) {
+                                if (err != null) {
+                                    resp.walletUnlockingMessage = "Wallet Not Unlocked - Password is wrong";
+                                    console.log("Wallet Unlocking status = " + data);
+                                }
+                                else {
+                                    resp.walletUnlockingMessage = "Wallet Unlocked Successfully";
+                                    console.log("Wallet Unlocking Error = " + err);
+                                }
+                                resolve(data);
+
+
+                            }
+                        );
+                    });
+                }).then(function () {
+                    return new Promise(function (resolve, reject) {
+                        cmd.get(
+                            cleosCreateActiveKeys,
+                            function (err, data, stderr) {
+
+                                var arr = data.split(": ");
+                                var Key = arr[1].split("Public key");
+                                var activePrivateKey = Key[0];
+                                var activePublicKey = arr[2];
+                                var activePrivateKey = activePrivateKey.replace(/\n/g, '');
+                                var activePublicKey = activePublicKey.replace(/\n/g, '');
+                                //resp.createActiveKeyMsg = "Active Keys Created";
+
+
+                                activeKeys.activePrivateKey = activePrivateKey;
+                                activeKeys.activePublicKey = activePublicKey;
+
+                                resp.activePublicKey = activePublicKey;
+
+                                activeKeysArray = [];
+                                activeKeysArray.push(activeKeys);
+                                resp.activeKeys = activeKeysArray;
+
+                                console.log("Active Private Key =" + activePrivateKey);
+                                console.log("Active Public Key =" + activePublicKey);
+                                resolve(resp);
+
+                            }
+                        )
+                    })
+                }).then(function (resp) {
+                    return new Promise(function (resolve, reject) {
+                        cmd.get(
+                            cleosCreateOwnerKeys,
+                            function (err, data, stderr) {
+
+                                var arr = data.split(": ");
+                                var Key = arr[1].split("Public key");
+                                var ownerPrivateKey = Key[0];
+                                var ownerPrivateKey = ownerPrivateKey.replace(/\n/g, '');
+                                var ownerPublicKey = arr[2];
+                                var ownerPublicKey = ownerPublicKey.replace(/\n/g, '');
+                                //resp.createOwnerKeysMsg = "Owner Keys Created";
+
+                                ownerKeys.ownerPrivateKey = ownerPrivateKey;
+                                ownerKeys.ownerPublicKey = ownerPublicKey;
+
+                                ownerKeysArray = [];
+                                ownerKeysArray.push(ownerKeys);
+
+                                resp.ownerKeys = ownerKeysArray;
+
+                                console.log("Owner Private Key =" + ownerPrivateKey);
+                                console.log("Owner Public Key =" + ownerPublicKey);
+
+                                //mainnet account creation command
+                                //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+
+
+                                //testnet account creation command
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+
+
+                                console.log('Command to be executed', createEOSWalletCommand);
+                                //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
+
+                                cmd.get(
+                                    createEOSWalletCommand,
+                                    function (err, data, stderr) {
+                                        if (err == null) {
+                                            resp.accountCreatedMsg = "Account Created Successfully";
+                                            console.log("Account Created Successfully" + data);
+                                        }
+                                        else {
+                                            resp.accountCreatedMsg = "Account creation failed";
+                                            console.log("Account creation failed" + err);
+                                        }
+                                    }
+                                );
+
+
+                                resolve(resp);
+
+                            }
+                        );
+                    })
+                }).then(function (resp) {
+                    // send the user's details to the database
+                        resp.message = "success";
+                         return res.status(200).send(resp);
+                      
+                });
+                    
+    },
+
+
+
     register: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;
