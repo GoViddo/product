@@ -1872,7 +1872,7 @@ app.get(
 
 
                                 //testnet account creation command
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 console.log('Command to be executed', createEOSWalletCommand);
