@@ -463,33 +463,9 @@ app.get(
 
                         db.query(qrn, function(mrre, mrresult){
 
-                            var countSendToken = mrresult.length + 1;
-
-                            var cid = mrresult.length - 1;
-                            var cid1 = cid - 1;
-                            var cid2 = cid1 - 1;
-                            var cid3 = cid2 - 1;
-                            var cid4 = cid3 - 1;
-                            var cid5 = cid4 - 1;
-                            var cid6 = cid5 - 1;
-                            var cid7 = cid6 - 1;
-                            var cid8 = cid7 - 1;
                             
-                            if(mrresult.length == 0)
-                            {
-                                memo = "Token for video "+videoName;    
-                            }
-                            else{
-                                memo = "Token for unique video view for videos "+mrresult[cid].video_name+", "+mrresult[cid1].video_name+", "+mrresult[cid2].video_name+", "+mrresult[cid3].video_name+", "+mrresult[cid4].video_name+", "+mrresult[cid5].video_name+", "+mrresult[cid6].video_name+", "+mrresult[cid7].video_name+", "+mrresult[cid8].video_name+", "+videoName;
-                            }
-
-                            console.log("count = "+countSendToken);
-                            console.log("rlength = "+mrresult.length);
-
-                            console.log("test"+countSendToken % 10);
-
-                            if((countSendToken % 10) == 0)
-                            {
+                                memo = "Unique View For Video "+videoName+" from user"+userId;    
+                            
 
                                 let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`, `video_name`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "', '"+videoName+"')";
 
@@ -510,47 +486,42 @@ app.get(
                                     cleosWalletUnlockQuery, 
                                     function(err1, data1, stderr1){
                 
-                                        // let sendTokens = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for unique video view\"}' -p  hellogoviddo";
-                                        // console.log(sendTokens); 
+                                         let sendTokens = "cleos -u https://jungle.eosmetal.io:443 push action goviddopower hi '["+memo+"]' -p goviddopower@active";
+                                        console.log(sendTokens); 
                                                 
-                                        // cmd.get(
-                                        //     sendTokens,
-                                        //             function (err, data, stderr) {
+                                        cmd.get(
+                                            sendTokens,
+                                                    function (err, data, stderr) {
                         
-                                        //                 let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','"+memo+"','hellogoviddo')";
 
-                                        //                 db.query(queryInsertTransactions, function(mresr, mresultmm){
+                                                            let data = [];
+                                                            resp.message = "success";
+                                        
+                                                            reviewDetails = {};
+                                        
+                                                            reviewDetails.userId = userId;
+                                                            reviewDetails.videoId = videoId;
+                                        
+                                                            data.push(reviewDetails);
+                                        
+                                                            resp.data = data;
+                                                            return res.status(200).send(resp);
 
-                                        //                     let data = [];
-                                        //                     resp.message = "success";
-                                        
-                                        //                     reviewDetails = {};
-                                        
-                                        //                     reviewDetails.userId = userId;
-                                        //                     reviewDetails.videoId = videoId;
-                                        
-                                        //                     data.push(reviewDetails);
-                                        
-                                        //                     resp.data = data;
-                                        //                     return res.status(200).send(resp);
+                                                    }
+                                                );
 
-                                        //                 });
-
-                                        //             }
-                                        //         );
-
-                                                             let data = [];
-                                                             resp.message = "success";
+                                                            //  let data = [];
+                                                            //  resp.message = "success";
                                         
-                                                             reviewDetails = {};
+                                                            //  reviewDetails = {};
                                         
-                                                             reviewDetails.userId = userId;
-                                                             reviewDetails.videoId = videoId;
+                                                            //  reviewDetails.userId = userId;
+                                                            //  reviewDetails.videoId = videoId;
                                         
-                                                             data.push(reviewDetails);
+                                                            //  data.push(reviewDetails);
                                         
-                                                             resp.data = data;
-                                                             return res.status(200).send(resp);
+                                                            //  resp.data = data;
+                                                            //  return res.status(200).send(resp);
 
                         
                                     }
@@ -564,38 +535,9 @@ app.get(
                                 });
                 
                 
-                                
-                            }
-                            else{
-                                let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`, `video_name`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "', '"+videoName+"')";
-
-                                console.log(insertIntoVideoViewQuery);
-
-                                db.query(insertIntoVideoViewQuery, function (err2, result2) {
-                
-                                    if (err1) {
-                                        resp.message = "failed";
-                                        resp.data = err;
-                                        return res.status(500).send(resp);
-                                    }
-                
-                                    let data = [];
-                                    resp.message = "success";
-                
-                                    reviewDetails = {};
-                
-                                    reviewDetails.userId = userId;
-                                    reviewDetails.videoId = videoId;
-                
-                                    data.push(reviewDetails);
-                
-                                    resp.data = data;
-                                    return res.status(200).send(resp);
-                
-                                });
                 
                 
-                            }
+                            
 
                         });
 
@@ -893,7 +835,7 @@ app.get(
         let walletName = req.body.walletName;
         var resp = {};
 
-        let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+        let cleosCheckWalletName = "cleos -u https://jungle.eosmetal.io:443 get account " + walletName + " --json";
 
         cmd.get(
             cleosCheckWalletName,
@@ -1032,7 +974,7 @@ app.get(
                             cleosWalletUnlockQuery, 
                             function(err1, data1, stderr1){
         
-                                let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"10 shares','hellogoviddo\"}' -p  hellogoviddo";
+                                let sendEOSTokensRegistration = "cleos -u https://jungle.eosmetal.io:443 push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"10 shares','hellogoviddo\"}' -p  hellogoviddo";
                                 console.log(sendEOSTokensRegistration);              
                                 cmd.get(
                                             sendEOSTokensRegistration,
@@ -1152,7 +1094,7 @@ app.get(
                     cleosWalletUnlockQuery, 
                     function(err1, data1, stderr1){
 
-                        let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
+                        let sendEOSTokensRegistration = "cleos -u https://jungle.eosmetal.io:443 push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
@@ -1776,10 +1718,10 @@ app.get(
                 var checkWalletNamePromise = new Promise(function (resolve, reject) {
                     //to check account name avilability
                     //mainnet url
-                    //let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+                    //let cleosCheckWalletName = "cleos -u https://jungle.eosmetal.io:443 get account " + walletName + " --json";
 
                     //testnet url
-                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+                    let cleosCheckWalletName = "cleos -u https://jungle.eosmetal.io:443 get account " + walletName + " --json";
 
                 
                     cmd.get(
@@ -1882,11 +1824,11 @@ app.get(
                                 console.log("Owner Public Key =" + ownerPublicKey);
 
                                 //mainnet account creation command
-                                //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                //let createEOSWalletCommand = "cleos -u https://jungle.eosmetal.io:443 system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 //testnet account creation command
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://jungle.eosmetal.io:443 system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 console.log('Command to be executed', createEOSWalletCommand);
@@ -1962,10 +1904,10 @@ app.get(
                 var checkWalletNamePromise = new Promise(function (resolve, reject) {
                     //to check account name avilability
                     //mainnet url
-                    //let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+                    //let cleosCheckWalletName = "cleos -u https://jungle.eosmetal.io:443 get account " + walletName + " --json";
 
                     //testnet url
-                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+                    let cleosCheckWalletName = "cleos -u https://jungle.eosmetal.io:443 get account " + walletName + " --json";
 
                     
 
@@ -2069,11 +2011,11 @@ app.get(
                                 console.log("Owner Public Key =" + ownerPublicKey);
 
                                 //mainnet account creation command
-                                //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                //let createEOSWalletCommand = "cleos -u https://jungle.eosmetal.io:443 system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 //testnet account creation command
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://jungle.eosmetal.io:443 system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 console.log('Command to be executed', createEOSWalletCommand);
@@ -2111,7 +2053,7 @@ app.get(
 
                         setTimeout(function(){ 
 
-                            let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                            let sendEOSTokensRegistration = "cleos -u https://jungle.eosmetal.io:443 push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
