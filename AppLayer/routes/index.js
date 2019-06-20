@@ -486,7 +486,7 @@ app.get(
                                     cleosWalletUnlockQuery, 
                                     function(err1, data1, stderr1){
                 
-                                         let sendTokens = "cleos -u https://jungle.eosmetal.io:443 push action goviddopower hi '["+memo+"]' -p goviddopower@active";
+                                         let sendTokens = "cleos -u https://jungle.eosmetal.io:443 push action goviddopower hi '[\"hellogoviddo\",\""+memo+"\"]' -p goviddopower@active";
                                         console.log(sendTokens); 
                                                 
                                         cmd.get(
