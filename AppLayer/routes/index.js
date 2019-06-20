@@ -494,7 +494,7 @@ app.get(
                                                     function (err, data, stderr) {
                         
 
-                                                            let data = [];
+                                                            let datam = [];
                                                             resp.message = "success";
                                         
                                                             reviewDetails = {};
@@ -502,9 +502,9 @@ app.get(
                                                             reviewDetails.userId = userId;
                                                             reviewDetails.videoId = videoId;
                                         
-                                                            data.push(reviewDetails);
+                                                            datam.push(reviewDetails);
                                         
-                                                            resp.data = data;
+                                                            resp.data = datam;
                                                             return res.status(200).send(resp);
 
                                                     }
