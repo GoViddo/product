@@ -510,34 +510,48 @@ app.get(
                                     cleosWalletUnlockQuery, 
                                     function(err1, data1, stderr1){
                 
-                                        let sendTokens = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for unique video view\"}' -p  hellogoviddo";
-                                        console.log(sendTokens); 
+                                        // let sendTokens = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for unique video view\"}' -p  hellogoviddo";
+                                        // console.log(sendTokens); 
                                                 
-                                        cmd.get(
-                                            sendTokens,
-                                                    function (err, data, stderr) {
+                                        // cmd.get(
+                                        //     sendTokens,
+                                        //             function (err, data, stderr) {
                         
-                                                        let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','"+memo+"','hellogoviddo')";
+                                        //                 let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','"+memo+"','hellogoviddo')";
 
-                                                        db.query(queryInsertTransactions, function(mresr, mresultmm){
+                                        //                 db.query(queryInsertTransactions, function(mresr, mresultmm){
 
-                                                            let data = [];
-                                                            resp.message = "success";
+                                        //                     let data = [];
+                                        //                     resp.message = "success";
                                         
-                                                            reviewDetails = {};
+                                        //                     reviewDetails = {};
                                         
-                                                            reviewDetails.userId = userId;
-                                                            reviewDetails.videoId = videoId;
+                                        //                     reviewDetails.userId = userId;
+                                        //                     reviewDetails.videoId = videoId;
                                         
-                                                            data.push(reviewDetails);
+                                        //                     data.push(reviewDetails);
                                         
-                                                            resp.data = data;
-                                                            return res.status(200).send(resp);
+                                        //                     resp.data = data;
+                                        //                     return res.status(200).send(resp);
 
-                                                        });
+                                        //                 });
 
-                                                    }
-                                                );
+                                        //             }
+                                        //         );
+
+                                                             let data = [];
+                                                             resp.message = "success";
+                                        
+                                                             reviewDetails = {};
+                                        
+                                                             reviewDetails.userId = userId;
+                                                             reviewDetails.videoId = videoId;
+                                        
+                                                             data.push(reviewDetails);
+                                        
+                                                             resp.data = data;
+                                                             return res.status(200).send(resp);
+
                         
                                     }
                                 );
@@ -1018,7 +1032,7 @@ app.get(
                             cleosWalletUnlockQuery, 
                             function(err1, data1, stderr1){
         
-                                let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"10 shares','hellogoviddo\"}' -p  hellogoviddo";
+                                let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"10 shares','hellogoviddo\"}' -p  hellogoviddo";
                                 console.log(sendEOSTokensRegistration);              
                                 cmd.get(
                                             sendEOSTokensRegistration,
@@ -1138,7 +1152,7 @@ app.get(
                     cleosWalletUnlockQuery, 
                     function(err1, data1, stderr1){
 
-                        let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
+                        let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"upvoting for 2 unique videos\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
@@ -1951,7 +1965,7 @@ app.get(
                     //let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
 
                     //testnet url
-                    let cleosCheckWalletName = "cleos -u http://junglehistory.cryptolions.io get account " + walletName + " --json";
+                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
 
                     
 
@@ -2059,7 +2073,7 @@ app.get(
 
 
                                 //testnet account creation command
-                                let createEOSWalletCommand = "cleos -u http://junglehistory.cryptolions.io system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 console.log('Command to be executed', createEOSWalletCommand);
@@ -2097,7 +2111,7 @@ app.get(
 
                         setTimeout(function(){ 
 
-                            let sendEOSTokensRegistration = "cleos -u http://junglehistory.cryptolions.io push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                            let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
