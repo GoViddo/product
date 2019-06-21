@@ -436,6 +436,7 @@ app.get(
 
             let videoId = result[0].video_id;
             let videoName = result[0].show_name;
+            let videoUniqueIdUpload = result[0].vdo_cipher_id+" = "+result[0].video_id;
 
             let userDetailsQuery = "SELECT * FROM `user_table` WHERE `email_id` = '" + userEmailId + "'";
 
@@ -464,7 +465,7 @@ app.get(
                         db.query(qrn, function(mrre, mrresult){
 
                             
-                                memo = "Unique View For Video "+videoName+" from user "+userId;    
+                                memo = "Unique View For Video "+videoUniqueIdUpload+" from user "+userId;    
                             
 
                                 let insertIntoVideoViewQuery = "INSERT INTO `video_views_table`(`view_user`, `video_id`, `total_video_played_time`, `video_name`) VALUES (" + userId + "," + videoId + ",'" + videoViewDuration + "', '"+videoName+"')";
