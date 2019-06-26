@@ -2056,8 +2056,7 @@ app.get(
                         }
                         resp.message = "Registration successful";
 
-                        setTimeout(function(){ 
-
+                       
                             let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
@@ -2089,7 +2088,7 @@ app.get(
                                     }
                                 );
 
-                         }, 1000);
+                         
                           
                     });
                 });
