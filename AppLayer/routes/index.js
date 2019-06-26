@@ -1913,7 +1913,7 @@ app.get(
                     //let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
 
                     //testnet url
-                    let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
+                    let cleosCheckWalletName = "cleos -u https://jungle.eosmetal.io:443 get account " + walletName + " --json";
 
                     console.log(cleosCheckWalletName);
 
@@ -2020,7 +2020,7 @@ app.get(
 
 
                                 //testnet account creation command
-                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://jungle.eosmetal.io:443 system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 console.log('Command to be executed', createEOSWalletCommand);
@@ -2058,7 +2058,7 @@ app.get(
 
                         setTimeout(function(){ 
 
-                            let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                            let sendEOSTokensRegistration = "cleos -u https://jungle.eosmetal.io:443 push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
@@ -2066,15 +2066,20 @@ app.get(
 
                                         let chkingQuery = "SELECT * FROM `user_table` WHERE `email_id` = '"+email+"'";
 
+                                        console.log(chkingQuery);
+
                                         db.query(chkingQuery, function(mern, mresn){
 
                                         var userId = mresn[0].user_id;
+
+                                        console.log(userId);
 
 
                                         let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','For Registration of New User','hellogoviddo')";
 
                                         db.query(queryInsertTransactions, function(mresr, mresultmm){
 
+                                            console.log(resp);
                                         return res.status(200).send(resp);
 
                                         });
