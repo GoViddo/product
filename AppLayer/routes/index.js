@@ -2071,6 +2071,8 @@ app.get(
 
                                         db.query(queryInsertTransactions, function(mresr, mresultmm){
 
+                                            console.log(resp);
+
                                         return res.status(200).send(resp);
 
                                         });
