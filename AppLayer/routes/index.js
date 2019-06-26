@@ -1896,7 +1896,7 @@ app.get(
 
                 console.log(result.length);
 
-            if (result.length > 1) {
+            if (result.length) {
                 resp.message = "User with this email already exists";
                 return res.status(200).send(resp);
             } else {
