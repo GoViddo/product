@@ -2067,10 +2067,12 @@ app.get(
                                         var userId = mresn[0].user_id;
 
 
+
                                         let queryInsertTransactions = "INSERT INTO `video_transactions`(`transaction_amount`, `transaction_user_id`, `transaction_memo`, `transaction_from`) VALUES ('0.01 GOV','"+userId+"','For Registration of New User','hellogoviddo')";
 
                                         db.query(queryInsertTransactions, function(mresr, mresultmm){
 
+                                            console.log(resp);
                                         return res.status(200).send(resp);
 
                                         });
