@@ -1891,7 +1891,7 @@ app.get(
                 resp.message = err;
                 return res.status(200).send(resp);
             }
-
+            
             if (result.length > 0) {
                 resp.message = "User with this email already exists";
                 return res.status(200).send(resp);
@@ -2012,11 +2012,12 @@ app.get(
                                 console.log("Owner Public Key =" + ownerPublicKey);
 
                                 //mainnet account creation command
-                                //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                //let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.1 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
 
 
                                 //testnet account creation command
-                                let createEOSWalletCommand = "cleos -u https://jungle.eosmetal.io:443 system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+                                let createEOSWalletCommand = "cleos -u https://eos.greymass.com/ system newaccount hellogoviddo " + walletName + " --stake-net '0.01 EOS' --stake-cpu '0.01 EOS' --buy-ram '0.2 EOS' " + ownerPublicKey + " " + resp.activePublicKey;
+
 
                                 console.log('Command to be executed', createEOSWalletCommand);
                                 //execute again cmd.get and run the createWalletCommand and return onwer and active keys with wallet name to the user
@@ -2053,7 +2054,7 @@ app.get(
 
                         setTimeout(function(){ 
 
-                            let sendEOSTokensRegistration = "cleos -u https://jungle.eosmetal.io:443 push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
+                            let sendEOSTokensRegistration = "cleos -u https://eos.greymass.com/ push action hellogoviddo transfer '{\"from\":\"hellogoviddo\", \"to\":\""+walletName+"\", \"quantity\":\"0.01 GOV\", \"memo\":\"Reward for register with goviddo\"}' -p  hellogoviddo";
                         console.log(sendEOSTokensRegistration);              
                         cmd.get(
                                     sendEOSTokensRegistration,
