@@ -1910,7 +1910,7 @@ app.get(
                     //testnet url
                     let cleosCheckWalletName = "cleos -u https://eos.greymass.com/ get account " + walletName + " --json";
 
-                    
+                    console.log(cleosCheckWalletName);
 
                     cmd.get(
                         cleosCheckWalletName,
@@ -1950,7 +1950,6 @@ app.get(
                                     console.log("Wallet Unlocking Error = " + err);
                                 }
                                 resolve(data);
-
 
                             }
                         );
