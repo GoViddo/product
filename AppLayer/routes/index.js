@@ -1892,7 +1892,7 @@ app.get(
                 return res.status(200).send(resp);
             }
             
-            if (result.length > 0) {
+            if (result.length > 1) {
                 resp.message = "User with this email already exists";
                 
                 console.log(resp);
