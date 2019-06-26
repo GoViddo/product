@@ -1892,14 +1892,7 @@ app.get(
                 return res.status(200).send(resp);
             }
             
-            if (result.length > 1) {
-                resp.message = "User with this email already exists";
-                
-                console.log(resp);
-
-                return res.status(200).send(resp);
-            } else {
-
+            
                 let walletPassword = "PW5KNGHsfKMvje9TgwFTyWAY8nLLGxARdCvmbXy1KQNcxurhGaiB5";
 
                 let cleosWalletUnlockQuery = "cleos wallet unlock --password " + walletPassword;
@@ -2087,7 +2080,7 @@ app.get(
                           
                     });
                 });
-            }
+            
         });
     }
 
