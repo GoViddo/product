@@ -5,6 +5,8 @@ const path = require('path');
 const config = require('./config').config;
 const app = express();
 const cmd = require('node-cmd');
+var cors = require('cors')
+
 
 // List globals
 global.cmd = cmd
@@ -51,6 +53,7 @@ handleDisconnect();
 app.set('port', process.env.port || port); // set express to use this port
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse form data client
+app.use(cors())
 
 // routes for the app
 app.get('/config', getConfig);
