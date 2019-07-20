@@ -663,7 +663,11 @@ app.get(
 
         var videoGenereId = 0;
 
+        
+
         var resp = {};
+
+        resp.videoGenere = videoGenere;
 
         let videoGenereIdQuery = "SELECT * FROM `video_genere_table` WHERE `video_genere_name` = '" + videoGenere + "'";
 
@@ -693,6 +697,7 @@ app.get(
 
 
                 resp.message = "success";
+                
                 data = [];
 
                 for (var i = 0; i < result.length; i++) {
