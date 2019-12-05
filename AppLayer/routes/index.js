@@ -27,6 +27,36 @@ module.exports = {
         });
     },
 
+    crowdConfig: (req, res) => {
+        let configQuery = "SELECT * FROM `crowd_funding_category_list` WHERE `crowd_fund_cat_status` = '1'";
+
+        var resp = {};
+        resp.status = "success";
+
+        db.query(configQuery, function (err, result) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            let data = [];
+
+            for (var i = 0; i < result.length; i++) {
+
+                var details = {};
+
+                details.catname = result[i].crowd_fund_cat_id;
+                details.catid = result[i].crowd_funding_category_name;
+
+                data.push(sliderDetails);
+
+            }
+
+            resp.data = data;
+        
+            return res.status(200).send(resp);
+        });
+    },
+
 
     shareUrl: (req, res) => {
         
@@ -599,6 +629,7 @@ app.get(
 
 
         db.query(selectSliderImagesQuery, function (err, result) {
+
 
             let resp = {};
 

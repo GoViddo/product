@@ -11,7 +11,7 @@ var cors = require('cors')
 // List globals
 global.cmd = cmd
 
-const { login, createEosMainNetWallet, register, shareUrl, updateApp, watchLaterList, transactionDetails, subscriptChannel, sahreUrlTokens, addComment, addToWatchList, getUserProfilePics, getUserHistory, getCommentList, getChannelList, getUserInfoForAccount, getVideoRelatedDetails, likeUnlikeSstore, getConfig , checkWalletName, saveViewInformation, getSubscriptionData, getVideoGenereId, bannerImages, getVideoData,getSubscriptionList, getSliderImageData, getPreviewData, generateVideoOtp} = require('./routes/index');
+const { login, createEosMainNetWallet, register, shareUrl, updateApp, watchLaterList, transactionDetails, subscriptChannel, sahreUrlTokens, addComment, addToWatchList, getUserProfilePics, getUserHistory, getCommentList, getChannelList, getUserInfoForAccount, getVideoRelatedDetails, likeUnlikeSstore, getConfig , checkWalletName, saveViewInformation, getSubscriptionData, getVideoGenereId, bannerImages, getVideoData,getSubscriptionList, getSliderImageData, getPreviewData, generateVideoOtp, crowdConfig} = require('./routes/index');
 
 const port = config.port;
 
@@ -62,6 +62,7 @@ app.use(function(req, res, next) {
 
 // routes for the app
 app.get('/config', getConfig);
+app.get('/crowdConfig', crowdConfig);
 app.post('/register', register);
 app.post('/login', login);
 app.post('/checkWalletName', checkWalletName);
