@@ -47,7 +47,7 @@ module.exports = {
                 details.catname = result[i].crowd_fund_cat_id;
                 details.catid = result[i].crowd_funding_category_name;
 
-                data.push(sliderDetails);
+                data.push(details);
 
             }
 
